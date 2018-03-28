@@ -27,7 +27,7 @@
 * Nik Arm (projektins)
 * Dario Furigo (VirtSyntaxError)
 * Ivo Kozina (kozinai)
-* Jannick Lüdi(janexander)
+* Jannick Lüdi (janexander)
 * Ohran Mujkic (mujko1)
 
 ### Agenda
