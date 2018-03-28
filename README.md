@@ -11,6 +11,7 @@
 
 ## Useful links
 * [Diary](https://github.com/res13/ch.bfh.bti7081.s2018.white/blob/master/doc/diary.md)
+* [Documentation](https://github.com/res13/ch.bfh.bti7081.s2018.white/blob/master/doc/PMS%20Documentation%20group%20white.docx?raw=true)
 
 ## Project Topic
 * target user: close relative of a patient
