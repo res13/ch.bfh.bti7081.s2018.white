@@ -9,6 +9,9 @@
 * Jannick Lüdi (janexander)
 * Ohran Mujkic (mujko1)
 
+## Useful links
+* [Diary](https://github.com/res13/ch.bfh.bti7081.s2018.white/blob/master/doc/diary.md)
+
 ## Project Topic
 * target user: close relative of a patient
 * disease: social anxiety disorder
