@@ -1,4 +1,25 @@
 # Meetings
+## 2018-04-04
+### Attendees
+* Andreas Erb (res13)
+* Beat Schärz (pidu2)
+* Nik Arm (projektins)
+* Dario Furigo (VirtSyntaxError)
+* Jannick Lüdi (janexander)
+* Ohran Mujkic (mujko1)
+
+### Agenda
+* Present storyboards
+* Decide prototypes
+
+### Decisions
+* Prototypes: Diary (Doctor, Patient, Relative), Medication checker, Goal tracker
+
+### ToDo
+* Andreas Erb, Janick Lüdi - Documentation storyboards & prototypes
+* Ohran Mujkic - evaluate interview 
+* Dario Furigo, Beat Schaerz - Describe the prototypes
+* Ivo Kozina, Nik Arm - Create presentation
 ## 2018-03-28
 ### Attendees
 * Andreas Erb (res13)
