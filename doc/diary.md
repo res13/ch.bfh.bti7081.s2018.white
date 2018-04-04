@@ -10,16 +10,24 @@
 
 ### Agenda
 * Present storyboards
-* Decide prototypes
+* Decide main features
 
 ### Decisions
-* Prototypes: Diary (Doctor, Patient, Relative), Medication checker, Goal tracker
+* Prototypes: 
+** Diary for the patient and doctors (readonly for the relatives if allowed) which includes medication and instructions for the patient
+** Diary for the relatives
+** Goal tracker usable by the doctor and the relatives
 
 ### ToDo
 * Andreas Erb, Janick Lüdi - Documentation storyboards & prototypes
-* Ohran Mujkic - evaluate interview 
-* Dario Furigo, Beat Schaerz - Describe the prototypes
-* Ivo Kozina, Nik Arm - Create presentation
+* Janick Lüdi - Document researching
+* Ohran Mujkic - summarize the interview
+* Dario Furigo, Beat Schaerz - Describe the main features
+* Dario Furigo, Beat Schaerz - Document synthesize
+* Ivo Kozina - Create prototypes with Input of Janick Lüdi
+* Nik Arm - Create presentation
+* Dario Furigo - Merge and check documentation
+
 ## 2018-03-28
 ### Attendees
 * Andreas Erb (res13)
