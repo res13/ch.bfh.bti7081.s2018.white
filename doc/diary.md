@@ -1,4 +1,27 @@
 # Meetings
+## 2018-03-28
+### Attendees
+* Andreas Erb (res13)
+* Beat Schärz (pidu2)
+* Nik Arm (projektins)
+* Dario Furigo (VirtSyntaxError)
+* Ivo Kozina (kozinai)
+* Jannick Lüdi (janexander)
+* Ohran Mujkic (mujko1)
+
+### Agenda
+* Role allocation
+
+### Decisions
+
+
+### ToDo
+* Andreas Erb, Janick Lüdi - Documentation guidelines
+* Ohran Mujkic - Summarize the interview 
+* Dario Furigo, Beat Schaerz - Describe the main features
+* Ivo Kozina, Nik Arm - Prototyping and Presentation guidelines
+* Everyone - 2-3 Storyboards to decide which are the main features afterwards
+
 ## 2018-03-23
 ### Attendees
 * Beat Schärz (pidu2)
@@ -15,7 +38,7 @@
 * make the Interview and split the research Tasks among the group 
 * determine first requirements in next meeting
 
-### TODO
+### ToDo
 * Write storyboards
 * Setup documentation
 * Hold interview
@@ -38,6 +61,6 @@
 ### Decisions
 * Instead of svn, git will be used
 
-### TODO
+### ToDo
 * Search interview partner
 * Gather interview questions
