@@ -13,10 +13,9 @@
 * Decide main features
 
 ### Decisions
-* Prototypes: 
-** Diary for the patient and doctors (readonly for the relatives if allowed) which includes medication and instructions for the patient
-** Diary for the relatives
-** Goal tracker usable by the doctor and the relatives
+* Prototype: Diary for the patient and doctors (readonly for the relatives if allowed) which includes medication and instructions for the patient
+* Prototype: Diary for the relatives
+* Prototype: Goal tracker usable by the doctor and the relatives
 
 ### ToDo
 * Andreas Erb, Janick Lüdi - Documentation storyboards & prototypes
