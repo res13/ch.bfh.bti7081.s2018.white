@@ -1,4 +1,27 @@
 # Meetings
+## 2018-04-06
+### Attendees
+* Beat Schärz (pidu2)
+* Dario Furigo (VirtSyntaxError)
+* Jannick Lüdi (janexander)
+* Ohran Mujkic (mujko1)
+
+### Agenda
+*
+
+### Decisions
+*
+
+### ToDo
+* Andreas Erb, Janick Lüdi - Documentation storyboards & prototypes
+* Janick Lüdi - Document researching
+* Ohran Mujkic - summarize the interview
+* Dario Furigo, Beat Schaerz - Describe the main features
+* Dario Furigo, Beat Schaerz - Document synthesize
+* Ivo Kozina - Create prototypes with Input of Janick Lüdi
+* Nik Arm - Create presentation
+* Dario Furigo - Merge and check documentation
+
 ## 2018-04-04
 ### Attendees
 * Andreas Erb (res13)
