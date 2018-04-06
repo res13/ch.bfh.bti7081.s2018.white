@@ -5,9 +5,11 @@
 * Dario Furigo (VirtSyntaxError)
 * Jannick Lüdi (janexander)
 * Ohran Mujkic (mujko1)
+* Nik Arm (projektins)
+
 
 ### Agenda
-*
+* Discuss the documentation
 
 ### Decisions
 *
@@ -19,6 +21,7 @@
 * Dario Furigo, Beat Schaerz - Describe the main features
 * Dario Furigo, Beat Schaerz - Document synthesize
 * Ivo Kozina - Create prototypes with Input of Janick Lüdi
+* Ohran Mujkic - Validation
 * Nik Arm - Create presentation
 * Dario Furigo - Merge and check documentation
 
