@@ -13,7 +13,7 @@
 * Discuss the job roles
 
 ### Decisions
-* Documentation in german
+* Documentation in German
 
 ### ToDo
 * Andreas Erb, Janick Lüdi - Documentation storyboards & prototypes
