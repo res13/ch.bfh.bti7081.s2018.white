@@ -10,14 +10,16 @@
 
 ### Agenda
 * Discuss the documentation
+* Discuss the job roles
 
 ### Decisions
-*
+* Documentation in german
 
 ### ToDo
 * Andreas Erb, Janick Lüdi - Documentation storyboards & prototypes
 * Janick Lüdi - Document researching
 * Ohran Mujkic - summarize the interview
+* Dario Furigo, Beat Schaerz - Scoping
 * Dario Furigo, Beat Schaerz - Describe the main features
 * Dario Furigo, Beat Schaerz - Document synthesize
 * Ivo Kozina - Create prototypes with Input of Janick Lüdi
