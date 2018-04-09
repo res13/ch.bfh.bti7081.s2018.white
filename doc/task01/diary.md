@@ -4,6 +4,29 @@
 * Beat Schärz (pidu2)
 * Dario Furigo (VirtSyntaxError)
 * Janick A. Lüdi (janexander)
+* Nik Arm (projektins)
+
+
+### Agenda
+* create documentation
+* role description
+
+### Decisions
+* job roles
+
+### ToDo
+* Dario Furigo - Preface, Introduction
+* Beat Schaerz - User requirements definition, System evolution
+* Ivo Kozina - System models
+* Ohran Mujkic - System requirements specification
+* Nik Arm - System architecture
+* Janick Lüdi - Testing
+
+## 2018-04-06
+### Attendees
+* Beat Schärz (pidu2)
+* Dario Furigo (VirtSyntaxError)
+* Janick A. Lüdi (janexander)
 * Ohran Mujkic (mujko1)
 * Nik Arm (projektins)
 
@@ -33,7 +56,7 @@
 * Beat Schärz (pidu2)
 * Nik Arm (projektins)
 * Dario Furigo (VirtSyntaxError)
-* Jannick Lüdi (janexander)
+* Janick Lüdi (janexander)
 * Ohran Mujkic (mujko1)
 
 ### Agenda
@@ -62,7 +85,7 @@
 * Nik Arm (projektins)
 * Dario Furigo (VirtSyntaxError)
 * Ivo Kozina (kozinai)
-* Jannick Lüdi (janexander)
+* Janick Lüdi (janexander)
 * Ohran Mujkic (mujko1)
 
 ### Agenda
@@ -106,7 +129,7 @@
 * Nik Arm (projektins)
 * Dario Furigo (VirtSyntaxError)
 * Ivo Kozina (kozinai)
-* Jannick Lüdi (janexander)
+* Janick Lüdi (janexander)
 * Ohran Mujkic (mujko1)
 
 ### Agenda
