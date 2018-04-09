@@ -20,7 +20,7 @@
 * Ivo Kozina - System models
 * Ohran Mujkic - System requirements specification
 * Nik Arm - System architecture
-* Janick Lüdi - Testing
+* Janick Lüdi - Testing, Apprendices
 
 ## 2018-04-06
 ### Attendees
