@@ -3,7 +3,7 @@
 ### Attendees
 * Beat Schärz (pidu2)
 * Dario Furigo (VirtSyntaxError)
-* Jannick Lüdi (janexander)
+* Janick A. Lüdi (janexander)
 * Ohran Mujkic (mujko1)
 * Nik Arm (projektins)
 

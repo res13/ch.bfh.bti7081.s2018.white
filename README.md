@@ -6,7 +6,7 @@
 * Nik Arm (projektins)
 * Dario Furigo (VirtSyntaxError)
 * Ivo Kozina (kozinai)
-* Jannick Lüdi (janexander)
+* Janick A. Lüdi (janexander)
 * Ohran Mujkic (mujko1)
 
 ## Useful links
