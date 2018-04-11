@@ -6,7 +6,6 @@
 * Janick A. Lüdi (janexander)
 * Nik Arm (projektins)
 
-
 ### Agenda
 * create documentation
 * role description
