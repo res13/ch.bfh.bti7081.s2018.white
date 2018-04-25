@@ -1,6 +1,7 @@
-package ch.bfh.bti7081.s2018.white.pms.services;
+package ch.bfh.bti7081.s2018.white.pms.services.impl;
 
 import ch.bfh.bti7081.s2018.white.pms.common.model.PmsType;
+import ch.bfh.bti7081.s2018.white.pms.services.BaseService;
 
 import java.util.List;
 

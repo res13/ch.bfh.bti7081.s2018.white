@@ -13,9 +13,7 @@ public class MessageHandler {
         return MESSAGES.getString(messageId);
     }
 
-    public static final String PATIENT_DIARY_NAME = getMessage("PATIENT_DIARY_NAME");
+    public static final String DIARY_NAME = getMessage("DIARY_NAME");
 
-    public static final String RELATIVE_DIARY_NAME = getMessage("RELATIVE_DIARY_NAME");
-
-
+    public static final String GOAL_TRACKER_NAME = getMessage("GOAL_TRACKER_NAME");
 }
