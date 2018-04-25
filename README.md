@@ -17,6 +17,7 @@
 * [Documentation Task01](https://github.com/res13/ch.bfh.bti7081.s2018.white/blob/master/doc/task01/PMS%20Documentation%20group%20white.pdf)
 * [Documentation Task02](https://github.com/res13/ch.bfh.bti7081.s2018.white/blob/master/doc/task02/PMS_task02_white.pdf)
 * [Documentation Task03](https://github.com/res13/ch.bfh.bti7081.s2018.white/blob/master/doc/task03/PMS_task03_white.pdf)
+* [Documentation Task04](https://github.com/res13/ch.bfh.bti7081.s2018.white/blob/master/doc/task04/PMS_task04_white.pdf)
 
 ### Technical
 * [VAADIN readme](https://github.com/res13/ch.bfh.bti7081.s2018.white/blob/master/VAADIN_README.md)
