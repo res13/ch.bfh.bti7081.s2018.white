@@ -6,6 +6,8 @@ import java.util.Date;
 
 public class PmsType {
 
+    private long id;
+
     private Date lastModified;
 
     private User lastModifiedBy;

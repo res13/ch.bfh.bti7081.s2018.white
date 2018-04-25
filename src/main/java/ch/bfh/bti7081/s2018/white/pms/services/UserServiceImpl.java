@@ -1,4 +1,11 @@
 package ch.bfh.bti7081.s2018.white.pms.services;
 
-public class UserServiceImpl extends BaseService implements UserService {
+import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
+
+public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
+
+    @Override
+    public long authenticate(String username, String password) {
+        return 0;
+    }
 }
