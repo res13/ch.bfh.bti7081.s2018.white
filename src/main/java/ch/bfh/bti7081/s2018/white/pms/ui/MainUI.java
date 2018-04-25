@@ -2,10 +2,13 @@ package ch.bfh.bti7081.s2018.white.pms.ui;
 
 import javax.servlet.annotation.WebServlet;
 
+import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
+import ch.bfh.bti7081.s2018.white.pms.services.UserServiceImpl;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
@@ -36,8 +39,14 @@ public class MainUI extends UI {
         });
         
         layout.addComponents(name, button);
-        
         setContent(layout);
+    }
+
+    private void login() {
+        UserServiceImpl impl = new UserServiceImpl();
+        long userId = impl.authenticate("username", "pw");
+        VaadinSession.getCurrent().setAttribute("userId", userId);
+        User user = impl.getEntityById(userId);
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)

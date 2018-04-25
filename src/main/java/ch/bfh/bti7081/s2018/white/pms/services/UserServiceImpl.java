@@ -5,7 +5,7 @@ import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
 
     @Override
-    public long authenticate(String username, String password) {
+    public long authenticate(String email, String password) {
         return 0;
     }
 }
