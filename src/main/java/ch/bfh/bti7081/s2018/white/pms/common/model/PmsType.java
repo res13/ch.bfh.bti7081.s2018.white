@@ -14,6 +14,7 @@ public abstract class PmsType {
 
     private Date lastModified;
 
+    @OneToOne
     private User lastModifiedBy;
 
 }
