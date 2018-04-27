@@ -1,16 +1,15 @@
 package ch.bfh.bti7081.s2018.white.pms.ui;
 
-import javax.servlet.annotation.WebServlet;
-
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import javax.servlet.annotation.WebServlet;
+import java.util.Date;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser window 
@@ -22,8 +21,12 @@ import com.vaadin.ui.VerticalLayout;
 @Theme("mytheme")
 public class MainUI extends UI {
 
+    public static final Logger log = LogManager.getLogger(MainUI.class.getName());
+
+
     @Override
     protected void init(VaadinRequest vaadinRequest) {
+        log.info("Starting GUI {}" , new Date());
         final VerticalLayout layout = new VerticalLayout();
         
         final TextField name = new TextField();
