@@ -148,36 +148,26 @@
                 </configuration>
             </plugin>
 
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-antrun-plugin</artifactId>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>generate-test-sql-scripts</id>-->
-                        <!--<phase>generate-test-resources</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>run</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<tasks>-->
-                                <!--<property name="maven_test_classpath" refid="maven.test.classpath"/>-->
-                                <!--<path id="hibernate_tools_path">-->
-                                    <!--<pathelement path="${maven_test_classpath}"/>-->
-                                <!--</path>-->
-                                <!--<property name="hibernate_tools_classpath" refid="hibernate_tools_path"/>-->
-                                <!--<taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask"/>-->
-                                <!--<mkdir dir="${project.build.directory}/test-classes/hsqldb"/>-->
-                                <!--<hibernatetool destdir="${project.build.directory}/test-classes/hsqldb">-->
-                                    <!--<classpath refid="hibernate_tools_path"/>-->
-                                    <!--<jpaconfiguration persistenceunit="testPersistenceUnit" propertyfile="src/test/resources/META-INF/spring/jdbc.properties"/>-->
-                                    <!--<hbm2ddl drop="false" create="true" export="false" outputfilename="create_db.sql" delimiter=";" format="true"/>-->
-                                    <!--<hbm2ddl drop="true" create="false" export="false" outputfilename="drop_db.sql" delimiter=";" format="true"/>-->
-                                <!--</hibernatetool>-->
-                            <!--</tasks>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
+            <!-- Run with mvn clean package jpa2ddl:generate -->
+            <plugin>
+                <groupId>com.devskiller.jpa2ddl</groupId>
+                <artifactId>jpa2ddl-maven-plugin</artifactId>
+                <version>0.9.11</version>
+                <configuration>
+                    <packages>
+                        <package>ch.bfh.bti7081.s2018.white.pms.common.model</package>
+                    </packages>
+                    <outputPath>${project.build.directory}/ddl.sql</outputPath>
+                    <generationMode>METADATA</generationMode>
+                    <jpaProperties>
+                        <property>
+                            <name>hibernate.dialect</name>
+                            <value>org.hibernate.dialect.H2Dialect</value>
+                        </property>
+                    </jpaProperties>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 

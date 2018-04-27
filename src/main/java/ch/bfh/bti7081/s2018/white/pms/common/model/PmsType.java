@@ -5,16 +5,20 @@ import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
+@MappedSuperclass
 public abstract class PmsType {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(nullable = false)
     private Date lastModified;
 
-    @OneToOne
-    private User lastModifiedBy;
+    @PrePersist
+    @PreUpdate
+    private void onInsert() {
+        this.lastModified = new Date();
+    }
 
 }

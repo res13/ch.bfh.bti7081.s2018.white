@@ -4,12 +4,14 @@ import ch.bfh.bti7081.s2018.white.pms.common.model.PmsType;
 import ch.bfh.bti7081.s2018.white.pms.common.model.caze.Case;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import java.util.List;
 
 @Entity
-@Table(name = "app")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class App extends PmsType {
 
     protected String name;
