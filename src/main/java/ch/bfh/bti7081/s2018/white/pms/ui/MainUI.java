@@ -1,6 +1,8 @@
 package ch.bfh.bti7081.s2018.white.pms.ui;
 
+import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.Diary;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry;
+import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry_;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
@@ -12,6 +14,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.servlet.annotation.WebServlet;
 import java.util.Date;
 
@@ -60,13 +65,26 @@ public class MainUI extends UI {
 
         Session currentSession = sessionFactoryObj.openSession();
 
+        String titleText = "ABC";
         DiaryEntry diaryEntry = new DiaryEntry();
-        diaryEntry.setTitle("Abc");
+        diaryEntry.setTitle(titleText);
         currentSession.save(diaryEntry);
 
+        //1. Example with find
         DiaryEntry diaryEntry1 = currentSession.find(DiaryEntry.class, 1L);
-
         System.out.println(diaryEntry1.getTitle());
+
+        //USE THIS FOR ALL SERVICES
+        //2. Example with Criteria Builer with JPA model Gen
+        CriteriaBuilder cb = currentSession.getCriteriaBuilder();
+        CriteriaQuery<DiaryEntry> q = cb.createQuery(DiaryEntry.class);
+        Root<DiaryEntry> root = q.from(DiaryEntry.class);
+        q.where(cb.like(root.get(DiaryEntry_.title), titleText));
+        DiaryEntry singleResult = currentSession.createQuery(q).getSingleResult();
+        if (singleResult != null){
+            System.out.println(singleResult.getTitle());
+        }
+
         System.exit(0);
     }
 }
