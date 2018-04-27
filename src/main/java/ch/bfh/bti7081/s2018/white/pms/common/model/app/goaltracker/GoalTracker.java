@@ -9,14 +9,21 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name = "goaltracker")
+@Table
 public class GoalTracker extends App {
 
     @OneToMany
     private List<Goal> goalList;
 
     public GoalTracker() {
-        name = MessageHandler.GOAL_TRACKER_NAME;
+    }
+
+    public List<Goal> getGoalList() {
+        return goalList;
+    }
+
+    public void setGoalList(List<Goal> goalList) {
+        this.goalList = goalList;
     }
 
 }

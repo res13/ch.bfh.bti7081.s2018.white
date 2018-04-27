@@ -6,9 +6,20 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name = "doctor")
+@Table
 public class Doctor extends User {
 
     @ManyToMany
     private List<Patient> patientList;
+
+    public Doctor() {
+    }
+
+    public List<Patient> getPatientList() {
+        return patientList;
+    }
+
+    public void setPatientList(List<Patient> patientList) {
+        this.patientList = patientList;
+    }
 }

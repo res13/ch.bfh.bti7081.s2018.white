@@ -7,14 +7,21 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "diary")
+@Table
 public class Diary extends App {
 
     @OneToMany
     private List<DiaryEntry> entryList;
 
     public Diary() {
-        name = MessageHandler.DIARY_NAME;
+//        name = MessageHandler.DIARY_NAME;
     }
 
+    public List<DiaryEntry> getEntryList() {
+        return entryList;
+    }
+
+    public void setEntryList(List<DiaryEntry> entryList) {
+        this.entryList = entryList;
+    }
 }

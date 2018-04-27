@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "diaryentry")
+@Table
 public class DiaryEntry extends PmsType {
 
     private LocalDateTime time;
@@ -25,4 +25,54 @@ public class DiaryEntry extends PmsType {
 
     private boolean patientRead;
 
+    public DiaryEntry() {
+    }
+
+    public LocalDateTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalDateTime time) {
+        this.time = time;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getEntryText() {
+        return entryText;
+    }
+
+    public void setEntryText(String entryText) {
+        this.entryText = entryText;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public boolean isRelativeRead() {
+        return relativeRead;
+    }
+
+    public void setRelativeRead(boolean relativeRead) {
+        this.relativeRead = relativeRead;
+    }
+
+    public boolean isPatientRead() {
+        return patientRead;
+    }
+
+    public void setPatientRead(boolean patientRead) {
+        this.patientRead = patientRead;
+    }
 }

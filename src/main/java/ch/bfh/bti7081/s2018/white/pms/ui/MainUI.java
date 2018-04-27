@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2018.white.pms.ui;
 
+import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
@@ -7,6 +8,9 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 import javax.servlet.annotation.WebServlet;
 import java.util.Date;
@@ -45,5 +49,24 @@ public class MainUI extends UI {
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MainUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
+    }
+
+    public static void main(String[] args) {
+        log.info("hoi");
+
+        // Creating Configuration Instance & Passing Hibernate Configuration File
+        Configuration configObj = new Configuration();
+        SessionFactory sessionFactoryObj = configObj.configure().buildSessionFactory();
+
+        Session currentSession = sessionFactoryObj.openSession();
+
+        DiaryEntry diaryEntry = new DiaryEntry();
+        diaryEntry.setTitle("Abc");
+        currentSession.save(diaryEntry);
+
+        DiaryEntry diaryEntry1 = currentSession.find(DiaryEntry.class, 1L);
+
+        System.out.println(diaryEntry1.getTitle());
+        System.exit(0);
     }
 }
