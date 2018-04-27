@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="ERROR" name="example-config">
+    <Properties>
+        <Property name="LOG_DIR">logs</Property>
+        <Property name="ARCHIVE">${LOG_DIR}/archive</Property>
+        <Property name="PATTERN">%d{yyyy-MM-dd-HH:mm:ss,SSS}-[%level]-%c{1}: %m%n</Property>
+    </Properties>
+    <Appenders>
+        <!-- Console Appender -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${PATTERN}"/>
+        </Console>
+        <!-- File Appender -->
+        <RollingFile name="fileWriter"
+                     fileName="${LOG_DIR}/PMS.log"
+                     filePattern="${ARCHIVE}/%d{yyyy-MM-dd}_pms.log">
+            <PatternLayout>
+                <pattern>${PATTERN}</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="20 MB" />
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="fileWriter"/>
+        </Root>
+        <!-- Log everything in hibernate -->
+        <Logger name="org.hibernate" level="error" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="fileWriter" />
+        </Logger>
+        <!-- Log SQL statements -->
+        <Logger name="org.hibernate.SQL" level="debug" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="fileWriter" />
+        </Logger>
+        <!-- Log JDBC bind parameters -->
+        <Logger name="org.hibernate.type.descriptor.sql" level="error" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="fileWriter" />
+        </Logger>
+    </Loggers>
+</Configuration>
