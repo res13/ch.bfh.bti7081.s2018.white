@@ -9,4 +9,15 @@ public class Doctor extends User {
 
     @ManyToMany(mappedBy = "doctorList")
     private List<Patient> patientList;
+
+    public Doctor() {
+    }
+
+    public List<Patient> getPatientList() {
+        return patientList;
+    }
+
+    public void setPatientList(List<Patient> patientList) {
+        this.patientList = patientList;
+    }
 }

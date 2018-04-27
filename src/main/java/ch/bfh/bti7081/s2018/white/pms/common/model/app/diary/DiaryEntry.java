@@ -27,4 +27,54 @@ public class DiaryEntry extends PmsType {
     @ManyToOne
     private Diary diary;
 
+    public DiaryEntry() {
+    }
+
+    public LocalDateTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalDateTime time) {
+        this.time = time;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getEntryText() {
+        return entryText;
+    }
+
+    public void setEntryText(String entryText) {
+        this.entryText = entryText;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public boolean isRelativeRead() {
+        return relativeRead;
+    }
+
+    public void setRelativeRead(boolean relativeRead) {
+        this.relativeRead = relativeRead;
+    }
+
+    public boolean isPatientRead() {
+        return patientRead;
+    }
+
+    public void setPatientRead(boolean patientRead) {
+        this.patientRead = patientRead;
+    }
 }

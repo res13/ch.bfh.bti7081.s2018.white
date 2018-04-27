@@ -19,4 +19,11 @@ public class GoalTracker extends App {
         name = MessageHandler.GOAL_TRACKER_NAME;
     }
 
+    public List<Goal> getGoalList() {
+        return goalList;
+    }
+
+    public void setGoalList(List<Goal> goalList) {
+        this.goalList = goalList;
+    }
 }

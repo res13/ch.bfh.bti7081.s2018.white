@@ -25,4 +25,46 @@ public class Goal extends PmsType {
     @ManyToOne
     private GoalTracker goalTracker;
 
+    public Goal() {
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
+
+    public LocalDateTime getDueTo() {
+        return dueTo;
+    }
+
+    public void setDueTo(LocalDateTime dueTo) {
+        this.dueTo = dueTo;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public String getGoal() {
+        return goal;
+    }
+
+    public void setGoal(String goal) {
+        this.goal = goal;
+    }
+
+    public GoalState getState() {
+        return state;
+    }
+
+    public void setState(GoalState state) {
+        this.state = state;
+    }
 }

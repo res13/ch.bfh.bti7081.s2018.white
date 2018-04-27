@@ -22,4 +22,23 @@ public abstract class App extends PmsType {
     public void notify(List<User>userList, String title, String message) {
 
     }
+
+    public App() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Case getCaze() {
+        return caze;
+    }
+
+    public void setCaze(Case caze) {
+        this.caze = caze;
+    }
 }

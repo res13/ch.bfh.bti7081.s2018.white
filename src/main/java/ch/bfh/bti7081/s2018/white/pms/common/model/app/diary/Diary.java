@@ -19,4 +19,11 @@ public class Diary extends App {
         name = MessageHandler.DIARY_NAME;
     }
 
+    public List<DiaryEntry> getEntryList() {
+        return entryList;
+    }
+
+    public void setEntryList(List<DiaryEntry> entryList) {
+        this.entryList = entryList;
+    }
 }

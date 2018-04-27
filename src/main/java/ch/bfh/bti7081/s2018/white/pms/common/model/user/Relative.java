@@ -9,4 +9,15 @@ public class Relative extends User {
 
     @ManyToMany(mappedBy = "relativeList")
     private List<Patient> patientList;
+
+    public Relative() {
+    }
+
+    public List<Patient> getPatientList() {
+        return patientList;
+    }
+
+    public void setPatientList(List<Patient> patientList) {
+        this.patientList = patientList;
+    }
 }

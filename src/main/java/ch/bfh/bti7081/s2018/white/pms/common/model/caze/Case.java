@@ -27,4 +27,46 @@ public class Case extends PmsType {
     @JoinColumn(name="caze_id")
     private List<App> appList;
 
+    public Case() {
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public LocalDateTime getFrom() {
+        return from;
+    }
+
+    public void setFrom(LocalDateTime from) {
+        this.from = from;
+    }
+
+    public LocalDateTime getTo() {
+        return to;
+    }
+
+    public void setTo(LocalDateTime to) {
+        this.to = to;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public List<App> getAppList() {
+        return appList;
+    }
+
+    public void setAppList(List<App> appList) {
+        this.appList = appList;
+    }
 }
