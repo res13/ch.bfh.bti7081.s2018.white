@@ -1,6 +1,5 @@
 package ch.bfh.bti7081.s2018.white.pms.ui;
 
-import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.Diary;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry_;
 import com.vaadin.annotations.Theme;
@@ -45,6 +44,8 @@ public class MainUI extends UI {
         button.addClickListener(e -> {
             layout.addComponent(new Label("Thanks " + name.getValue() 
                     + ", it works!"));
+
+            testDb();
         });
         
         layout.addComponents(name, button);
@@ -56,7 +57,7 @@ public class MainUI extends UI {
     public static class MyUIServlet extends VaadinServlet {
     }
 
-    public static void main(String[] args) {
+    private static void testDb() {
         log.info("hoi");
 
         // Creating Configuration Instance & Passing Hibernate Configuration File
