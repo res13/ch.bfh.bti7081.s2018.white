@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2018.white.pms.ui;
 
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry_;
+import ch.bfh.bti7081.s2018.white.pms.services.hibernate.HibernateUtil;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
@@ -18,6 +19,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.servlet.annotation.WebServlet;
 import java.util.Date;
+import java.util.List;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser window 
@@ -57,14 +59,14 @@ public class MainUI extends UI {
     public static class MyUIServlet extends VaadinServlet {
     }
 
+    public static void main(String[] args) {
+        testDb();
+    }
+
     private static void testDb() {
         log.info("hoi");
 
-        // Creating Configuration Instance & Passing Hibernate Configuration File
-        Configuration configObj = new Configuration();
-        SessionFactory sessionFactoryObj = configObj.configure().buildSessionFactory();
-
-        Session currentSession = sessionFactoryObj.openSession();
+        Session currentSession = HibernateUtil.getSession();
 
         String titleText = "ABC";
         DiaryEntry diaryEntry = new DiaryEntry();
@@ -81,10 +83,8 @@ public class MainUI extends UI {
         CriteriaQuery<DiaryEntry> q = cb.createQuery(DiaryEntry.class);
         Root<DiaryEntry> root = q.from(DiaryEntry.class);
         q.where(cb.like(root.get(DiaryEntry_.title), titleText));
-        DiaryEntry singleResult = currentSession.createQuery(q).getSingleResult();
-        if (singleResult != null){
-            System.out.println(singleResult.getTitle());
-        }
+        List<DiaryEntry> resultList = currentSession.createQuery(q).getResultList();
+        System.out.println(resultList.size());
 
         System.exit(0);
     }
