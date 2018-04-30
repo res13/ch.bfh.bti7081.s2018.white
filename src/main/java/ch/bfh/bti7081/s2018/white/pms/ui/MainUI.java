@@ -85,7 +85,5 @@ public class MainUI extends UI {
         q.where(cb.like(root.get(DiaryEntry_.title), titleText));
         List<DiaryEntry> resultList = currentSession.createQuery(q).getResultList();
         System.out.println(resultList.size());
-
-        System.exit(0);
     }
 }

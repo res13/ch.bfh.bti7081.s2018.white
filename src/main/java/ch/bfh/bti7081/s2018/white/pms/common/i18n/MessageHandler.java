@@ -7,7 +7,7 @@ public class MessageHandler {
 
     private static Locale DEFAULT_LOCALE = new Locale("de", "CH");
 
-    private static ResourceBundle MESSAGES = ResourceBundle.getBundle("MessagesBundle", DEFAULT_LOCALE);
+    private static ResourceBundle MESSAGES = ResourceBundle.getBundle("MessageBundle", DEFAULT_LOCALE);
 
     private static String getMessage(String messageId) {
         return MESSAGES.getString(messageId);
