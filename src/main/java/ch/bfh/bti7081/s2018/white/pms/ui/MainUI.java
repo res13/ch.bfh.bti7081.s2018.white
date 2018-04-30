@@ -2,7 +2,7 @@ package ch.bfh.bti7081.s2018.white.pms.ui;
 
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry_;
-import ch.bfh.bti7081.s2018.white.pms.services.hibernate.HibernateUtil;
+import ch.bfh.bti7081.s2018.white.pms.persistence.JpaUtility;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
@@ -10,9 +10,6 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -66,24 +63,29 @@ public class MainUI extends UI {
     private static void testDb() {
         log.info("hoi");
 
-        Session currentSession = HibernateUtil.getSession();
+        try (JpaUtility jpaUtility = new JpaUtility()) {
+            String titleText = "ABC";
+            DiaryEntry diaryEntry = new DiaryEntry();
+            diaryEntry.setTitle(titleText);
+            jpaUtility.getEntityManager().persist(diaryEntry);
 
-        String titleText = "ABC";
-        DiaryEntry diaryEntry = new DiaryEntry();
-        diaryEntry.setTitle(titleText);
-        currentSession.save(diaryEntry);
+            //1. Example with find
+            DiaryEntry diaryEntry1 = jpaUtility.getEntityManager().find(DiaryEntry.class, 1L);
+            System.out.println(diaryEntry1.getTitle());
 
-        //1. Example with find
-        DiaryEntry diaryEntry1 = currentSession.find(DiaryEntry.class, 1L);
-        System.out.println(diaryEntry1.getTitle());
+            //USE THIS FOR ALL SERVICES
+            //2. Example with Criteria Builer with JPA model Gen
+            CriteriaBuilder cb = jpaUtility.getEntityManager().getCriteriaBuilder();
+            CriteriaQuery<DiaryEntry> q = cb.createQuery(DiaryEntry.class);
+            Root<DiaryEntry> root = q.from(DiaryEntry.class);
+            q.where(cb.like(root.get(DiaryEntry_.title), titleText));
+            List<DiaryEntry> resultList = jpaUtility.getEntityManager().createQuery(q).getResultList();
+            System.out.println(resultList.size());
+        } catch (Exception e) {
+            log.error(e);
+        }
 
-        //USE THIS FOR ALL SERVICES
-        //2. Example with Criteria Builer with JPA model Gen
-        CriteriaBuilder cb = currentSession.getCriteriaBuilder();
-        CriteriaQuery<DiaryEntry> q = cb.createQuery(DiaryEntry.class);
-        Root<DiaryEntry> root = q.from(DiaryEntry.class);
-        q.where(cb.like(root.get(DiaryEntry_.title), titleText));
-        List<DiaryEntry> resultList = currentSession.createQuery(q).getResultList();
-        System.out.println(resultList.size());
+
+
     }
 }
