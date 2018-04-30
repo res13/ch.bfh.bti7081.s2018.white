@@ -5,5 +5,8 @@ import ch.bfh.bti7081.s2018.white.pms.services.AppService;
 
 public class AppServiceImpl<T extends App> extends BaseServiceImpl<T> implements AppService {
 
+    public AppServiceImpl(Class<T> clazz) {
+        super(clazz);
+    }
 
 }
