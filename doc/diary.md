@@ -1,4 +1,26 @@
 # Meetings
+## 2018-04-30
+### Attendees
+* Andreas Erb (res13)
+* Beat Schärz (pidu2)
+* Nik Arm (projektins)
+* Dario Furigo (VirtSyntaxError)
+* Janick Lüdi (janexander)
+* Ohran Mujkic (mujko1)
+
+### Agenda
+* product planning meeting
+
+### Decisions
+* job roles
+* Scrum Master - Andreas Erb
+
+### ToDo
+* Beat Schaerz - Product backlog template
+* Janick Lüdi - Sprint backlog template
+* all - Product and Sprint planning
+
+# Meetings
 ## 2018-04-13
 ### Attendees
 * Beat Schärz (pidu2)
