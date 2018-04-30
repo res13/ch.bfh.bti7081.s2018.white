@@ -24,9 +24,9 @@
             <property name="hibernate.connection.username" value="sa" />
             <property name="hibernate.connection.password" value="" />
             <property name="hibernate.current_session_context_class" value="thread" />
+            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
             <property name="connection.pool_size" value="1" />
             <property name="show_sql" value="true" />
-            <property name="hbm2ddl.auto" value="create-drop" />
         </properties>
     </persistence-unit>
 </persistence>

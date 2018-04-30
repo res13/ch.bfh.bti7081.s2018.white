@@ -61,18 +61,26 @@ public class MainUI extends UI {
     }
 
     private static void testDb() {
-        log.info("hoi");
-
-        try (JpaUtility jpaUtility = new JpaUtility()) {
-            String titleText = "ABC";
+        String titleText = "ABC";
+        try (JpaUtility jpaUtility = new JpaUtility()){
             DiaryEntry diaryEntry = new DiaryEntry();
             diaryEntry.setTitle(titleText);
             jpaUtility.getEntityManager().persist(diaryEntry);
-
+        }
+        catch (Exception e) {
+            log.error(e);
+            e.printStackTrace();
+        }
+        try (JpaUtility jpaUtility = new JpaUtility()){
             //1. Example with find
             DiaryEntry diaryEntry1 = jpaUtility.getEntityManager().find(DiaryEntry.class, 1L);
             System.out.println(diaryEntry1.getTitle());
-
+        }
+        catch (Exception e) {
+            log.error(e);
+            e.printStackTrace();
+        }
+        try (JpaUtility jpaUtility = new JpaUtility()){
             //USE THIS FOR ALL SERVICES
             //2. Example with Criteria Builer with JPA model Gen
             CriteriaBuilder cb = jpaUtility.getEntityManager().getCriteriaBuilder();
@@ -81,11 +89,10 @@ public class MainUI extends UI {
             q.where(cb.like(root.get(DiaryEntry_.title), titleText));
             List<DiaryEntry> resultList = jpaUtility.getEntityManager().createQuery(q).getResultList();
             System.out.println(resultList.size());
-        } catch (Exception e) {
-            log.error(e);
         }
-
-
-
+        catch (Exception e) {
+            log.error(e);
+            e.printStackTrace();
+        }
     }
 }

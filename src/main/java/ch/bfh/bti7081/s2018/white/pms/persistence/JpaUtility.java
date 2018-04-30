@@ -1,22 +1,31 @@
 package ch.bfh.bti7081.s2018.white.pms.persistence;
 
+import ch.bfh.bti7081.s2018.white.pms.ui.MainUI;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class JpaUtility implements AutoCloseable {
 
-    private static final EntityManagerFactory entityManagerFactory;
+    public static final Logger log = LogManager.getLogger(MainUI.class.getName());
+
+    private EntityManagerFactory entityManagerFactory;
 
     private EntityManager entityManager;
 
-    static {
-        entityManagerFactory = Persistence.createEntityManagerFactory("ch.bfh.bti7081.s2018.white.pms");
-    }
-
     public JpaUtility() {
-        entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
+        try {
+            entityManagerFactory = Persistence.createEntityManagerFactory("ch.bfh.bti7081.s2018.white.pms");
+            entityManager = entityManagerFactory.createEntityManager();
+            entityManager.getTransaction().begin();
+        }
+        catch (Exception e) {
+            log.error(e);
+            e.printStackTrace();
+        }
     }
 
     public EntityManager getEntityManager(){
@@ -25,7 +34,12 @@ public class JpaUtility implements AutoCloseable {
 
     @Override
     public void close() throws Exception {
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        if (entityManager != null) {
+            entityManager.getTransaction().commit();
+            entityManager.close();
+        }
+        if (entityManagerFactory != null) {
+            entityManagerFactory.close();
+        }
     }
 }
