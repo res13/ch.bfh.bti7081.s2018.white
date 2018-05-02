@@ -1,7 +1,7 @@
 package ch.bfh.bti7081.s2018.white.pms.common.model.app;
 
 import ch.bfh.bti7081.s2018.white.pms.common.model.PmsType;
-import ch.bfh.bti7081.s2018.white.pms.common.model.caze.Case;
+import ch.bfh.bti7081.s2018.white.pms.common.model.caze.Caze;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 
 import javax.persistence.Entity;
@@ -17,7 +17,7 @@ public abstract class App extends PmsType {
     protected String name;
 
     @ManyToOne
-    private Case caze;
+    private Caze caze;
 
     public void notify(List<User>userList, String title, String message) {
 
@@ -34,11 +34,11 @@ public abstract class App extends PmsType {
         this.name = name;
     }
 
-    public Case getCaze() {
+    public Caze getCaze() {
         return caze;
     }
 
-    public void setCaze(Case caze) {
+    public void setCaze(Caze caze) {
         this.caze = caze;
     }
 }

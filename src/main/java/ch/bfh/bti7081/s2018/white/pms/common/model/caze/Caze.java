@@ -12,14 +12,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-public class Case extends PmsType {
+public class Caze extends PmsType {
 
     @ManyToOne
     private Patient patient;
 
-    private LocalDateTime from;
+    private LocalDateTime fromDate;
 
-    private LocalDateTime to;
+    private LocalDateTime toDate;
 
     private String note;
 
@@ -27,7 +27,7 @@ public class Case extends PmsType {
     @JoinColumn(name="caze_id")
     private List<App> appList;
 
-    public Case() {
+    public Caze() {
     }
 
     public Patient getPatient() {
@@ -38,20 +38,20 @@ public class Case extends PmsType {
         this.patient = patient;
     }
 
-    public LocalDateTime getFrom() {
-        return from;
+    public LocalDateTime getFromDate() {
+        return fromDate;
     }
 
-    public void setFrom(LocalDateTime from) {
-        this.from = from;
+    public void setFromDate(LocalDateTime from) {
+        this.fromDate = from;
     }
 
-    public LocalDateTime getTo() {
-        return to;
+    public LocalDateTime getToDate() {
+        return toDate;
     }
 
-    public void setTo(LocalDateTime to) {
-        this.to = to;
+    public void setToDate(LocalDateTime to) {
+        this.toDate = to;
     }
 
     public String getNote() {

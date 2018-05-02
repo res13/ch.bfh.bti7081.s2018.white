@@ -1,6 +1,6 @@
 package ch.bfh.bti7081.s2018.white.pms.common.model.user;
 
-import ch.bfh.bti7081.s2018.white.pms.common.model.caze.Case;
+import ch.bfh.bti7081.s2018.white.pms.common.model.caze.Caze;
 
 import javax.persistence.*;
 import java.util.List;
@@ -24,7 +24,7 @@ public class Patient extends User {
 
     @OneToMany
     @JoinColumn(name="patient_id")
-    private List<Case> caseList;
+    private List<Caze> cazeList;
 
     public Patient() {
 
@@ -46,12 +46,12 @@ public class Patient extends User {
         this.doctorList = doctorList;
     }
 
-    public List<Case> getCaseList() {
-        return caseList;
+    public List<Caze> getCazeList() {
+        return cazeList;
     }
 
-    public void setCaseList(List<Case> caseList) {
-        this.caseList = caseList;
+    public void setCazeList(List<Caze> cazeList) {
+        this.cazeList = cazeList;
     }
 
 
