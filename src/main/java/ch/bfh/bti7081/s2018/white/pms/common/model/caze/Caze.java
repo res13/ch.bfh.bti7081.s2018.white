@@ -1,6 +1,6 @@
 package ch.bfh.bti7081.s2018.white.pms.common.model.caze;
 
-import ch.bfh.bti7081.s2018.white.pms.common.model.PmsType;
+import ch.bfh.bti7081.s2018.white.pms.common.model.PmsEntity;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.App;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.Patient;
 
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-public class Caze extends PmsType {
+public class Caze extends PmsEntity {
 
     @ManyToOne
     private Patient patient;

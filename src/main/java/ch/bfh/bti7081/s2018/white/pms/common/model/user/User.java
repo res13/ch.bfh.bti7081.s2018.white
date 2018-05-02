@@ -1,6 +1,6 @@
 package ch.bfh.bti7081.s2018.white.pms.common.model.user;
 
-import ch.bfh.bti7081.s2018.white.pms.common.model.PmsType;
+import ch.bfh.bti7081.s2018.white.pms.common.model.PmsEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class User extends PmsType {
+public abstract class User extends PmsEntity {
 
     private String name;
 

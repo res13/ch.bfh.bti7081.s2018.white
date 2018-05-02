@@ -1,6 +1,6 @@
 package ch.bfh.bti7081.s2018.white.pms.common.model.app;
 
-import ch.bfh.bti7081.s2018.white.pms.common.model.PmsType;
+import ch.bfh.bti7081.s2018.white.pms.common.model.PmsEntity;
 import ch.bfh.bti7081.s2018.white.pms.common.model.caze.Caze;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 
@@ -12,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class App extends PmsType {
+public abstract class App extends PmsEntity {
 
     protected String name;
 

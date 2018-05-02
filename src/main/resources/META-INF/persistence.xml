@@ -6,7 +6,7 @@
     <persistence-unit name="ch.bfh.bti7081.s2018.white.pms" transaction-type="RESOURCE_LOCAL">
         <description>PMS</description>
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>ch.bfh.bti7081.s2018.white.pms.common.model.PmsType</class>
+        <class>ch.bfh.bti7081.s2018.white.pms.common.model.PmsEntity</class>
         <class>ch.bfh.bti7081.s2018.white.pms.common.model.user.Doctor</class>
         <class>ch.bfh.bti7081.s2018.white.pms.common.model.user.Patient</class>
         <class>ch.bfh.bti7081.s2018.white.pms.common.model.user.Relative</class>

@@ -1,6 +1,6 @@
 package ch.bfh.bti7081.s2018.white.pms.services.impl;
 
-import ch.bfh.bti7081.s2018.white.pms.common.model.PmsType;
+import ch.bfh.bti7081.s2018.white.pms.common.model.PmsEntity;
 import ch.bfh.bti7081.s2018.white.pms.persistence.JpaUtility;
 import ch.bfh.bti7081.s2018.white.pms.services.BaseService;
 import org.apache.logging.log4j.LogManager;
@@ -12,7 +12,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-public class BaseServiceImpl<T extends PmsType> implements BaseService<T> {
+public class BaseServiceImpl<T extends PmsEntity> implements BaseService<T> {
 
     public static final Logger log = LogManager.getLogger(BaseServiceImpl.class.getName());
 
