@@ -23,54 +23,41 @@ public class BaseServiceImpl<T extends PmsType> implements BaseService<T> {
     }
 
     @Override
-    public void createEntity(T entity) throws Exception {
-        try (JpaUtility jpaUtility = new JpaUtility()) {
-            jpaUtility.getEntityManager().persist(entity);
-        } catch (Exception e) {
-            log.error(e);
-        }
-    }
-
-    @Override
     public void saveOrUpdateEntity(T entity) throws Exception {
-        try (JpaUtility jpaUtility = new JpaUtility()) {
-            jpaUtility.getEntityManager().persist(entity);
-        } catch (Exception e) {
-            log.error(e);
-        }
+        new JpaUtility().execute(
+            (em) -> {
+                em.persist(entity);
+                return null;
+            });
     }
 
     @Override
     public void deleteEntity(T entity) throws Exception {
-        try (JpaUtility jpaUtility = new JpaUtility()) {
-            jpaUtility.getEntityManager().remove(entity);
-        } catch (Exception e) {
-            log.error(e);
-        }
+        new JpaUtility().execute(
+            (em) -> {
+                em.remove(entity);
+                return null;
+            });
     }
 
     @Override
     public List<T> getAllEntities() throws Exception {
-        try (JpaUtility jpaUtility = new JpaUtility()) {
-            CriteriaBuilder cb = jpaUtility.getEntityManager().getCriteriaBuilder();
-            CriteriaQuery<T> cq = cb.createQuery(clazz);
-            Root<T> rootEntry = cq.from(clazz);
-            CriteriaQuery<T> all = cq.select(rootEntry);
-            TypedQuery<T> allQuery = jpaUtility.getEntityManager().createQuery(all);
-            return allQuery.getResultList();
-        } catch (Exception e) {
-            log.error(e);
-            throw e;
-        }
+        return new JpaUtility().execute(
+            (em) -> {
+                CriteriaBuilder cb = em.getCriteriaBuilder();
+                CriteriaQuery<T> cq = cb.createQuery(clazz);
+                Root<T> rootEntry = cq.from(clazz);
+                CriteriaQuery<T> all = cq.select(rootEntry);
+                TypedQuery<T> allQuery = em.createQuery(all);
+                return allQuery.getResultList();
+            });
     }
 
     @Override
     public T getEntityById(long id) throws Exception {
-        try (JpaUtility jpaUtility = new JpaUtility()) {
-            return jpaUtility.getEntityManager().find(clazz, id);
-        } catch (Exception e) {
-            log.error(e);
-            throw e;
-        }
+        return new JpaUtility().execute(
+            (em) -> {
+                return em.find(clazz, id);
+            });
     }
 }

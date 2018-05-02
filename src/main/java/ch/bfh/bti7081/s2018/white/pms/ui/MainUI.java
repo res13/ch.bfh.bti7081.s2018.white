@@ -19,10 +19,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This UI is the application entry point. A UI may either represent a browser window 
+ * This UI is the application entry point. A UI may either represent a browser window
  * (or tab) or some part of an HTML page where a Vaadin application is embedded.
  * <p>
- * The UI is initialized using {@link #init(VaadinRequest)}. This method is intended to be 
+ * The UI is initialized using {@link #init(VaadinRequest)}. This method is intended to be
  * overridden to add component to the user interface and initialize non-component functionality.
  */
 @Theme("mytheme")
@@ -33,20 +33,20 @@ public class MainUI extends UI {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-        log.info("Starting GUI {}" , new Date());
+        log.info("Starting GUI {}", new Date());
         final VerticalLayout layout = new VerticalLayout();
-        
+
         final TextField name = new TextField();
         name.setCaption("Type your name here:");
 
         Button button = new Button("Click Me");
         button.addClickListener(e -> {
-            layout.addComponent(new Label("Thanks " + name.getValue() 
+            layout.addComponent(new Label("Thanks " + name.getValue()
                     + ", it works!"));
 
             testDb();
         });
-        
+
         layout.addComponents(name, button);
         setContent(layout);
     }
@@ -62,35 +62,41 @@ public class MainUI extends UI {
 
     private static void testDb() {
         String titleText = "ABC";
-        try (JpaUtility jpaUtility = new JpaUtility()){
-            DiaryEntry diaryEntry = new DiaryEntry();
-            diaryEntry.setTitle(titleText);
-            jpaUtility.getEntityManager().persist(diaryEntry);
-        }
-        catch (Exception e) {
+        DiaryEntry diaryEntry = new DiaryEntry();
+        diaryEntry.setTitle(titleText);
+        try {
+            new JpaUtility().execute(
+                    (em) -> {
+                        em.persist(diaryEntry);
+                        return null;
+                    });
+        } catch (Exception e) {
             log.error(e);
             e.printStackTrace();
         }
-        try (JpaUtility jpaUtility = new JpaUtility()){
-            //1. Example with find
-            DiaryEntry diaryEntry1 = jpaUtility.getEntityManager().find(DiaryEntry.class, 1L);
+
+        try {
+            DiaryEntry diaryEntry1 = new JpaUtility().execute(
+                    (em) -> {
+                        return em.find(DiaryEntry.class, 1L);
+                    });
             System.out.println(diaryEntry1.getTitle());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error(e);
             e.printStackTrace();
         }
-        try (JpaUtility jpaUtility = new JpaUtility()){
-            //USE THIS FOR ALL SERVICES
-            //2. Example with Criteria Builer with JPA model Gen
-            CriteriaBuilder cb = jpaUtility.getEntityManager().getCriteriaBuilder();
-            CriteriaQuery<DiaryEntry> q = cb.createQuery(DiaryEntry.class);
-            Root<DiaryEntry> root = q.from(DiaryEntry.class);
-            q.where(cb.like(root.get(DiaryEntry_.title), titleText));
-            List<DiaryEntry> resultList = jpaUtility.getEntityManager().createQuery(q).getResultList();
+
+        try {
+            List<DiaryEntry> resultList = new JpaUtility().execute(
+                    (em) -> {
+                        CriteriaBuilder cb = em.getCriteriaBuilder();
+                        CriteriaQuery<DiaryEntry> q = cb.createQuery(DiaryEntry.class);
+                        Root<DiaryEntry> root = q.from(DiaryEntry.class);
+                        q.where(cb.like(root.get(DiaryEntry_.title), titleText));
+                        return em.createQuery(q).getResultList();
+                    });
             System.out.println(resultList.size());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error(e);
             e.printStackTrace();
         }

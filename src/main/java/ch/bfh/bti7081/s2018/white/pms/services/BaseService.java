@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface BaseService<T extends PmsType> {
 
-    void createEntity(T entity) throws Exception;
-
     void saveOrUpdateEntity(T entity) throws Exception;
 
     void deleteEntity(T entity) throws Exception;

@@ -43,5 +43,9 @@
             <AppenderRef ref="Console" />
             <AppenderRef ref="fileWriter" />
         </Logger>
+        <Logger name="ch.bfh.bti7081.s2018.white.pms" level="error" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="fileWriter" />
+        </Logger>
     </Loggers>
 </Configuration>

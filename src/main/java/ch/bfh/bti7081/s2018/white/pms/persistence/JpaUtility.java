@@ -1,45 +1,46 @@
 package ch.bfh.bti7081.s2018.white.pms.persistence;
 
-import ch.bfh.bti7081.s2018.white.pms.ui.MainUI;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 
-public class JpaUtility implements AutoCloseable {
+public class JpaUtility {
 
-    public static final Logger log = LogManager.getLogger(MainUI.class.getName());
+    public static final Logger log = LogManager.getLogger(JpaUtility.class.getName());
 
-    private EntityManagerFactory entityManagerFactory;
+    private static EntityManagerFactory entityManagerFactory;
 
-    private EntityManager entityManager;
-
-    public JpaUtility() {
+    static {
         try {
             entityManagerFactory = Persistence.createEntityManagerFactory("ch.bfh.bti7081.s2018.white.pms");
-            entityManager = entityManagerFactory.createEntityManager();
-            entityManager.getTransaction().begin();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error(e);
             e.printStackTrace();
         }
     }
 
-    public EntityManager getEntityManager(){
-        return entityManager;
+    public interface ABlockOfCode<T> {
+        T execute(EntityManager em);
     }
 
-    @Override
-    public void close() throws Exception {
-        if (entityManager != null) {
-            entityManager.getTransaction().commit();
-            entityManager.close();
-        }
-        if (entityManagerFactory != null) {
-            entityManagerFactory.close();
+    public <T> T execute(ABlockOfCode<T> aBlockOfCode) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction tx = null;
+        try {
+            tx = em.getTransaction();
+            tx.begin();
+            T returnValue = aBlockOfCode.execute(em);
+            tx.commit();
+            return returnValue;
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            log.error(e);
+            throw e;
+        } finally {
+            em.close();
         }
     }
 }
