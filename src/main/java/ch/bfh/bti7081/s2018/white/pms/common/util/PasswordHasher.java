@@ -1,13 +1,11 @@
 package ch.bfh.bti7081.s2018.white.pms.common.util;
 
-import ch.bfh.bti7081.s2018.white.pms.persistence.JpaUtility;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.spec.KeySpec;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.Random;
 
@@ -16,7 +14,6 @@ public class PasswordHasher {
     private static final String KEY_FACTORY = "PBKDF2WithHmacSHA1";
 
     public static final Logger log = LogManager.getLogger(PasswordHasher.class.getName());
-
 
 
     public static String hashPlainTextPassword(String plaintextPassword, String salt) throws Exception {

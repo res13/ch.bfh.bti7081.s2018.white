@@ -3,7 +3,10 @@ package ch.bfh.bti7081.s2018.white.pms.persistence;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 
 public class JpaUtility {
 
@@ -13,6 +16,7 @@ public class JpaUtility {
 
     static {
         try {
+            log.info("Initializing database");
             entityManagerFactory = Persistence.createEntityManagerFactory("ch.bfh.bti7081.s2018.white.pms");
         } catch (Exception e) {
             log.error(e);

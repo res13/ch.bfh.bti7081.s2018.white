@@ -24,7 +24,7 @@ public class Caze extends PmsEntity {
     private String note;
 
     @OneToMany
-    @JoinColumn(name="caze_id")
+    @JoinColumn(name = "caze_id")
     private List<App> appList;
 
     public Caze() {

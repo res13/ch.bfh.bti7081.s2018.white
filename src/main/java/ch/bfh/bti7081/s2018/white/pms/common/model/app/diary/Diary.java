@@ -12,7 +12,7 @@ import java.util.List;
 public class Diary extends App {
 
     @OneToMany
-    @JoinColumn(name="diary_id")
+    @JoinColumn(name = "diary_id")
     private List<DiaryEntry> entryList;
 
     public Diary() {

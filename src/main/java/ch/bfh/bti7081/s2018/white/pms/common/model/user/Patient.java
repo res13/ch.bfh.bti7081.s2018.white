@@ -23,7 +23,7 @@ public class Patient extends User {
     private List<Doctor> doctorList;
 
     @OneToMany
-    @JoinColumn(name="patient_id")
+    @JoinColumn(name = "patient_id")
     private List<Caze> cazeList;
 
     public Patient() {

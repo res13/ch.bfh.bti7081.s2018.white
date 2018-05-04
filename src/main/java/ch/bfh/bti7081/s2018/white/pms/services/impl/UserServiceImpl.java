@@ -1,15 +1,12 @@
 package ch.bfh.bti7081.s2018.white.pms.services.impl;
 
 import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
-import ch.bfh.bti7081.s2018.white.pms.common.model.user.Patient;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.common.util.PasswordHasher;
 import ch.bfh.bti7081.s2018.white.pms.persistence.JpaUtility;
 import ch.bfh.bti7081.s2018.white.pms.services.UserService;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jsoup.helper.Validate;
 
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -32,13 +29,11 @@ public class UserServiceImpl<T extends User> extends BaseServiceImpl<T> implemen
             User user = userList.get(0);
             if (PasswordHasher.validate(password, user.getSalt(), user.getPasswordHash())) {
                 return user;
-            }
-            else {
+            } else {
                 log.info("User " + email + "entered a wrong password");
                 throw new Exception(MessageHandler.USERNAME_OR_PASSWORD_INCORRECT);
             }
-        }
-        else {
+        } else {
             log.info("User " + email + "not found");
             throw new Exception(MessageHandler.USERNAME_OR_PASSWORD_INCORRECT);
         }

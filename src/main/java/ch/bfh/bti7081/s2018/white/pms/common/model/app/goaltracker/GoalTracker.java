@@ -12,7 +12,7 @@ import java.util.List;
 public class GoalTracker extends App {
 
     @OneToMany
-    @JoinColumn(name="goalTracker_id")
+    @JoinColumn(name = "goalTracker_id")
     private List<Goal> goalList;
 
     public GoalTracker() {

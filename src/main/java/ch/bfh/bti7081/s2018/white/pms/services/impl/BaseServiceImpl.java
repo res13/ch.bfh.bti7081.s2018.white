@@ -25,40 +25,40 @@ public class BaseServiceImpl<T extends PmsEntity> implements BaseService<T> {
     @Override
     public void saveOrUpdateEntity(T entity) throws Exception {
         new JpaUtility().execute(
-            (em) -> {
-                em.persist(entity);
-                return null;
-            });
+                (em) -> {
+                    em.persist(entity);
+                    return null;
+                });
     }
 
     @Override
     public void deleteEntity(T entity) throws Exception {
         new JpaUtility().execute(
-            (em) -> {
-                T entityToDelete = em.find(clazz, entity.getId());
-                em.remove(entityToDelete);
-                return null;
-            });
+                (em) -> {
+                    T entityToDelete = em.find(clazz, entity.getId());
+                    em.remove(entityToDelete);
+                    return null;
+                });
     }
 
     @Override
     public List<T> getAllEntities() throws Exception {
         return new JpaUtility().execute(
-            (em) -> {
-                CriteriaBuilder cb = em.getCriteriaBuilder();
-                CriteriaQuery<T> cq = cb.createQuery(clazz);
-                Root<T> rootEntry = cq.from(clazz);
-                CriteriaQuery<T> all = cq.select(rootEntry);
-                TypedQuery<T> allQuery = em.createQuery(all);
-                return allQuery.getResultList();
-            });
+                (em) -> {
+                    CriteriaBuilder cb = em.getCriteriaBuilder();
+                    CriteriaQuery<T> cq = cb.createQuery(clazz);
+                    Root<T> rootEntry = cq.from(clazz);
+                    CriteriaQuery<T> all = cq.select(rootEntry);
+                    TypedQuery<T> allQuery = em.createQuery(all);
+                    return allQuery.getResultList();
+                });
     }
 
     @Override
     public T getEntityById(long id) throws Exception {
         return new JpaUtility().execute(
-            (em) -> {
-                return em.find(clazz, id);
-            });
+                (em) -> {
+                    return em.find(clazz, id);
+                });
     }
 }
