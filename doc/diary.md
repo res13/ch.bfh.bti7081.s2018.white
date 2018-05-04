@@ -1,4 +1,19 @@
 # Meetings
+## 2018-05-04
+### Attendees
+* Beat Schärz (pidu2)
+* Dario Furigo (VirtSyntaxError)
+* Janick Lüdi (janexander)
+* Ohran Mujkic (mujko1)
+
+### Agenda
+* distribution of tasks
+
+### Decisions
+
+### ToDo
+* check sprint backlog
+
 ## 2018-04-30
 ### Attendees
 * Andreas Erb (res13)
@@ -20,7 +35,6 @@
 * Janick Lüdi - Sprint backlog template
 * all - Product and Sprint planning
 
-# Meetings
 ## 2018-04-13
 ### Attendees
 * Beat Schärz (pidu2)
