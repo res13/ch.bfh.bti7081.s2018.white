@@ -51,7 +51,7 @@ public class MainUI extends UI {
         setContent(layout);
     }
 
-    @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
+    @WebServlet(urlPatterns = "/test", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MainUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
     }
