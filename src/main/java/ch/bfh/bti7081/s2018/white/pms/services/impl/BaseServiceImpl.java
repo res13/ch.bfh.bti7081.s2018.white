@@ -16,7 +16,7 @@ public class BaseServiceImpl<T extends PmsEntity> implements BaseService<T> {
 
     public static final Logger log = LogManager.getLogger(BaseServiceImpl.class.getName());
 
-    private Class<T> clazz;
+    protected Class<T> clazz;
 
     public BaseServiceImpl(Class<T> clazz) {
         this.clazz = clazz;
@@ -35,7 +35,8 @@ public class BaseServiceImpl<T extends PmsEntity> implements BaseService<T> {
     public void deleteEntity(T entity) throws Exception {
         new JpaUtility().execute(
             (em) -> {
-                em.remove(entity);
+                T entityToDelete = em.find(clazz, entity.getId());
+                em.remove(entityToDelete);
                 return null;
             });
     }

@@ -8,7 +8,7 @@ public abstract class PmsEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false)
     private Date lastModified;
@@ -19,11 +19,11 @@ public abstract class PmsEntity {
         this.lastModified = new Date();
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

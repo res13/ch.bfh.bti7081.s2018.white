@@ -16,4 +16,8 @@ public class MessageHandler {
     public static final String DIARY_NAME = getMessage("DIARY_NAME");
 
     public static final String GOAL_TRACKER_NAME = getMessage("GOAL_TRACKER_NAME");
+
+    public static final String USERNAME_OR_PASSWORD_INCORRECT = getMessage("USERNAME_OR_PASSWORD_INCORRECT");
+
+    public static final String EMAIL_ALREADY_IN_USE = getMessage("EMAIL_ALREADY_IN_USE");
 }

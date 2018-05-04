@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2018.white.pms.common.model.user;
 
 import ch.bfh.bti7081.s2018.white.pms.common.model.PmsEntity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -11,15 +12,23 @@ import java.time.LocalDate;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User extends PmsEntity {
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private String surname;
 
+    @Column(nullable = false)
     private LocalDate dateOfBirth;
 
+    @Column(unique = true, nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String passwordHash;
+
+    @Column(nullable = false)
+    private String salt;
 
     public User() {
     }
@@ -62,5 +71,13 @@ public abstract class User extends PmsEntity {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 }
