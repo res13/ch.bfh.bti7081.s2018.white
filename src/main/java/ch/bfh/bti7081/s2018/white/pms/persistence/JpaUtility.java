@@ -18,9 +18,19 @@ public class JpaUtility {
         try {
             log.info("Initializing database");
             entityManagerFactory = Persistence.createEntityManagerFactory("ch.bfh.bti7081.s2018.white.pms");
+            log.info("Import DDL");
+            entityManagerFactory.createEntityManager().close();
+            if (!System.getProperty("SkipTestDataImporting", "true").equals("true")) {
+                log.info("Import test DML");
+                TestDataImporter.importTestData();
+            }
         } catch (Exception e) {
             log.error(e);
-            e.printStackTrace();
+            try {
+                throw e;
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
         }
     }
 

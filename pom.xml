@@ -27,6 +27,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- If there are no local customizations, this can also be "fetch" or "cdn" -->
         <vaadin.widgetset.mode>local</vaadin.widgetset.mode>
+        <skipTests>true</skipTests>
     </properties>
 
     <repositories>
@@ -108,6 +109,14 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.21.0</version>
+                <configuration>
+                    <skipTests>${skipTests}</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.2.0</version>
                 <configuration>
@@ -149,9 +158,6 @@
                     </filesets>
                 </configuration>
             </plugin>
-
-            <!-- The Jetty plugin allows us to easily test the development build by
-                running jetty:run on the command line. -->
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
@@ -159,73 +165,15 @@
                 <configuration>
                     <!-- NEED to Change watch directory -->
                     <scanIntervalSeconds>0</scanIntervalSeconds>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>SkipTestDataImporting</name>
+                            <value>${skipTests}</value>
+                        </systemProperty>
+                    </systemProperties>
                 </configuration>
             </plugin>
-
-            <!-- Run with mvn clean package jpa2ddl:generate -->
-            <plugin>
-                <groupId>com.devskiller.jpa2ddl</groupId>
-                <artifactId>jpa2ddl-maven-plugin</artifactId>
-                <version>0.9.11</version>
-                <configuration>
-                    <packages>
-                        <package>ch.bfh.bti7081.s2018.white.pms.common.model</package>
-                    </packages>
-                    <outputPath>${project.build.directory}/ddl.sql</outputPath>
-                    <generationMode>METADATA</generationMode>
-                    <jpaProperties>
-                        <property>
-                            <name>hibernate.dialect</name>
-                            <value>org.hibernate.dialect.H2Dialect</value>
-                        </property>
-                    </jpaProperties>
-                </configuration>
-            </plugin>
-
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <!-- Vaadin pre-release repositories -->
-            <id>vaadin-prerelease</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-
-            <repositories>
-                <repository>
-                    <id>vaadin-prereleases</id>
-                    <url>http://maven.vaadin.com/vaadin-prereleases</url>
-                </repository>
-                <repository>
-                    <id>vaadin-snapshots</id>
-                    <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
-                    <releases>
-                        <enabled>false</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                </repository>
-            </repositories>
-            <pluginRepositories>
-                <pluginRepository>
-                    <id>vaadin-prereleases</id>
-                    <url>http://maven.vaadin.com/vaadin-prereleases</url>
-                </pluginRepository>
-                <pluginRepository>
-                    <id>vaadin-snapshots</id>
-                    <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
-                    <releases>
-                        <enabled>false</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                </pluginRepository>
-            </pluginRepositories>
-        </profile>
-    </profiles>
 
 </project>

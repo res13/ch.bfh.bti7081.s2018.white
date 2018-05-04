@@ -5,6 +5,8 @@ import org.apache.logging.log4j.Logger;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.security.spec.KeySpec;
 import java.util.Base64;
 import java.util.Random;
@@ -15,6 +17,15 @@ public class PasswordHasher {
 
     public static final Logger log = LogManager.getLogger(PasswordHasher.class.getName());
 
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.print("Plaintext password: ");
+        String plaintextPassword = br.readLine();
+        String salt = getRandomSalt();
+        System.out.println("Salt: " + salt);
+        String passwordHash = hashPlainTextPassword(plaintextPassword, salt);
+        System.out.println("Password hash: " + passwordHash);
+    }
 
     public static String hashPlainTextPassword(String plaintextPassword, String salt) throws Exception {
         Base64.Decoder dec = Base64.getDecoder();

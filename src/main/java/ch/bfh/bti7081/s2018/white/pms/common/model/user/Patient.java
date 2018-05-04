@@ -10,15 +10,15 @@ public class Patient extends User {
 
     @ManyToMany
     @JoinTable(name = "Patient_Relative",
-            joinColumns = @JoinColumn(name = "Relative_id"),
-            inverseJoinColumns = @JoinColumn(name = "Patient_id")
+            joinColumns = @JoinColumn(name = "patient_id"),
+            inverseJoinColumns = @JoinColumn(name = "relative_id")
     )
     private List<Relative> relativeList;
 
     @ManyToMany
     @JoinTable(name = "Patient_Doctor",
-            joinColumns = @JoinColumn(name = "Doctor_id"),
-            inverseJoinColumns = @JoinColumn(name = "Patient_id")
+            joinColumns = @JoinColumn(name = "patient_id"),
+            inverseJoinColumns = @JoinColumn(name = "doctor_id")
     )
     private List<Doctor> doctorList;
 
