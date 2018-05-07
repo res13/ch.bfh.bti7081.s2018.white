@@ -1,11 +1,13 @@
 package ch.bfh.bti7081.s2018.white.pms.ui.main;
 
 import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
+import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.ui.app.diary.DiaryOverview;
 import ch.bfh.bti7081.s2018.white.pms.ui.app.goaltracker.GoaltrackerOverview;
 import ch.bfh.bti7081.s2018.white.pms.ui.profile.ProfileView;
 import ch.bfh.bti7081.s2018.white.pms.ui.settings.SettingsView;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Panel;
@@ -55,7 +57,10 @@ public class DashboardView extends PmsSecureView {
         menuContent.addComponent(new Button(MessageHandler.DIARY_NAME, new ButtonListener(DiaryOverview.NAME)));
         menuContent.addComponent(new Button(MessageHandler.PROFILE, new ButtonListener(ProfileView.NAME)));
         menuContent.addComponent(new Button(MessageHandler.SETTINGS, new ButtonListener(SettingsView.NAME)));
-        menuContent.addComponent(new Button(MessageHandler.LOGOUT, clickEvent -> getUI().getNavigator().navigateTo(LoginView.NAME)));
+        menuContent.addComponent(new Button(MessageHandler.LOGOUT, clickEvent -> {
+            VaadinSession.getCurrent().setAttribute(User.class, null);
+            getUI().getNavigator().navigateTo(LoginView.NAME);
+        }));
         contentPanel = new Panel();
         horizontalLayout.addComponent(menuContent);
         horizontalLayout.addComponent(contentPanel);
