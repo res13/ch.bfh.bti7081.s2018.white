@@ -29,7 +29,7 @@ public class DashboardView extends PmsSecureView {
 
         @Override
         public void buttonClick(Button.ClickEvent event) {
-            getUI().getNavigator().navigateTo(NAME + "/" + viewName);
+            UI.getCurrent().getNavigator().navigateTo(NAME + "/" + viewName);
         }
     }
 
@@ -55,10 +55,19 @@ public class DashboardView extends PmsSecureView {
         horizontalBody.addComponents(menuContent, contentPanel);
 
         HorizontalLayout horizontalMenu = new HorizontalLayout();
-        horizontalMenu.addComponent(new Label(VaadinSession.getCurrent().getAttribute(User.class).getName()));
+        User user = VaadinSession.getCurrent().getAttribute(User.class);
+        if (user != null) {
+            horizontalMenu.addComponent(new Label(user.getName()));
+        }
+        else {
+            UI.getCurrent().getNavigator().navigateTo(LoginView.NAME);
+            VaadinSession.getCurrent().close();
+            return;
+        }
         horizontalMenu.addComponent(new Button(MessageHandler.LOGOUT, clickEvent -> {
             VaadinSession.getCurrent().setAttribute(User.class, null);
-            getUI().getNavigator().navigateTo(LoginView.NAME);
+            VaadinSession.getCurrent().close();
+            UI.getCurrent().getNavigator().navigateTo(LoginView.NAME);
         }));
 
         VerticalLayout verticalLayout = new VerticalLayout();

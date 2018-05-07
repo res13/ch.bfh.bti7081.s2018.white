@@ -37,7 +37,7 @@ public class LoginView extends VerticalLayout implements View {
             try {
                 User user = userService.authenticate(emailField.getValue(), passwordField.getValue());
                 VaadinSession.getCurrent().setAttribute(User.class, user);
-                getUI().getNavigator().navigateTo(DashboardView.NAME);
+                UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME);
             } catch (Exception e) {
                 log.error(e);
                 Notification.show(e.getMessage(), Notification.Type.ERROR_MESSAGE);

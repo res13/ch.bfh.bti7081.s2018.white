@@ -61,5 +61,9 @@ public class MessageHandler {
 
     public static final String MISSED = getMessage("MISSED");
 
+    public static final String SESSION_CLOSED = getMessage("SESSION_CLOSED");
+
+    public static final String PLEASE_LOGIN_AGAIN = getMessage("PLEASE_LOGIN_AGAIN");
+
 
 }
