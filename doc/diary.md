@@ -1,4 +1,24 @@
 # Meetings
+## 2018-05-07
+### Attendees
+* Beat Schärz (pidu2)
+* Dario Furigo (VirtSyntaxError)
+* Janick Lüdi (janexander)
+* Ohran Mujkic (mujko1)
+* Andreas Erb (res13)
+* Nik Arm (projektins)
+
+### Agenda
+* Sprint1 updaten
+* GUI definitions
+
+### Decisions
+* Patient diary and Relative diary in one View separated horizontally
+* Diary view is like goals view
+
+### ToDo
+* check sprint backlog
+
 ## 2018-05-04
 ### Attendees
 * Beat Schärz (pidu2)
