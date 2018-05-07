@@ -22,6 +22,10 @@ public class UserServiceImpl<T extends User> extends BaseServiceImpl<T> implemen
         super(clazz);
     }
 
+    public UserServiceImpl() {
+        this((Class<T>) User.class);
+    }
+
     @Override
     public User authenticate(String email, String password) throws Exception {
         List<T> userList = getUserByEmail(email);

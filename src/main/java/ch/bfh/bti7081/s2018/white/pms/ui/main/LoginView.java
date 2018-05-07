@@ -33,14 +33,13 @@ public class LoginView extends VerticalLayout implements View {
         Button send = new Button(MessageHandler.LOGIN);
         send.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         send.addClickListener((Button.ClickListener) event -> {
-            UserService userService = new UserServiceImpl(User.class);
+            UserService userService = new UserServiceImpl();
             try {
                 User user = userService.authenticate(emailField.getValue(), passwordField.getValue());
                 VaadinSession.getCurrent().setAttribute(User.class, user);
                 getUI().getNavigator().navigateTo(DashboardView.NAME);
             } catch (Exception e) {
                 log.error(e);
-                e.printStackTrace();
                 Notification.show(e.getMessage(), Notification.Type.ERROR_MESSAGE);
             }
         });
