@@ -11,6 +11,7 @@
 ### Agenda
 * Sprint1 updaten
 * GUI definitions
+* Testaccounts definition
 
 ### Decisions
 * Patient diary and Relative diary in one View separated horizontally
