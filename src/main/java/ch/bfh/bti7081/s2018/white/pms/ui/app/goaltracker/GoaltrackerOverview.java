@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2018.white.pms.ui.app.goaltracker;
 
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.goaltracker.Goal;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.GoalServiceImpl;
+import ch.bfh.bti7081.s2018.white.pms.ui.main.PmsSecureView;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.FontAwesome;
@@ -16,15 +17,17 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Theme("mytheme")
-public class GoaltrackerOverview extends UI {
+public class GoaltrackerOverview extends PmsSecureView {
 
     private GoalServiceImpl goalService = new GoalServiceImpl();
     private Grid<Goal> grid = new Grid<>(Goal.class);
     private TextField filterText = new TextField();
     private GoalView form = new GoalView(this);
+    public static final String NAME = "goaltracker";
 
-    @Override
-    protected void init(VaadinRequest vaadinRequest) {
+    public GoaltrackerOverview() {
+        super();
+        setCaption(NAME);
         Goal goal = new Goal();
         goal.setGoal("abc");
         goal.setCreated(LocalDateTime.now());
@@ -70,7 +73,7 @@ public class GoaltrackerOverview extends UI {
         // fetch list of Customers from goalService and assign it to Grid
         updateList();
 
-        setContent(layout);
+        addComponent(layout);
 
         form.setVisible(false);
 
@@ -91,10 +94,5 @@ public class GoaltrackerOverview extends UI {
             e.printStackTrace();
         }
         grid.setItems(goals);
-    }
-
-    @WebServlet(urlPatterns = "/app/goaltracker", name = "MyUIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = GoaltrackerOverview.class, productionMode = false)
-    public static class MyUIServlet extends VaadinServlet {
     }
 }

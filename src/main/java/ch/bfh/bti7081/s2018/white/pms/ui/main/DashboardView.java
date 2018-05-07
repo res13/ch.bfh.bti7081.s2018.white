@@ -1,12 +1,13 @@
 package ch.bfh.bti7081.s2018.white.pms.ui.main;
 
 import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
-import ch.bfh.bti7081.s2018.white.pms.ui.PmsSecureView;
-import ch.bfh.bti7081.s2018.white.pms.ui.app.AppsView;
+import ch.bfh.bti7081.s2018.white.pms.ui.app.diary.DiaryOverview;
+import ch.bfh.bti7081.s2018.white.pms.ui.app.goaltracker.GoaltrackerOverview;
 import ch.bfh.bti7081.s2018.white.pms.ui.profile.ProfileView;
 import ch.bfh.bti7081.s2018.white.pms.ui.settings.SettingsView;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 
@@ -37,24 +38,27 @@ public class DashboardView extends PmsSecureView {
 
     public DashboardView() {
         super();
-        AppsView appsView = new AppsView();
+        setCaption("Dashboard");
+        GoaltrackerOverview goaltrackerOverview = new GoaltrackerOverview();
+        DiaryOverview diaryOverview = new DiaryOverview();
         ProfileView profileView = new ProfileView();
         SettingsView settingsView = new SettingsView();
-        viewsMap.put(AppsView.NAME, new AppsView());
+        viewsMap.put(goaltrackerOverview.NAME, new GoaltrackerOverview());
+        viewsMap.put(diaryOverview.NAME, new DiaryOverview());
         viewsMap.put(ProfileView.NAME, new ProfileView());
         viewsMap.put(SettingsView.NAME, new SettingsView());
 
-        Panel panel = new Panel();
-        panel.setSizeUndefined();
-        addComponent(panel);
+        HorizontalLayout horizontalLayout = new HorizontalLayout();
+        addComponent(horizontalLayout);
         menuContent = new VerticalLayout();
-        menuContent.addComponent(new Button(MessageHandler.APPS, new ButtonListener(AppsView.NAME)));
+        menuContent.addComponent(new Button(MessageHandler.GOAL_TRACKER_NAME, new ButtonListener(GoaltrackerOverview.NAME)));
+        menuContent.addComponent(new Button(MessageHandler.DIARY_NAME, new ButtonListener(DiaryOverview.NAME)));
         menuContent.addComponent(new Button(MessageHandler.PROFILE, new ButtonListener(ProfileView.NAME)));
         menuContent.addComponent(new Button(MessageHandler.SETTINGS, new ButtonListener(SettingsView.NAME)));
         menuContent.addComponent(new Button(MessageHandler.LOGOUT, clickEvent -> getUI().getNavigator().navigateTo(LoginView.NAME)));
-        panel.setContent(menuContent);
         contentPanel = new Panel();
-        // TODO: add contentPanel
+        horizontalLayout.addComponent(menuContent);
+        horizontalLayout.addComponent(contentPanel);
     }
 
     @Override

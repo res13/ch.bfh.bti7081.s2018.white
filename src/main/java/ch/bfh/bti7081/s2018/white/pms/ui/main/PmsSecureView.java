@@ -1,7 +1,6 @@
-package ch.bfh.bti7081.s2018.white.pms.ui;
+package ch.bfh.bti7081.s2018.white.pms.ui.main;
 
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
-import ch.bfh.bti7081.s2018.white.pms.ui.main.LoginView;
 import com.vaadin.navigator.View;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.VerticalLayout;

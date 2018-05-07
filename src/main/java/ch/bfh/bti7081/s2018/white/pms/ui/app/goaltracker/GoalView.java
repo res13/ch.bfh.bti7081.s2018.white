@@ -2,12 +2,13 @@ package ch.bfh.bti7081.s2018.white.pms.ui.app.goaltracker;
 
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.goaltracker.Goal;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.goaltracker.GoalState;
+import ch.bfh.bti7081.s2018.white.pms.ui.main.PmsSecureView;
 import com.vaadin.data.Binder;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
-public class GoalView extends FormLayout {
+public class GoalView  extends PmsSecureView {
 
     private TextField firstName = new TextField("First name");
     private TextField lastName = new TextField("Last name");

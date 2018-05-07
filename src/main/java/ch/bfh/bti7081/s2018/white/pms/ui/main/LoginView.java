@@ -4,6 +4,7 @@ import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.services.UserService;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.UserServiceImpl;
+import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinSession;
@@ -18,6 +19,7 @@ public class LoginView extends VerticalLayout implements View {
     public static final String NAME = "";
 
     public LoginView(){
+        setCaption(NAME);
         Panel panel = new Panel();
         panel.setSizeUndefined();
         addComponent(panel);
@@ -29,6 +31,7 @@ public class LoginView extends VerticalLayout implements View {
         content.addComponent(passwordField);
 
         Button send = new Button(MessageHandler.LOGIN);
+        send.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         send.addClickListener((Button.ClickListener) event -> {
             UserService userService = new UserServiceImpl(User.class);
             try {
