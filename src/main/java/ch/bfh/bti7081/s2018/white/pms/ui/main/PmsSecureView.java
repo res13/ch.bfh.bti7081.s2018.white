@@ -13,7 +13,7 @@ public abstract class PmsSecureView extends VerticalLayout implements View {
 
     private void checkLogin() {
         User user = (User) VaadinSession.getCurrent().getAttribute(User.class.getName());
-        if (user == null) {
+        if (user == null || (getUI() != null && getUI().getNavigator() != null)) {
             getUI().getNavigator().navigateTo(LoginView.NAME);
         }
     }

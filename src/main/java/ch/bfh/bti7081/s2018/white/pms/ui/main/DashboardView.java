@@ -8,18 +8,13 @@ import ch.bfh.bti7081.s2018.white.pms.ui.profile.ProfileView;
 import ch.bfh.bti7081.s2018.white.pms.ui.settings.SettingsView;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinSession;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Panel;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
 
 import java.util.HashMap;
 
 public class DashboardView extends PmsSecureView {
 
     public static final String NAME = "pms";
-
-    private VerticalLayout menuContent;
 
     private Panel contentPanel;
 
@@ -50,20 +45,26 @@ public class DashboardView extends PmsSecureView {
         viewsMap.put(ProfileView.NAME, new ProfileView());
         viewsMap.put(SettingsView.NAME, new SettingsView());
 
-        HorizontalLayout horizontalLayout = new HorizontalLayout();
-        addComponent(horizontalLayout);
-        menuContent = new VerticalLayout();
+        HorizontalLayout horizontalBody = new HorizontalLayout();
+        VerticalLayout menuContent = new VerticalLayout();
         menuContent.addComponent(new Button(MessageHandler.GOAL_TRACKER_NAME, new ButtonListener(GoaltrackerOverview.NAME)));
         menuContent.addComponent(new Button(MessageHandler.DIARY_NAME, new ButtonListener(DiaryOverview.NAME)));
         menuContent.addComponent(new Button(MessageHandler.PROFILE, new ButtonListener(ProfileView.NAME)));
         menuContent.addComponent(new Button(MessageHandler.SETTINGS, new ButtonListener(SettingsView.NAME)));
-        menuContent.addComponent(new Button(MessageHandler.LOGOUT, clickEvent -> {
+        contentPanel = new Panel();
+        horizontalBody.addComponents(menuContent, contentPanel);
+
+        HorizontalLayout horizontalMenu = new HorizontalLayout();
+        horizontalMenu.addComponent(new Label(VaadinSession.getCurrent().getAttribute(User.class).getName()));
+        horizontalMenu.addComponent(new Button(MessageHandler.LOGOUT, clickEvent -> {
             VaadinSession.getCurrent().setAttribute(User.class, null);
             getUI().getNavigator().navigateTo(LoginView.NAME);
         }));
-        contentPanel = new Panel();
-        horizontalLayout.addComponent(menuContent);
-        horizontalLayout.addComponent(contentPanel);
+
+        VerticalLayout verticalLayout = new VerticalLayout();
+        verticalLayout.addComponents(horizontalMenu, horizontalBody);
+
+        addComponent(verticalLayout);
     }
 
     @Override
