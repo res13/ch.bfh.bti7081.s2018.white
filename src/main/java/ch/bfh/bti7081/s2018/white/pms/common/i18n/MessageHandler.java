@@ -37,4 +37,29 @@ public class MessageHandler {
 
     public static final String SETTINGS = getMessage("SETTINGS");
 
+    public static final String FILTER = getMessage("FILTER");
+
+    public static final String CLEAR_FILTER = getMessage("CLEAR_FILTER");
+
+    public static final String ADD_GOAL = getMessage("ADD_GOAL");
+
+    public static final String NAME = getMessage("NAME");
+
+    public static final String SURNAME = getMessage("SURNAME");
+
+    public static final String BIRTHDAY = getMessage("BIRTHDAY");
+
+    public static final String STATUS = getMessage("STATUS");
+
+    public static final String SAVE = getMessage("SAVE");
+
+    public static final String DELETE = getMessage("DELETE");
+
+    public static final String OPEN = getMessage("OPEN");
+
+    public static final String SUCCESSFUL = getMessage("SUCCESSFUL");
+
+    public static final String MISSED = getMessage("MISSED");
+
+
 }

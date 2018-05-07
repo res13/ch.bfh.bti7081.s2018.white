@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2018.white.pms.ui.app.goaltracker;
 
+import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.goaltracker.Goal;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.goaltracker.GoalState;
 import ch.bfh.bti7081.s2018.white.pms.ui.main.PmsSecureView;
@@ -10,13 +11,13 @@ import com.vaadin.ui.themes.ValoTheme;
 
 public class GoalView  extends PmsSecureView {
 
-    private TextField firstName = new TextField("First name");
-    private TextField lastName = new TextField("Last name");
-    private TextField email = new TextField("Email");
-    private NativeSelect<GoalState> status = new NativeSelect<>("Status");
-    private DateField birthdate = new DateField("Birthday");
-    private Button save = new Button("Save");
-    private Button delete = new Button("Delete");
+    private TextField firstName = new TextField(MessageHandler.SURNAME);
+    private TextField lastName = new TextField(MessageHandler.NAME);
+    private TextField email = new TextField(MessageHandler.EMAIL);
+    private NativeSelect<GoalState> status = new NativeSelect<>(MessageHandler.STATUS);
+    private DateField birthdate = new DateField(MessageHandler.BIRTHDAY);
+    private Button save = new Button(MessageHandler.SAVE);
+    private Button delete = new Button(MessageHandler.DELETE);
 
     private Goal goal;
     private GoaltrackerOverview overview;
@@ -24,17 +25,12 @@ public class GoalView  extends PmsSecureView {
 
     public GoalView(GoaltrackerOverview Dashboard) {
         this.overview = Dashboard;
-
         setSizeUndefined();
         HorizontalLayout buttons = new HorizontalLayout(save, delete);
         addComponents(firstName, lastName, email, status, birthdate, buttons);
-
         status.setItems(GoalState.values());
         save.setStyleName(ValoTheme.BUTTON_PRIMARY);
         save.setClickShortcut(ShortcutAction.KeyCode.ENTER);
-
-//        binder.bindInstanceFields(this);
-
         save.addClickListener(e -> this.save());
         delete.addClickListener(e -> this.delete());
     }
@@ -42,8 +38,6 @@ public class GoalView  extends PmsSecureView {
     public void setGoal(Goal goal) {
         this.goal = goal;
         binder.setBean(goal);
-
-        // Show delete button for only customers already in the database
         delete.setVisible(true);
         setVisible(true);
         firstName.selectAll();
