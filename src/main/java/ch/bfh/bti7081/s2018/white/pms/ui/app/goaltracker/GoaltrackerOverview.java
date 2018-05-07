@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2018.white.pms.ui.app.goaltracker;
 
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.goaltracker.Goal;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.GoalServiceImpl;
+import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinRequest;
@@ -14,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Theme("mytheme")
 public class GoaltrackerOverview extends UI {
 
     private GoalServiceImpl goalService = new GoalServiceImpl();
@@ -91,7 +93,7 @@ public class GoaltrackerOverview extends UI {
         grid.setItems(goals);
     }
 
-    @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
+    @WebServlet(urlPatterns = "/app/goaltracker", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = GoaltrackerOverview.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
     }

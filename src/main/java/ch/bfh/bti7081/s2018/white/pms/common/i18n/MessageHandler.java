@@ -20,4 +20,21 @@ public class MessageHandler {
     public static final String USERNAME_OR_PASSWORD_INCORRECT = getMessage("USERNAME_OR_PASSWORD_INCORRECT");
 
     public static final String EMAIL_ALREADY_IN_USE = getMessage("EMAIL_ALREADY_IN_USE");
+
+    public static final String APPS = getMessage("APPS");
+
+    public static final String EMAIL = getMessage("EMAIL");
+
+    public static final String LOGIN = getMessage("LOGIN");
+
+    public static final String LOGOUT = getMessage("LOGOUT");
+
+    public static final String PASSWORD = getMessage("PASSWORD");
+
+    public static final String PROFILE = getMessage("PROFILE");
+
+    public static final String REGISTRATE = getMessage("REGISTRATE");
+
+    public static final String SETTINGS = getMessage("SETTINGS");
+
 }
