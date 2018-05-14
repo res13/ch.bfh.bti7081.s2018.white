@@ -80,4 +80,8 @@ public abstract class User extends PmsEntity {
     public void setSalt(String salt) {
         this.salt = salt;
     }
+
+    public String getFullName(){
+        return this.surname + " " + this.name;
+    }
 }
