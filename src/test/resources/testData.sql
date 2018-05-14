@@ -740,3 +740,29 @@ values (12,
         7,
         3);
 
+
+insert into Comment(Id, Lastmodified, time, Commenttext, Creator_id, Diaryentry_id)
+values (1,
+        Current_timestamp(),
+        Current_timestamp(),
+        'comment to diaryentry number 4 from doctor 1 Bidu',
+        1,
+        4);
+
+
+insert into Comment(Id, Lastmodified, time, Commenttext, Creator_id, Diaryentry_id)
+values (2,
+        Current_timestamp(),
+        Current_timestamp(),
+        'comment to diaryentry number 11 from doctor 2 Nik',
+        2,
+        11);
+
+insert into Comment(Id, Lastmodified, time, Commenttext, Creator_id, Diaryentry_id)
+values (3,
+        Current_timestamp(),
+        Current_timestamp(),
+        'another comment to diaryentry number 11 from doctor 3 Andi',
+        3,
+        11);
+

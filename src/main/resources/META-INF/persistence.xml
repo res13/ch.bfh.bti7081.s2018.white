@@ -17,6 +17,7 @@
         <class>ch.bfh.bti7081.s2018.white.pms.common.model.app.goaltracker.GoalTracker</class>
         <class>ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.Diary</class>
         <class>ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry</class>
+        <class>ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.Comment</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <property name="hibernate.connection.driver_class" value="org.h2.Driver"/>
