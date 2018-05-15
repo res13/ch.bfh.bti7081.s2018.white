@@ -26,7 +26,7 @@ public class BaseServiceImpl<T extends PmsEntity> implements BaseService<T> {
     public void saveOrUpdateEntity(T entity) throws Exception {
         new JpaUtility().execute(
                 (em) -> {
-                    em.persist(entity);
+                    em.merge(entity);
                     return null;
                 });
     }

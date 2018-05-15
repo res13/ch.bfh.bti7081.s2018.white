@@ -33,7 +33,7 @@ public class DiaryOverview extends PmsSecureView {
         }
 
         layout.addComponent(accordion, 0, 0);
-        Button newButton = new Button();
+        Button newButton = new Button("+");
         newButton.addClickListener(clickEvent -> newDiaryEntry());
         layout.addComponent(newButton, 1, 0);
         addComponent(layout);

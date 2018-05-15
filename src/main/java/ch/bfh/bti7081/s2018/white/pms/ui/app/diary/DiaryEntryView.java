@@ -19,7 +19,8 @@ public class DiaryEntryView extends PmsSecureView {
     private DiaryEntryServiceImpl diaryEntryService = new DiaryEntryServiceImpl();
     private CommentServiceImpl commentService = new CommentServiceImpl();
 
-    private GridLayout layout = new GridLayout(5, 5);
+    private VerticalLayout vLayout = new VerticalLayout();
+    private GridLayout gLayout = new GridLayout(4, 4);
     private TextField title = new TextField();
     private TextArea text = new TextArea();
     private Label creator = new Label();
@@ -32,20 +33,6 @@ public class DiaryEntryView extends PmsSecureView {
     public DiaryEntryView(DiaryEntry diaryEntry) {
         editButton.addClickListener(clickEvent -> switchEditable());
         saveButton.addClickListener(clickEvent -> saveDiaryEntry());
-
-        try {
-            List<Comment> diaryEntryEntities = commentService.getEntitiesByDiaryEntityId(diaryEntry.getId());
-
-            Accordion accordion = new Accordion();
-            for (Comment comment : diaryEntryEntities) {
-                accordion.addTab(new CommentView(comment), "comment");
-            }
-            layout.addComponent(accordion, 0, 4);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
 
         this.diaryEntry = diaryEntry;
         switchEditable();
@@ -65,23 +52,37 @@ public class DiaryEntryView extends PmsSecureView {
         creator.setEnabled(false);
         time.setEnabled(false);
 
-        layout.addComponent(title, 0, 0);
-        layout.addComponent(time, 0, 1);
-        layout.addComponent(creator, 1, 1);
-        layout.addComponent(text, 0, 2);
+        gLayout.addComponent(title, 0, 0);
+        gLayout.addComponent(time, 0, 1);
+        gLayout.addComponent(creator, 1, 1);
+        gLayout.addComponent(text, 0, 2);
+        vLayout.addComponent(gLayout);
+        
+        try {
+            List<Comment> diaryEntryEntities = commentService.getEntitiesByDiaryEntityId(diaryEntry.getId());
 
-        addComponents(layout);
+            Accordion accordion = new Accordion();
+            for (Comment comment : diaryEntryEntities) {
+                accordion.addTab(new CommentView(comment), "comment");
+            }
+            vLayout.addComponent(accordion);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        addComponents(vLayout);
     }
 
     private void switchEditable() {
         title.setEnabled(!title.isEnabled());
         text.setEnabled(!text.isEnabled());
 
-        layout.removeComponent(3, 3);
+        gLayout.removeComponent(3, 3);
         if (this.diaryEntry != null && !title.isEnabled()) {
-            layout.addComponent(editButton, 3, 3);
+        	gLayout.addComponent(editButton, 3, 3);
         } else {
-            layout.addComponent(saveButton, 3, 3);
+        	gLayout.addComponent(saveButton, 3, 3);
         }
     }
 
