@@ -20,19 +20,23 @@ public class DiaryEntryView extends PmsSecureView {
     private CommentServiceImpl commentService = new CommentServiceImpl();
 
     private VerticalLayout vLayout = new VerticalLayout();
+    private HorizontalLayout hLayoutComments = new HorizontalLayout();
     private GridLayout gLayout = new GridLayout(4, 4);
     private TextField title = new TextField();
     private TextArea text = new TextArea();
     private Label creator = new Label();
     private Label time = new Label();
     private DiaryEntry diaryEntry;
+    private Accordion accordionComments = new Accordion();
     private Button editButton = new Button("Edit");
     private Button saveButton = new Button("Save");
+    private Button newButton = new Button("New comment");
 
 
     public DiaryEntryView(DiaryEntry diaryEntry) {
         editButton.addClickListener(clickEvent -> switchEditable());
         saveButton.addClickListener(clickEvent -> saveDiaryEntry());
+        newButton.addClickListener(clickEvent -> newComment());
 
         this.diaryEntry = diaryEntry;
         switchEditable();
@@ -58,17 +62,22 @@ public class DiaryEntryView extends PmsSecureView {
         gLayout.addComponent(text, 0, 2);
         vLayout.addComponent(gLayout);
         
-        try {
-            List<Comment> diaryEntryEntities = commentService.getEntitiesByDiaryEntityId(diaryEntry.getId());
-
-            Accordion accordion = new Accordion();
-            for (Comment comment : diaryEntryEntities) {
-                accordion.addTab(new CommentView(comment), "comment");
-            }
-            vLayout.addComponent(accordion);
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (this.diaryEntry != null) {
+	        try {
+	            List<Comment> diaryEntryEntities = commentService.getEntitiesByDiaryEntityId(diaryEntry.getId());
+	            if (!diaryEntryEntities.isEmpty()) newButton.setCaption("+");
+	            
+	            for (Comment comment : diaryEntryEntities) {
+	                accordionComments.addTab(new CommentView(comment), "comment");
+	            }
+	            
+	            hLayoutComments.addComponent(accordionComments);
+	            hLayoutComments.addComponent(newButton);
+	            vLayout.addComponent(hLayoutComments);
+	
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
         }
 
         addComponents(vLayout);
@@ -104,7 +113,13 @@ public class DiaryEntryView extends PmsSecureView {
         }
 
         switchEditable();
-        Notifier.notify("Saved", "saved Entity");
+        Notifier.notify("Saved", "saved Entity "+diaryEntry.getTitle()+" with id "+diaryEntry.getId());
 //        Page.getCurrent().reload();
+    }
+    
+    private void newComment() {
+        TabSheet.Tab newCommentTab = accordionComments.addTab(new CommentView(null), "comment");
+        accordionComments.setSelectedTab(newCommentTab);
+        newButton.setCaption("+");
     }
 }

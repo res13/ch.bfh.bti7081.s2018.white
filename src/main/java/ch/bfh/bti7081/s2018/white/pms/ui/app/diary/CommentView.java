@@ -86,6 +86,6 @@ public class CommentView  extends PmsSecureView {
         }
 
         switchEditable();
-        Notifier.notify("Saved", "saved comment");
+        Notifier.notify("Saved", "saved comment "+comment.getCommentText()+" with id "+comment.getId());
     }
 }
