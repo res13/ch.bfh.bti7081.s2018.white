@@ -28,11 +28,30 @@
 
 // For more information, see: https://vaadin.com/book/-/page/themes.valo.html
 // Example variants can be copy/pasted from https://vaadin.com/wiki/-/wiki/Main/Valo+Examples
+//$v-layout-margin-top: 0px; $v-layout-margin-right: 0px; $v-layout-margin-bottom: 0px; $v-layout-margin-left: 0px;
+
+
 
 @import "../valo/valo.scss";
 
 @mixin mytheme {
   @include valo;
 
+
   // Insert your own theme rules here
+  /* .v-margin-left {
+     padding-left: 0px;
+   }
+   .v-margin-right {
+     padding-right: 0px;
+   }
+   .v-margin-top {
+     padding-top: 0px;
+   }
+   .v-margin-bottom {
+     padding-bottom: 0px;
+   }*/
 }
+
+
+

@@ -9,6 +9,8 @@ import ch.bfh.bti7081.s2018.white.pms.ui.settings.SettingsView;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
+import com.vaadin.ui.themes.ValoTheme;
+
 
 import java.util.HashMap;
 
@@ -45,19 +47,44 @@ public class DashboardView extends PmsSecureView {
         viewsMap.put(ProfileView.NAME, new ProfileView());
         viewsMap.put(SettingsView.NAME, new SettingsView());
 
+        Label menuTitle = new Label("Menu");
+        menuTitle.addStyleName(ValoTheme.MENU_TITLE);
+
         HorizontalLayout horizontalBody = new HorizontalLayout();
         VerticalLayout menuContent = new VerticalLayout();
-        menuContent.addComponent(new Button(MessageHandler.GOAL_TRACKER_NAME, new ButtonListener(GoaltrackerOverview.NAME)));
-        menuContent.addComponent(new Button(MessageHandler.DIARY_NAME, new ButtonListener(DiaryOverview.NAME)));
-        menuContent.addComponent(new Button(MessageHandler.PROFILE, new ButtonListener(ProfileView.NAME)));
-        menuContent.addComponent(new Button(MessageHandler.SETTINGS, new ButtonListener(SettingsView.NAME)));
+        menuContent.addStyleName(ValoTheme.MENU_ROOT);
+
+        Button btnGoal = new Button(MessageHandler.GOAL_TRACKER_NAME, new ButtonListener(GoaltrackerOverview.NAME));
+        btnGoal.addStyleNames(ValoTheme.BUTTON_LINK, ValoTheme.MENU_ITEM);
+        Button btnDiary = new Button(MessageHandler.DIARY_NAME, new ButtonListener(DiaryOverview.NAME));
+        btnDiary.addStyleNames(ValoTheme.BUTTON_LINK, ValoTheme.MENU_ITEM);
+        Button btnProfile = new Button(MessageHandler.PROFILE, new ButtonListener(ProfileView.NAME));
+        btnProfile.addStyleNames(ValoTheme.BUTTON_LINK, ValoTheme.MENU_ITEM);
+        Button btnLogout = new Button(MessageHandler.LOGOUT, clickEvent -> {
+            VaadinSession.getCurrent().setAttribute(User.class, null);
+            VaadinSession.getCurrent().close();
+            UI.getCurrent().getNavigator().navigateTo(LoginView.NAME);
+        });
+        btnLogout.addStyleNames(ValoTheme.BUTTON_LINK, ValoTheme.MENU_ITEM);
+
+        menuContent.addComponent(menuTitle);
+        menuContent.addComponent(btnGoal);
+        menuContent.addComponent(btnDiary);
+        menuContent.addComponent(btnProfile);
+        menuContent.addComponent(btnLogout);
+
         contentPanel = new Panel();
         horizontalBody.addComponents(menuContent, contentPanel);
 
         HorizontalLayout horizontalMenu = new HorizontalLayout();
+        horizontalMenu.addStyleName(ValoTheme.MENU_ROOT);
+        horizontalMenu.setSizeFull();
         User user = VaadinSession.getCurrent().getAttribute(User.class);
+
         if (user != null) {
-            horizontalMenu.addComponent(new Label(user.getName()));
+            Label lblUsername = new Label(user.getName());
+            horizontalMenu.addComponent(lblUsername);
+            horizontalMenu.setComponentAlignment(lblUsername, Alignment.TOP_RIGHT);
         }
         else {
             UI.getCurrent().getNavigator().navigateTo(LoginView.NAME);
@@ -69,6 +96,12 @@ public class DashboardView extends PmsSecureView {
             VaadinSession.getCurrent().close();
             UI.getCurrent().getNavigator().navigateTo(LoginView.NAME);
         }));
+
+        Button btnSetting = new Button(MessageHandler.SETTINGS, new ButtonListener(SettingsView.NAME));
+
+        horizontalMenu.addComponent(btnSetting);
+        horizontalMenu.setComponentAlignment(btnSetting, Alignment.TOP_RIGHT);
+
 
         VerticalLayout verticalLayout = new VerticalLayout();
         verticalLayout.addComponents(horizontalMenu, horizontalBody);
