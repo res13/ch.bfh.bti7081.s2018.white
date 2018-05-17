@@ -118,7 +118,9 @@ public class DiaryEntryView extends PmsSecureView {
     }
     
     private void newComment() {
-        TabSheet.Tab newCommentTab = accordionComments.addTab(new CommentView(null), "comment");
+        Comment comment = new Comment();
+        comment.setDiaryEntry(this.diaryEntry);
+        TabSheet.Tab newCommentTab = accordionComments.addTab(new CommentView(comment), "comment");
         accordionComments.setSelectedTab(newCommentTab);
         newButton.setCaption("+");
     }

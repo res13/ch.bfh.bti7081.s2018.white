@@ -36,7 +36,7 @@ public class CommentView  extends PmsSecureView {
         
         switchEditable();
 
-        if (this.comment != null) {
+        if (this.comment.getId() != null) {
         	text.setValue(comment.getCommentText());
         	text.setSizeFull();
             creator.setValue(comment.getCreator().getFullName());
@@ -71,10 +71,6 @@ public class CommentView  extends PmsSecureView {
     
     
     private void saveComment() {
-        if (this.comment == null) {
-            this.comment = new Comment();
-        }
-
         comment.setCommentText(text.getValue());
         comment.setCreator(VaadinSession.getCurrent().getAttribute(User.class));
         comment.setTime(LocalDateTime.now());
@@ -86,6 +82,6 @@ public class CommentView  extends PmsSecureView {
         }
 
         switchEditable();
-        Notifier.notify("Saved", "saved comment "+comment.getCommentText()+" with id "+comment.getId());
+        Notifier.notify("Saved", "saved comment "+comment.getCommentText());
     }
 }
