@@ -7,6 +7,7 @@ import ch.bfh.bti7081.s2018.white.pms.services.impl.CommentServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.DiaryEntryServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.Notifier;
 import ch.bfh.bti7081.s2018.white.pms.ui.main.PmsSecureView;
+import com.vaadin.server.Page;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
 
@@ -31,12 +32,14 @@ public class DiaryEntryView extends PmsSecureView {
     private Button editButton = new Button("Edit");
     private Button saveButton = new Button("Save");
     private Button newButton = new Button("New comment");
+    private Button deleteButton = new Button("Delete");
 
 
     public DiaryEntryView(DiaryEntry diaryEntry) {
         editButton.addClickListener(clickEvent -> switchEditable());
         saveButton.addClickListener(clickEvent -> saveDiaryEntry());
         newButton.addClickListener(clickEvent -> newComment());
+        deleteButton.addClickListener(clickEvent -> deleteDiaryEntry());
 
         this.diaryEntry = diaryEntry;
         switchEditable();
@@ -73,6 +76,7 @@ public class DiaryEntryView extends PmsSecureView {
 	            
 	            hLayoutComments.addComponent(accordionComments);
 	            hLayoutComments.addComponent(newButton);
+                hLayoutComments.addComponent(deleteButton);
 	            vLayout.addComponent(hLayoutComments);
 	
 	        } catch (Exception e) {
@@ -82,6 +86,19 @@ public class DiaryEntryView extends PmsSecureView {
 
         addComponents(vLayout);
     }
+
+    private void deleteDiaryEntry() {
+        System.out.println(this.diaryEntry.getTitle());
+        try {
+            diaryEntryService.deleteEntity(diaryEntry);
+            Notifier.notify("Delete", "delete Entity "+diaryEntry.getTitle()+" with id "+diaryEntry.getId());
+            Page.getCurrent().reload();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Notifier.notify("Error", "Not possible to delete Entity " + diaryEntry.getTitle() + " with id " + diaryEntry.getId());
+        }
+    }
+
 
     private void switchEditable() {
         title.setEnabled(!title.isEnabled());
