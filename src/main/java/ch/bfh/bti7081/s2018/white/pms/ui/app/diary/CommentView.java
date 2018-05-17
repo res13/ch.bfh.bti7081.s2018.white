@@ -26,6 +26,7 @@ public class CommentView  extends PmsSecureView {
     private Comment comment;
     private Button editButton= new Button("Edit");
     private Button saveButton = new Button("Save");
+    private Button deleteButton = new Button("Delete");
 
 
     public CommentView(Comment comment) {
@@ -33,6 +34,7 @@ public class CommentView  extends PmsSecureView {
         
         editButton.addClickListener(clickEvent -> switchEditable());
         saveButton.addClickListener(clickEvent -> saveComment());
+        deleteButton.addClickListener(clickEvent -> deleteComment());
         
         switchEditable();
 
@@ -63,7 +65,8 @@ public class CommentView  extends PmsSecureView {
         
         hLayoutButtons.removeAllComponents();
         if (this.comment != null && !text.isEnabled()) {
-        	hLayoutButtons.addComponent(editButton);
+	        	hLayoutButtons.addComponent(editButton);
+	        	hLayoutButtons.addComponent(deleteButton);
         } else {
         	hLayoutButtons.addComponent(saveButton);
         }
@@ -82,6 +85,17 @@ public class CommentView  extends PmsSecureView {
         }
 
         switchEditable();
-        Notifier.notify("Saved", "saved comment "+comment.getCommentText());
+        Notifier.notify("Saved", "saved comment ");
+    }
+    
+    private void deleteComment() {
+        
+        try {
+            commentService.deleteEntity(comment);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Notifier.notify("Deleted", "deleted comment ");
     }
 }
