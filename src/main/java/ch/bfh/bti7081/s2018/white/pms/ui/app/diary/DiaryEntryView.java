@@ -144,7 +144,7 @@ public class DiaryEntryView extends PmsSecureView {
 
         switchEditable();
         Notifier.notify("Saved", "saved Entity "+diaryEntry.getTitle()+" with id "+diaryEntry.getId());
-//        Page.getCurrent().reload();
+        Page.getCurrent().reload();
     }
     
     private void newComment() {
