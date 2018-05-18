@@ -56,7 +56,7 @@ public class UserServiceImpl<T extends User> extends BaseServiceImpl<T> implemen
     }
 
     @Override
-    public void saveOrUpdateEntity(T entity) throws Exception {
+    public T saveOrUpdateEntity(T entity) throws Exception {
         // if the user is persisted to the database at first time
         if (entity.getId() == null && entity.getLastModified() == null) {
             List<T> userList = getUserByEmail(entity.getEmail());
@@ -65,6 +65,6 @@ public class UserServiceImpl<T extends User> extends BaseServiceImpl<T> implemen
                 throw new Exception(MessageHandler.EMAIL_ALREADY_IN_USE);
             }
         }
-        super.saveOrUpdateEntity(entity);
+        return super.saveOrUpdateEntity(entity);
     }
 }

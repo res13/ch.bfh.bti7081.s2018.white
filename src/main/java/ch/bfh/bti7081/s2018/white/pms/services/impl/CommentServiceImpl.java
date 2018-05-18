@@ -11,24 +11,20 @@ import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.Comment;
 import ch.bfh.bti7081.s2018.white.pms.persistence.JpaUtility;
 import ch.bfh.bti7081.s2018.white.pms.services.CommentService;
 
-public class CommentServiceImpl<T extends Comment> extends BaseServiceImpl<T> implements CommentService {
+public class CommentServiceImpl extends BaseServiceImpl<Comment> implements CommentService {
 
-    public CommentServiceImpl(Class<T> clazz) {
-        super(clazz);
-    }
-    
     public CommentServiceImpl() {
-        super((Class<T>) Comment.class);
+        super(Comment.class);
     }
     
-    public List<T> getEntitiesByDiaryEntityId(long id) throws Exception {
-        return new JpaUtility().execute(
+    public List<Comment> getEntitiesByDiaryEntityId(long id) throws Exception {
+        return (List<Comment>) new JpaUtility().execute(
                 (em) -> {
                     CriteriaBuilder cb = em.getCriteriaBuilder();
-                    CriteriaQuery<T> cq = cb.createQuery(clazz);
-                    Root<T> rootEntry = cq.from(clazz);
-                    CriteriaQuery<T> where = cq.where(cb.equal(rootEntry.get("diaryEntry"), id));
-                    TypedQuery<T> allQuery = em.createQuery(where);
+                    CriteriaQuery<Comment> cq = cb.createQuery(clazz);
+                    Root<Comment> rootEntry = cq.from(clazz);
+                    CriteriaQuery<Comment> where = cq.where(cb.equal(rootEntry.get("diaryEntry"), id));
+                    TypedQuery<Comment> allQuery = em.createQuery(where);
                     return allQuery.getResultList();
                 });
     }

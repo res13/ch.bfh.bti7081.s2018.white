@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface BaseService<T extends PmsEntity> {
 
-    void saveOrUpdateEntity(T entity) throws Exception;
+    T saveOrUpdateEntity(T entity) throws Exception;
 
     void deleteEntity(T entity) throws Exception;
 

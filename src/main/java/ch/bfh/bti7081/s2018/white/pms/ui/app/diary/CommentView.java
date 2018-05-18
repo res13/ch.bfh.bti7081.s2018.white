@@ -27,10 +27,12 @@ public class CommentView  extends PmsSecureView {
     private Button editButton= new Button("Edit");
     private Button saveButton = new Button("Save");
     private Button deleteButton = new Button("Delete");
+    private DiaryEntryView parentView;
 
 
-    public CommentView(Comment comment) {
+    public CommentView(Comment comment, DiaryEntryView diaryEntryView) {
         this.comment = comment;
+        this.parentView = diaryEntryView;
         
         editButton.addClickListener(clickEvent -> switchEditable());
         saveButton.addClickListener(clickEvent -> saveComment());
@@ -79,7 +81,7 @@ public class CommentView  extends PmsSecureView {
         comment.setTime(LocalDateTime.now());
 
         try {
-            commentService.saveOrUpdateEntity(comment);
+            this.comment = commentService.saveOrUpdateEntity(comment);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -97,5 +99,6 @@ public class CommentView  extends PmsSecureView {
         }
 
         Notifier.notify("Deleted", "deleted comment ");
+        parentView.deleteComment(comment.getId());
     }
 }

@@ -13,6 +13,7 @@ import com.vaadin.ui.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
 
 public class DiaryEntryView extends PmsSecureView {
@@ -34,7 +35,8 @@ public class DiaryEntryView extends PmsSecureView {
     private Button saveButton = new Button("Save");
     private Button newButton = new Button("New comment");
     private Button deleteButton = new Button("Delete");
-    private DiaryOverview parent;
+    private DiaryOverview parentDiary;
+    private HashMap<Long, TabSheet.Tab> commentToTab = new HashMap<>();
 
 
     public DiaryEntryView(DiaryEntry diaryEntry, DiaryOverview diaryOverview) {
@@ -43,7 +45,7 @@ public class DiaryEntryView extends PmsSecureView {
         newButton.addClickListener(clickEvent -> newComment());
         deleteButton.addClickListener(clickEvent -> deleteDiaryEntry());
 
-        this.parent = diaryOverview;
+        this.parentDiary = diaryOverview;
         this.diaryEntry = diaryEntry;
         switchEditable();
 
@@ -75,7 +77,7 @@ public class DiaryEntryView extends PmsSecureView {
 	            if (!diaryEntryEntities.isEmpty()) newButton.setCaption("+");
 	            
 	            for (Comment comment : diaryEntryEntities) {
-	                accordionComments.addTab(new CommentView(comment), "comment");
+	                addComment(comment);
 	            }
 	            
 	            hLayoutComments.addComponent(accordionComments);
@@ -91,7 +93,6 @@ public class DiaryEntryView extends PmsSecureView {
     }
 
     private void deleteDiaryEntry() {
-        //System.out.println(this.diaryEntry.getTitle());
         try {
             if(this.accordionComments.getComponentCount() > 0){
             	try {
@@ -106,7 +107,7 @@ public class DiaryEntryView extends PmsSecureView {
             }
             diaryEntryService.deleteEntity(diaryEntry);
             Notifier.notify("Delete", "deleted Entity");
-            parent.deleteDiaryEntry(diaryEntry.getId());
+            parentDiary.deleteDiaryEntry(diaryEntry.getId());
         } catch (Exception e) {
             e.printStackTrace();
             //Notifier.notify("Error", "Not possible to delete Entity " + diaryEntry.getTitle() + " with id " + diaryEntry.getId());
@@ -139,21 +140,36 @@ public class DiaryEntryView extends PmsSecureView {
         diaryEntry.setTime(LocalDateTime.now());
 
         try {
-            diaryEntryService.saveOrUpdateEntity(diaryEntry);
+            this.diaryEntry = diaryEntryService.saveOrUpdateEntity(diaryEntry);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         switchEditable();
         Notifier.notify("Saved", "saved Entity");
-        //Page.getCurrent().reload();
     }
     
     private void newComment() {
-        Comment comment = new Comment();
-        comment.setDiaryEntry(this.diaryEntry);
-        TabSheet.Tab newCommentTab = accordionComments.addTab(new CommentView(comment), "comment");
+    	Comment comment = new Comment();
+    	comment.setDiaryEntry(this.diaryEntry);
+        TabSheet.Tab newCommentTab = addComment(comment);
         accordionComments.setSelectedTab(newCommentTab);
         newButton.setCaption("+");
+    }
+    
+    private TabSheet.Tab addComment(Comment comment) {
+    	TabSheet.Tab newCommentTab = accordionComments.addTab(new CommentView(comment, this), "comment");
+    	commentToTab.put(comment.getId(), newCommentTab);
+    	return newCommentTab;
+    }
+    
+    public void deleteComment(long CommentId) {
+    	if(commentToTab.containsKey(CommentId)){
+    		accordionComments.removeTab(commentToTab.get(CommentId));
+    		commentToTab.remove(CommentId);
+    		if(this.accordionComments.getComponentCount() == 0){
+    			newButton.setCaption("New comment");
+    		}
+    	}
     }
 }

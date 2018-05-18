@@ -23,11 +23,10 @@ public class BaseServiceImpl<T extends PmsEntity> implements BaseService<T> {
     }
 
     @Override
-    public void saveOrUpdateEntity(T entity) throws Exception {
-        new JpaUtility().execute(
+    public T saveOrUpdateEntity(T entity) throws Exception {
+        return new JpaUtility().execute(
                 (em) -> {
-                    em.merge(entity);
-                    return null;
+                    return em.merge(entity);
                 });
     }
 
