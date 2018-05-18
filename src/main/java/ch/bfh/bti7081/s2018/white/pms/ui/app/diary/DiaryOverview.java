@@ -8,12 +8,14 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.TabSheet;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class DiaryOverview extends PmsSecureView {
 
     private DiaryEntryServiceImpl diaryEntryService = new DiaryEntryServiceImpl();
     private Accordion accordion = new Accordion();
+    private HashMap<Long, TabSheet.Tab> diaryEntryToTab = new HashMap<>();
 
     public static final String NAME = "diary";
 
@@ -26,7 +28,7 @@ public class DiaryOverview extends PmsSecureView {
             List<DiaryEntry> allEntities = diaryEntryService.getAllEntities();
 
             for (DiaryEntry diaryEntry : allEntities) {
-                accordion.addTab(new DiaryEntryView(diaryEntry), diaryEntry.getTitle());
+            	add(diaryEntry);    
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -41,8 +43,25 @@ public class DiaryOverview extends PmsSecureView {
     }
 
     private void newDiaryEntry() {
-        TabSheet.Tab newDiaryEntryTab = accordion.addTab(new DiaryEntryView(null), "New");
+        TabSheet.Tab newDiaryEntryTab = add(new DiaryEntry());
         accordion.setSelectedTab(newDiaryEntryTab);
+    }
+    
+    public void deleteDiaryEntry(long diaryEntryId) {
+    	if(diaryEntryToTab.containsKey(diaryEntryId)){
+    		accordion.removeTab(diaryEntryToTab.get(diaryEntryId));
+    		diaryEntryToTab.remove(diaryEntryId);
+    	}
+    }
+    
+    private TabSheet.Tab add(DiaryEntry diaryEntry){
+    	String title = diaryEntry.getTitle();
+    	if(title == null){
+    		title = "New";	
+    	}
+    	TabSheet.Tab newDiaryEntryTab = accordion.addTab(new DiaryEntryView(diaryEntry, this), title);
+    	diaryEntryToTab.put(diaryEntry.getId(), newDiaryEntryTab);
+    	return newDiaryEntryTab;
     }
 
 }

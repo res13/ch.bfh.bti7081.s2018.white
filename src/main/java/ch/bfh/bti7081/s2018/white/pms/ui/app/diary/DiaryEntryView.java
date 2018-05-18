@@ -34,18 +34,20 @@ public class DiaryEntryView extends PmsSecureView {
     private Button saveButton = new Button("Save");
     private Button newButton = new Button("New comment");
     private Button deleteButton = new Button("Delete");
+    private DiaryOverview parent;
 
 
-    public DiaryEntryView(DiaryEntry diaryEntry) {
+    public DiaryEntryView(DiaryEntry diaryEntry, DiaryOverview diaryOverview) {
         editButton.addClickListener(clickEvent -> switchEditable());
         saveButton.addClickListener(clickEvent -> saveDiaryEntry());
         newButton.addClickListener(clickEvent -> newComment());
         deleteButton.addClickListener(clickEvent -> deleteDiaryEntry());
 
+        this.parent = diaryOverview;
         this.diaryEntry = diaryEntry;
         switchEditable();
 
-        if (this.diaryEntry != null) {
+        if (this.diaryEntry.getId() != null) {
             title.setValue(diaryEntry.getTitle());
             text.setValue(diaryEntry.getEntryText());
             creator.setValue(diaryEntry.getCreator().getFullName());
@@ -67,7 +69,7 @@ public class DiaryEntryView extends PmsSecureView {
         gLayout.addComponent(hLayoutButtons, 3, 3);
         vLayout.addComponent(gLayout);
         
-        if (this.diaryEntry != null) {
+        if (this.diaryEntry.getId() != null) {
 	        try {
 	            List<Comment> diaryEntryEntities = commentService.getEntitiesByDiaryEntityId(diaryEntry.getId());
 	            if (!diaryEntryEntities.isEmpty()) newButton.setCaption("+");
@@ -104,7 +106,7 @@ public class DiaryEntryView extends PmsSecureView {
             }
             diaryEntryService.deleteEntity(diaryEntry);
             Notifier.notify("Delete", "deleted Entity");
-            //Page.getCurrent().reload();
+            parent.deleteDiaryEntry(diaryEntry.getId());
         } catch (Exception e) {
             e.printStackTrace();
             //Notifier.notify("Error", "Not possible to delete Entity " + diaryEntry.getTitle() + " with id " + diaryEntry.getId());
@@ -127,7 +129,7 @@ public class DiaryEntryView extends PmsSecureView {
 
 
     private void saveDiaryEntry() {
-        if (this.diaryEntry == null) {
+        if (this.diaryEntry.getId() == null) {
             this.diaryEntry = new DiaryEntry();
         }
 
@@ -143,8 +145,8 @@ public class DiaryEntryView extends PmsSecureView {
         }
 
         switchEditable();
-        Notifier.notify("Saved", "saved Entity "+diaryEntry.getTitle()+" with id "+diaryEntry.getId());
-        Page.getCurrent().reload();
+        Notifier.notify("Saved", "saved Entity");
+        //Page.getCurrent().reload();
     }
     
     private void newComment() {
