@@ -22,6 +22,7 @@ public class DiaryEntryView extends PmsSecureView {
 
     private VerticalLayout vLayout = new VerticalLayout();
     private HorizontalLayout hLayoutComments = new HorizontalLayout();
+    private HorizontalLayout hLayoutButtons = new HorizontalLayout();
     private GridLayout gLayout = new GridLayout(4, 4);
     private TextField title = new TextField();
     private TextArea text = new TextArea();
@@ -63,6 +64,7 @@ public class DiaryEntryView extends PmsSecureView {
         gLayout.addComponent(time, 0, 1);
         gLayout.addComponent(creator, 1, 1);
         gLayout.addComponent(text, 0, 2);
+        gLayout.addComponent(hLayoutButtons, 3, 3);
         vLayout.addComponent(gLayout);
         
         if (this.diaryEntry != null) {
@@ -76,7 +78,6 @@ public class DiaryEntryView extends PmsSecureView {
 	            
 	            hLayoutComments.addComponent(accordionComments);
 	            hLayoutComments.addComponent(newButton);
-                hLayoutComments.addComponent(deleteButton);
 	            vLayout.addComponent(hLayoutComments);
 	
 	        } catch (Exception e) {
@@ -88,14 +89,25 @@ public class DiaryEntryView extends PmsSecureView {
     }
 
     private void deleteDiaryEntry() {
-        System.out.println(this.diaryEntry.getTitle());
+        //System.out.println(this.diaryEntry.getTitle());
         try {
+            if(this.accordionComments.getComponentCount() > 0){
+            	try {
+    	            List<Comment> diaryEntryEntities = commentService.getEntitiesByDiaryEntityId(diaryEntry.getId());
+    	            
+    	            for (Comment comment : diaryEntryEntities) {
+    	            	commentService.deleteEntity(comment);
+    	            }
+            	} catch (Exception e) {
+     	            e.printStackTrace();
+     	        }
+            }
             diaryEntryService.deleteEntity(diaryEntry);
-            Notifier.notify("Delete", "delete Entity "+diaryEntry.getTitle()+" with id "+diaryEntry.getId());
-            Page.getCurrent().reload();
+            Notifier.notify("Delete", "deleted Entity");
+            //Page.getCurrent().reload();
         } catch (Exception e) {
             e.printStackTrace();
-            Notifier.notify("Error", "Not possible to delete Entity " + diaryEntry.getTitle() + " with id " + diaryEntry.getId());
+            //Notifier.notify("Error", "Not possible to delete Entity " + diaryEntry.getTitle() + " with id " + diaryEntry.getId());
         }
     }
 
@@ -104,11 +116,12 @@ public class DiaryEntryView extends PmsSecureView {
         title.setEnabled(!title.isEnabled());
         text.setEnabled(!text.isEnabled());
 
-        gLayout.removeComponent(3, 3);
+        hLayoutButtons.removeAllComponents();;
         if (this.diaryEntry != null && !title.isEnabled()) {
-        	gLayout.addComponent(editButton, 3, 3);
+        	hLayoutButtons.addComponent(editButton);
+        	hLayoutButtons.addComponent(deleteButton);
         } else {
-        	gLayout.addComponent(saveButton, 3, 3);
+        	hLayoutButtons.addComponent(saveButton);
         }
     }
 
