@@ -8,6 +8,7 @@ import ch.bfh.bti7081.s2018.white.pms.services.impl.DiaryEntryServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.Notifier;
 import ch.bfh.bti7081.s2018.white.pms.ui.main.PmsSecureView;
 import com.vaadin.server.Page;
+import com.vaadin.server.VaadinService;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
 
@@ -110,7 +111,6 @@ public class DiaryEntryView extends PmsSecureView {
             parentDiary.deleteDiaryEntry(diaryEntry.getId());
         } catch (Exception e) {
             e.printStackTrace();
-            //Notifier.notify("Error", "Not possible to delete Entity " + diaryEntry.getTitle() + " with id " + diaryEntry.getId());
         }
     }
 
@@ -120,9 +120,13 @@ public class DiaryEntryView extends PmsSecureView {
         text.setEnabled(!text.isEnabled());
 
         hLayoutButtons.removeAllComponents();;
-        if (this.diaryEntry != null && !title.isEnabled()) {
-        	hLayoutButtons.addComponent(editButton);
-        	hLayoutButtons.addComponent(deleteButton);
+        if (this.diaryEntry.getId() != null && !title.isEnabled()) {
+        	if(VaadinSession.getCurrent().getAttribute(User.class) != null){
+        		if(VaadinSession.getCurrent().getAttribute(User.class).getId() == diaryEntry.getCreator().getId()){
+            	hLayoutButtons.addComponent(editButton);
+            	hLayoutButtons.addComponent(deleteButton);
+        		}
+        	}
         } else {
         	hLayoutButtons.addComponent(saveButton);
         }
@@ -159,7 +163,10 @@ public class DiaryEntryView extends PmsSecureView {
     
     private TabSheet.Tab addComment(Comment comment) {
     	TabSheet.Tab newCommentTab = accordionComments.addTab(new CommentView(comment, this), "comment");
-    	commentToTab.put(comment.getId(), newCommentTab);
+    	if(comment.getId() != null){
+    		commentToTab.put(comment.getId(), newCommentTab);
+    	}
+    	System.out.println("Before update to DB: "+comment.getId());
     	return newCommentTab;
     }
     

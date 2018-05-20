@@ -63,12 +63,17 @@ public class CommentView  extends PmsSecureView {
     }
 
     private void switchEditable() {
+    	User userSession = VaadinSession.getCurrent().getAttribute(User.class);
         text.setEnabled(!text.isEnabled());
         
         hLayoutButtons.removeAllComponents();
-        if (this.comment != null && !text.isEnabled()) {
-	        	hLayoutButtons.addComponent(editButton);
-	        	hLayoutButtons.addComponent(deleteButton);
+        if (this.comment.getId() != null && !text.isEnabled()) {
+        	if(userSession.getId() != null){
+        		if(userSession.getId() == comment.getCreator().getId()){
+    	        	hLayoutButtons.addComponent(editButton);
+    	        	hLayoutButtons.addComponent(deleteButton);
+            	}
+        	}	
         } else {
         	hLayoutButtons.addComponent(saveButton);
         }
@@ -81,11 +86,12 @@ public class CommentView  extends PmsSecureView {
         comment.setTime(LocalDateTime.now());
 
         try {
-            this.comment = commentService.saveOrUpdateEntity(comment);
+            comment = commentService.saveOrUpdateEntity(comment);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        System.out.println("After update to DB: "+comment.getId());
         switchEditable();
         Notifier.notify("Saved", "saved comment ");
     }
