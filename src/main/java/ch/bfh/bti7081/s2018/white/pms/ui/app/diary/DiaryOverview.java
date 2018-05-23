@@ -40,71 +40,71 @@ public class DiaryOverview extends PmsSecureView {
     public DiaryOverview() {
         super();
         setCaption(NAME);
+        User user = VaadinSession.getCurrent().getAttribute(User.class);
 
-        try {
-            List<DiaryEntry> relativeEntities = diaryEntryService.getEntitiesByCreatorId(VaadinSession.getCurrent().getAttribute(User.class).getId());
-            for (DiaryEntry diaryEntry : relativeEntities) {
-            	addRelativeDiary(diaryEntry);    
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        newButtonRelative.addClickListener(clickEvent -> newRelativeDiaryEntry());
-        gridRelativeDiary.addComponent(accordionRelative, 0, 0);       
-        gridRelativeDiary.addComponent(newButtonRelative, 1, 0);
-        layout.addComponent(labelRelativeDiary);
-        layout.addComponent(gridRelativeDiary);
-        layout.addComponent(labelPatientDiary);
-        
-        try {
-        	User user = VaadinSession.getCurrent().getAttribute(User.class);
-        	if(user instanceof Relative){
-        		List<Patient> relativePatients = ((Relative) user).getPatientList();
-        	
-	        	for (Patient patient : relativePatients) {
-	            	Accordion accordionPatient = new Accordion();
-	            	accordionPatients.addTab(accordionPatient,patient.getFullName());
-	               
-	                List<Caze> patientCazes = patient.getCazeList();
-	                for (Caze caze : patientCazes) {
-	                	Accordion accordionCaze = new Accordion();
-	                	accordionPatient.addTab(accordionPatient,caze.getNote());
-	                	List<App> cazeApps = caze.getAppList();
-	                	for (App app : cazeApps) {
-	                		Accordion accordionDiary = new Accordion();
-	                    	Diary diary;
-	                    	                  
-	                        GridLayout gridPatientDiary = new GridLayout(2, 1);
-	                        Button newButtonPatient = new Button("+");
-	
-	                        
-	    					try {
-	    						diary = diaryService.getEntityById(app.getId());
-	    						newButtonPatient.addClickListener(clickEvent -> newPatientDiaryEntry(accordionDiary,diary.getId()));
-	    								
-	    			            gridPatientDiary.addComponent(accordionDiary, 0, 0);       
-	    			            gridPatientDiary.addComponent(newButtonPatient, 1, 0);
-	    			            accordionCaze.addTab(gridPatientDiary,diary.getName());
-	
-	    			            
-	    						List<DiaryEntry> patientEntities = diaryEntryService.getEntitiesByDiaryId(diary.getId());
-	    			            for (DiaryEntry diaryEntry : patientEntities) {
-	    			            	addPatientDiary(accordionDiary,diaryEntry);    
-	    			            }
-	
-	    						
-	    	                    layout.addComponent(gridPatientDiary);
-	    					} catch (Exception e) {
-	    						e.printStackTrace();
-	    					}   	
-	                    }
-	                }      
+        if(user instanceof Relative){
+	        try {
+	            List<DiaryEntry> relativeEntities = diaryEntryService.getEntitiesByCreatorId(user.getId());
+	            for (DiaryEntry diaryEntry : relativeEntities) {
+	            	addRelativeDiary(diaryEntry);    
 	            }
-        	}
-        } catch (Exception e) {
-			e.printStackTrace();
-		} 
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+        
+	        newButtonRelative.addClickListener(clickEvent -> newRelativeDiaryEntry());
+	        gridRelativeDiary.addComponent(accordionRelative, 0, 0);       
+	        gridRelativeDiary.addComponent(newButtonRelative, 1, 0);
+	        layout.addComponent(labelRelativeDiary);
+	        layout.addComponent(gridRelativeDiary);
+	        layout.addComponent(labelPatientDiary);
+	        
+	        try {
+	        		List<Patient> relativePatients = ((Relative) user).getPatientList();
+	        	
+		        	for (Patient patient : relativePatients) {
+		            	Accordion accordionPatient = new Accordion();
+		            	accordionPatients.addTab(accordionPatient,patient.getFullName());
+		               
+		                List<Caze> patientCazes = patient.getCazeList();
+		                for (Caze caze : patientCazes) {
+		                	Accordion accordionCaze = new Accordion();
+		                	accordionPatient.addTab(accordionPatient,caze.getNote());
+		                	List<App> cazeApps = caze.getAppList();
+		                	for (App app : cazeApps) {
+		                		Accordion accordionDiary = new Accordion();
+		                    	Diary diary;
+		                    	                  
+		                        GridLayout gridPatientDiary = new GridLayout(2, 1);
+		                        Button newButtonPatient = new Button("+");
+		
+		                        
+		    					try {
+		    						diary = diaryService.getEntityById(app.getId());
+		    						newButtonPatient.addClickListener(clickEvent -> newPatientDiaryEntry(accordionDiary,diary.getId()));
+		    								
+		    			            gridPatientDiary.addComponent(accordionDiary, 0, 0);       
+		    			            gridPatientDiary.addComponent(newButtonPatient, 1, 0);
+		    			            accordionCaze.addTab(gridPatientDiary,diary.getName());
+		
+		    			            
+		    						List<DiaryEntry> patientEntities = diaryEntryService.getEntitiesByDiaryId(diary.getId());
+		    			            for (DiaryEntry diaryEntry : patientEntities) {
+		    			            	addPatientDiary(accordionDiary,diaryEntry);    
+		    			            }
+		
+		    						
+		    	                    layout.addComponent(gridPatientDiary);
+		    					} catch (Exception e) {
+		    						e.printStackTrace();
+		    					}   	
+		                    }
+		                }      
+		            }
+	        } catch (Exception e) {
+				e.printStackTrace();
+			} 
+    	}
         
         addComponent(layout);
 
