@@ -18,7 +18,7 @@ public class CommentServiceImpl extends BaseServiceImpl<Comment> implements Comm
     }
     
     public List<Comment> getEntitiesByDiaryEntityId(long id) throws Exception {
-        return (List<Comment>) new JpaUtility().execute(
+        return new JpaUtility().execute(
                 (em) -> {
                     CriteriaBuilder cb = em.getCriteriaBuilder();
                     CriteriaQuery<Comment> cq = cb.createQuery(clazz);

@@ -14,7 +14,7 @@ import com.vaadin.ui.themes.ValoTheme;
 
 import java.util.HashMap;
 
-public class DashboardView extends PmsSecureView {
+public abstract class DashboardView extends PmsSecureView {
 
     public static final String NAME = "pms";
 
@@ -35,17 +35,25 @@ public class DashboardView extends PmsSecureView {
         }
     }
 
+    public abstract DiaryOverview getDiaryOverview();
+
+    public abstract ProfileView getProfileOverview();
+
+    public abstract GoaltrackerOverview getGoaltrackerOverview();
+
+    public abstract SettingsView getSettingsView();
+
     public DashboardView() {
         super();
         setCaption("Dashboard");
-        GoaltrackerOverview goaltrackerOverview = new GoaltrackerOverview();
-        DiaryOverview diaryOverview = new DiaryOverview();
-        ProfileView profileView = new ProfileView();
-        SettingsView settingsView = new SettingsView();
-        viewsMap.put(goaltrackerOverview.NAME, new GoaltrackerOverview());
-        viewsMap.put(diaryOverview.NAME, new DiaryOverview());
-        viewsMap.put(ProfileView.NAME, new ProfileView());
-        viewsMap.put(SettingsView.NAME, new SettingsView());
+        GoaltrackerOverview goaltrackerOverview = getGoaltrackerOverview();
+        DiaryOverview diaryOverview = getDiaryOverview();
+        ProfileView profileView = getProfileOverview();
+        SettingsView settingsView = getSettingsView();
+        viewsMap.put(goaltrackerOverview.NAME, goaltrackerOverview);
+        viewsMap.put(diaryOverview.NAME, diaryOverview);
+        viewsMap.put(ProfileView.NAME, profileView);
+        viewsMap.put(SettingsView.NAME, settingsView);
 
         Label menuTitle = new Label("Menu");
         menuTitle.addStyleName(ValoTheme.MENU_TITLE);

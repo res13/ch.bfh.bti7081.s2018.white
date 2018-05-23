@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2018.white.pms.ui.app.diary;
 
+import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.App;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.Diary;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry;
@@ -22,12 +23,12 @@ import com.vaadin.ui.VerticalLayout;
 import java.util.HashMap;
 import java.util.List;
 
-public class DiaryOverview extends PmsSecureView {
+public abstract class DiaryOverview extends PmsSecureView {
 
     private DiaryEntryServiceImpl diaryEntryService = new DiaryEntryServiceImpl();
     private DiaryServiceImpl diaryService = new DiaryServiceImpl();
     private Accordion accordionRelative = new Accordion();
-    private Label labelRelativeDiary = new Label("Angehörigentagebuch");
+    private Label labelRelativeDiary = new Label(MessageHandler.RELATIVE_DIARY);
     private Label labelPatientDiary = new Label("Patiententagebuch");
     private HashMap<Long, TabSheet.Tab> diaryEntryToTab = new HashMap<>();
     private VerticalLayout layout = new VerticalLayout();

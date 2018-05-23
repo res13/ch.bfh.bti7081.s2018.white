@@ -1,6 +1,9 @@
 package ch.bfh.bti7081.s2018.white.pms.ui.main;
 
 import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
+import ch.bfh.bti7081.s2018.white.pms.common.model.user.Doctor;
+import ch.bfh.bti7081.s2018.white.pms.common.model.user.Patient;
+import ch.bfh.bti7081.s2018.white.pms.common.model.user.Relative;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.services.UserService;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.UserServiceImpl;
@@ -11,6 +14,8 @@ import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import javax.print.Doc;
 
 public class LoginView extends VerticalLayout implements View {
 
@@ -37,6 +42,20 @@ public class LoginView extends VerticalLayout implements View {
             try {
                 User user = userService.authenticate(emailField.getValue(), passwordField.getValue());
                 VaadinSession.getCurrent().setAttribute(User.class, user);
+                Class<? extends DashboardView> dashboardView;
+                if (user instanceof Doctor) {
+                    dashboardView = DashboardDoctorView.class;
+                }
+                else if (user instanceof Patient) {
+                    dashboardView = DashboardPatientView.class;
+                }
+                else if (user instanceof Relative) {
+                    dashboardView = DashboardRelativeView.class;
+                }
+                else {
+                    throw new Exception("Invalid user");
+                }
+                UI.getCurrent().getNavigator().addView(DashboardView.NAME, dashboardView);
                 UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME);
             } catch (Exception e) {
                 log.error(e);

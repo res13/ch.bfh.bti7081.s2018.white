@@ -21,7 +21,6 @@ public class NavigatorUI extends UI {
     protected void init(VaadinRequest vaadinRequest) {
         new Navigator(this, this);
         getNavigator().addView(LoginView.NAME, LoginView.class);
-        getNavigator().addView(DashboardView.NAME, DashboardView.class);
         setupMessageProvider(vaadinRequest);
     }
 

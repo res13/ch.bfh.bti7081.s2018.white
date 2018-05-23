@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2018.white.pms.ui.app.diary;
 
+import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.Comment;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
@@ -32,10 +33,10 @@ public class DiaryEntryView extends PmsSecureView {
     private Label time = new Label();
     private DiaryEntry diaryEntry;
     private Accordion accordionComments = new Accordion();
-    private Button editButton = new Button("Edit");
-    private Button saveButton = new Button("Save");
-    private Button newButton = new Button("New comment");
-    private Button deleteButton = new Button("Delete");
+    private Button editButton = new Button(MessageHandler.EDIT);
+    private Button saveButton = new Button(MessageHandler.SAVE);
+    private Button newButton = new Button(MessageHandler.NEW_COMMENT);
+    private Button deleteButton = new Button(MessageHandler.DELETE);
     private DiaryOverview parentDiary;
     private HashMap<Long, TabSheet.Tab> commentToTab = new HashMap<>();
 
@@ -96,7 +97,7 @@ public class DiaryEntryView extends PmsSecureView {
     private void deleteDiaryEntry() {
         try {
             diaryEntryService.deleteEntity(diaryEntry);
-            Notifier.notify("Delete", "deleted Entity");
+            Notifier.notify(MessageHandler.DELETED, MessageHandler.DELETED_DIARY_ENTRY);
             parentDiary.deleteDiaryEntry(diaryEntry.getId());
         } catch (Exception e) {
             e.printStackTrace();
@@ -139,7 +140,7 @@ public class DiaryEntryView extends PmsSecureView {
         }
 
         switchEditable();
-        Notifier.notify("Saved", "saved Entity");
+        Notifier.notify(MessageHandler.SAVED, MessageHandler.SAVED_DIARY_ENTRY);
     }
     
     private void newComment() {
@@ -155,7 +156,6 @@ public class DiaryEntryView extends PmsSecureView {
     	if(comment.getId() != null){
     		commentToTab.put(comment.getId(), newCommentTab);
     	}
-    	System.out.println("Before update to DB: "+comment.getId());
     	return newCommentTab;
     }
     

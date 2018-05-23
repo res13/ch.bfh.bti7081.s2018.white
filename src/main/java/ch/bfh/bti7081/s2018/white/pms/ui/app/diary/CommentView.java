@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2018.white.pms.ui.app.diary;
 
+import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.Comment;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
@@ -24,9 +25,9 @@ public class CommentView  extends PmsSecureView {
     private Label creator = new Label();
     private Label time = new Label();
     private Comment comment;
-    private Button editButton= new Button("Edit");
-    private Button saveButton = new Button("Save");
-    private Button deleteButton = new Button("Delete");
+    private Button editButton= new Button(MessageHandler.EDIT);
+    private Button saveButton = new Button(MessageHandler.SAVE);
+    private Button deleteButton = new Button(MessageHandler.DELETE);
     private DiaryEntryView parentView;
 
 
@@ -90,10 +91,8 @@ public class CommentView  extends PmsSecureView {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        System.out.println("After update to DB: "+comment.getId());
         switchEditable();
-        Notifier.notify("Saved", "saved comment ");
+        Notifier.notify(MessageHandler.SAVED, MessageHandler.SAVED_COMMENT);
     }
     
     private void deleteComment() {
@@ -103,7 +102,7 @@ public class CommentView  extends PmsSecureView {
             e.printStackTrace();
         }
 
-        Notifier.notify("Deleted", "deleted comment ");
+        Notifier.notify(MessageHandler.DELETED, MessageHandler.DELETED_COMMENT);
         parentView.deleteComment(comment.getId());
     }
 }

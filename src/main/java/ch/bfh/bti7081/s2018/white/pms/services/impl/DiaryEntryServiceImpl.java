@@ -18,7 +18,7 @@ public class DiaryEntryServiceImpl extends BaseServiceImpl<DiaryEntry> implement
     }
     
     public List<DiaryEntry> getEntitiesByCreatorId(long id) throws Exception {
-        return (List<DiaryEntry>) new JpaUtility().execute(
+        return new JpaUtility().execute(
                 (em) -> {
                     CriteriaBuilder cb = em.getCriteriaBuilder();
                     CriteriaQuery<DiaryEntry> cq = cb.createQuery(clazz);
@@ -30,7 +30,7 @@ public class DiaryEntryServiceImpl extends BaseServiceImpl<DiaryEntry> implement
     }
     
     public List<DiaryEntry> getEntitiesByDiaryId(long id) throws Exception {
-        return (List<DiaryEntry>) new JpaUtility().execute(
+        return new JpaUtility().execute(
                 (em) -> {
                     CriteriaBuilder cb = em.getCriteriaBuilder();
                     CriteriaQuery<DiaryEntry> cq = cb.createQuery(clazz);
