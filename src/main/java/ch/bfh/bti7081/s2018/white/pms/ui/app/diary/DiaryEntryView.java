@@ -121,7 +121,7 @@ public class DiaryEntryView extends PmsSecureView {
 
         hLayoutButtons.removeAllComponents();;
         if (this.diaryEntry.getId() != null && !title.isEnabled()) {
-        	if(VaadinSession.getCurrent().getAttribute(User.class) != null){
+        	if(VaadinSession.getCurrent().getAttribute(User.class).getId() != null){
         		if(VaadinSession.getCurrent().getAttribute(User.class).getId() == diaryEntry.getCreator().getId()){
             	hLayoutButtons.addComponent(editButton);
             	hLayoutButtons.addComponent(deleteButton);
