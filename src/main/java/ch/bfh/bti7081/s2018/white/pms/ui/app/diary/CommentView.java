@@ -97,7 +97,6 @@ public class CommentView  extends PmsSecureView {
     }
     
     private void deleteComment() {
-        
         try {
             commentService.deleteEntity(comment);
         } catch (Exception e) {

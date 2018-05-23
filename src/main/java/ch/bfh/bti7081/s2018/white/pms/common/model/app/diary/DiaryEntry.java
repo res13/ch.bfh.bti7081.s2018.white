@@ -3,10 +3,9 @@ package ch.bfh.bti7081.s2018.white.pms.common.model.app.diary;
 import ch.bfh.bti7081.s2018.white.pms.common.model.PmsEntity;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class DiaryEntry extends PmsEntity {
@@ -23,6 +22,9 @@ public class DiaryEntry extends PmsEntity {
     private boolean relativeRead;
 
     private boolean patientRead;
+
+    @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Comment> commentList;
 
     @ManyToOne
     private Diary diary;
@@ -76,5 +78,13 @@ public class DiaryEntry extends PmsEntity {
 
     public void setPatientRead(boolean patientRead) {
         this.patientRead = patientRead;
+    }
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
     }
 }

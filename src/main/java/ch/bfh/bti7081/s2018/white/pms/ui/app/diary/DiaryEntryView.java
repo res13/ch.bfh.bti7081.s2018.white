@@ -95,17 +95,6 @@ public class DiaryEntryView extends PmsSecureView {
 
     private void deleteDiaryEntry() {
         try {
-            if(this.accordionComments.getComponentCount() > 0){
-            	try {
-    	            List<Comment> diaryEntryEntities = commentService.getEntitiesByDiaryEntityId(diaryEntry.getId());
-    	            
-    	            for (Comment comment : diaryEntryEntities) {
-    	            	commentService.deleteEntity(comment);
-    	            }
-            	} catch (Exception e) {
-     	            e.printStackTrace();
-     	        }
-            }
             diaryEntryService.deleteEntity(diaryEntry);
             Notifier.notify("Delete", "deleted Entity");
             parentDiary.deleteDiaryEntry(diaryEntry.getId());
