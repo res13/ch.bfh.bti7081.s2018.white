@@ -6,7 +6,7 @@ import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
-public abstract class PmsSecureView<T extends User> extends VerticalLayout implements View {
+public abstract class PmsSecureView extends VerticalLayout implements View {
 
     public PmsSecureView() {
         checkLogin();

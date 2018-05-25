@@ -19,11 +19,11 @@ public abstract class App extends PmsEntity {
     @ManyToOne
     private Caze caze;
 
-    public void notify(List<User> userList, String title, String message) {
-
+    public App() {
     }
 
-    public App() {
+    public void notify(List<User> userList, String title, String message) {
+
     }
 
     public String getName() {

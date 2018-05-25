@@ -3,10 +3,8 @@ package ch.bfh.bti7081.s2018.white.pms.ui.app.goaltracker;
 import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.goaltracker.Goal;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.goaltracker.GoalState;
-import ch.bfh.bti7081.s2018.white.pms.ui.main.PmsSecureView;
 import com.vaadin.data.Binder;
 import com.vaadin.event.ShortcutAction;
-import com.vaadin.navigator.View;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 

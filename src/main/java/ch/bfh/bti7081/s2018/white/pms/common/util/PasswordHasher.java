@@ -13,9 +13,8 @@ import java.util.Random;
 
 public class PasswordHasher {
 
-    private static final String KEY_FACTORY = "PBKDF2WithHmacSHA1";
-
     public static final Logger log = LogManager.getLogger(PasswordHasher.class.getName());
+    private static final String KEY_FACTORY = "PBKDF2WithHmacSHA1";
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

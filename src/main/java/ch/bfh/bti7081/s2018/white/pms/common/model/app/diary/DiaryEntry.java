@@ -8,7 +8,6 @@ import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -33,24 +32,22 @@ public class DiaryEntry extends PmsEntity {
     @ManyToOne
     private Diary diary;
 
+    public DiaryEntry() {
+    }
+
     @PrePersist
     @PreUpdate
     private void onInsert() {
         if (creator != null) {
             if (creator instanceof Relative) {
                 relativeRead = true;
-            }
-            else if (creator instanceof Doctor) {
+            } else if (creator instanceof Doctor) {
                 relativeRead = true;
                 patientRead = true;
-            }
-            else if (creator instanceof Patient) {
+            } else if (creator instanceof Patient) {
                 patientRead = true;
             }
         }
-    }
-
-    public DiaryEntry() {
     }
 
     public LocalDateTime getTime() {
@@ -99,6 +96,14 @@ public class DiaryEntry extends PmsEntity {
 
     public void setPatientRead(boolean patientRead) {
         this.patientRead = patientRead;
+    }
+
+    public Diary getDiary() {
+        return diary;
+    }
+
+    public void setDiary(Diary diary) {
+        this.diary = diary;
     }
 
     public List<Comment> getCommentList() {

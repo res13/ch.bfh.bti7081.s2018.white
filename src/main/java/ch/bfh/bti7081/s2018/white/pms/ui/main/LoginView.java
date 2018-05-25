@@ -1,21 +1,15 @@
 package ch.bfh.bti7081.s2018.white.pms.ui.main;
 
 import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
-import ch.bfh.bti7081.s2018.white.pms.common.model.user.Doctor;
-import ch.bfh.bti7081.s2018.white.pms.common.model.user.Patient;
-import ch.bfh.bti7081.s2018.white.pms.common.model.user.Relative;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.services.UserService;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.UserServiceImpl;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import javax.print.Doc;
 
 public class LoginView extends VerticalLayout implements View {
 
@@ -23,7 +17,7 @@ public class LoginView extends VerticalLayout implements View {
 
     public static final String NAME = "";
 
-    public LoginView(){
+    public LoginView() {
         setCaption(NAME);
         createView();
     }
@@ -54,20 +48,7 @@ public class LoginView extends VerticalLayout implements View {
         try {
             User user = userService.authenticate(email, password);
             VaadinSession.getCurrent().setAttribute(User.class, user);
-            DashboardView dashboardView;
-            if (user instanceof Doctor) {
-                dashboardView = new DashboardView<Doctor>();
-            }
-            else if (user instanceof Patient) {
-                dashboardView = new DashboardView<Patient>();
-            }
-            else if (user instanceof Relative) {
-                dashboardView = new DashboardView<Relative>();
-            }
-            else {
-                throw new Exception(MessageHandler.INVALID_USER_TYPE);
-            }
-            UI.getCurrent().getNavigator().addView(DashboardView.NAME, dashboardView);
+            UI.getCurrent().getNavigator().addView(DashboardView.NAME, DashboardView.class);
             UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME);
         } catch (Exception e) {
             log.error(e);

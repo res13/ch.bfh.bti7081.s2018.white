@@ -18,34 +18,34 @@
                 <pattern>${PATTERN}</pattern>
             </PatternLayout>
             <Policies>
-                <TimeBasedTriggeringPolicy />
-                <SizeBasedTriggeringPolicy size="20 MB" />
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="20 MB"/>
             </Policies>
         </RollingFile>
     </Appenders>
     <Loggers>
         <Root level="INFO">
-            <AppenderRef ref="Console" />
+            <AppenderRef ref="Console"/>
             <AppenderRef ref="fileWriter"/>
         </Root>
         <!-- Log everything in hibernate -->
         <Logger name="org.hibernate" level="error" additivity="false">
-            <AppenderRef ref="Console" />
-            <AppenderRef ref="fileWriter" />
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="fileWriter"/>
         </Logger>
         <!-- Log SQL statements -->
         <Logger name="org.hibernate.SQL" level="trace" additivity="false">
-            <AppenderRef ref="Console" />
-            <AppenderRef ref="fileWriter" />
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="fileWriter"/>
         </Logger>
         <!-- Log JDBC bind parameters -->
         <Logger name="org.hibernate.type.descriptor.sql" level="error" additivity="false">
-            <AppenderRef ref="Console" />
-            <AppenderRef ref="fileWriter" />
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="fileWriter"/>
         </Logger>
         <Logger name="ch.bfh.bti7081.s2018.white.pms" level="error" additivity="false">
-            <AppenderRef ref="Console" />
-            <AppenderRef ref="fileWriter" />
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="fileWriter"/>
         </Logger>
     </Loggers>
 </Configuration>

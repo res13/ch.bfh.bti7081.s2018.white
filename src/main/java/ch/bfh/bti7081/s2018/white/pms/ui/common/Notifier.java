@@ -7,7 +7,7 @@ import static com.vaadin.ui.Notification.Type.TRAY_NOTIFICATION;
 
 public class Notifier {
 
-    public static void notify(String title, String text){
+    public static void notify(String title, String text) {
         Notification sample = new Notification(title, text, TRAY_NOTIFICATION);
         sample.show(Page.getCurrent());
     }

@@ -135,17 +135,20 @@ public class DiaryEntryView extends VerticalLayout {
             if (user.getId() != null && user.getId() == diaryEntry.getCreator().getId()) {
                 hLayoutButtons.addComponent(editButton);
                 hLayoutButtons.addComponent(deleteButton);
+                if (user instanceof Patient) {
+                    hLayoutPermissions.addComponent(relativeRead);
+                } else if (user instanceof Relative) {
+                    hLayoutPermissions.addComponent(patientRead);
+                }
             }
         } else {
             hLayoutButtons.addComponent(saveButton);
+            if (user instanceof Patient && parentDiary instanceof PatientDiaryOverview) {
+                hLayoutPermissions.addComponent(relativeRead);
+            } else if (user instanceof Relative && parentDiary instanceof RelativeDiaryOverview) {
+                hLayoutPermissions.addComponent(patientRead);
+            }
         }
-        if (user instanceof Patient) {
-            hLayoutPermissions.addComponent(relativeRead);
-        }
-        else if (user instanceof Relative) {
-            hLayoutPermissions.addComponent(patientRead);
-        }
-
     }
 
     private void saveDiaryEntry() {
@@ -157,10 +160,11 @@ public class DiaryEntryView extends VerticalLayout {
         diaryEntry.setEntryText(text.getValue());
         diaryEntry.setCreator(user);
         diaryEntry.setTime(LocalDateTime.now());
+        //TODO: Add new diaryEntry to a diary
+        //diaryEntry.setDiary();
         if (user instanceof Patient) {
             diaryEntry.setRelativeRead(relativeRead.getValue());
-        }
-        else if (user instanceof Relative) {
+        } else if (user instanceof Relative) {
             diaryEntry.setPatientRead(patientRead.getValue());
         }
         try {

@@ -4,7 +4,6 @@ import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.goaltracker.Goal;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.GoalServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.ui.main.PmsSecureView;
-import com.vaadin.annotations.Theme;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.ui.ValueChangeMode;
 import com.vaadin.ui.*;
@@ -14,9 +13,9 @@ import java.util.List;
 
 public class GoaltrackerOverview extends PmsSecureView {
 
+    public static final String NAME = "goaltracker";
     private GoalServiceImpl goalService;
     private Grid<Goal> grid;
-    public static final String NAME = "goaltracker";
 
     @Override
     public String getName() {

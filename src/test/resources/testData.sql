@@ -609,7 +609,7 @@ insert into Goaltracker (Id)
 values (4);
 
 
-insert into Goal(Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
+insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
 values (1,
         Current_timestamp(),
         Current_timestamp(),
@@ -620,7 +620,7 @@ values (1,
         3);
 
 
-insert into Goal(Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
+insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
 values (2,
         Current_timestamp(),
         Current_timestamp(),
@@ -631,7 +631,7 @@ values (2,
         3);
 
 
-insert into Goal(Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
+insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
 values (3,
         Current_timestamp(),
         Current_timestamp(),
@@ -642,7 +642,7 @@ values (3,
         3);
 
 
-insert into Goal(Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
+insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
 values (4,
         Current_timestamp(),
         Current_timestamp(),
@@ -653,7 +653,7 @@ values (4,
         3);
 
 
-insert into Goal(Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
+insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
 values (5,
         Current_timestamp(),
         Current_timestamp(),
@@ -664,7 +664,7 @@ values (5,
         3);
 
 
-insert into Goal(Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
+insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
 values (6,
         Current_timestamp(),
         Current_timestamp(),
@@ -675,7 +675,7 @@ values (6,
         3);
 
 
-insert into Goal(Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
+insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
 values (7,
         Current_timestamp(),
         Current_timestamp(),
@@ -686,7 +686,7 @@ values (7,
         3);
 
 
-insert into Goal(Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
+insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
 values (8,
         Current_timestamp(),
         Current_timestamp(),
@@ -697,7 +697,7 @@ values (8,
         3);
 
 
-insert into Goal(Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
+insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
 values (9,
         Current_timestamp(),
         Current_timestamp(),
@@ -708,7 +708,7 @@ values (9,
         3);
 
 
-insert into Goal(Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
+insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
 values (10,
         Current_timestamp(),
         Current_timestamp(),
@@ -719,7 +719,7 @@ values (10,
         3);
 
 
-insert into Goal(Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
+insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
 values (11,
         Current_timestamp(),
         Current_timestamp(),
@@ -730,7 +730,7 @@ values (11,
         3);
 
 
-insert into Goal(Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
+insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
 values (12,
         Current_timestamp(),
         Current_timestamp(),
@@ -741,7 +741,7 @@ values (12,
         3);
 
 
-insert into Comment(Id, Lastmodified, time, Commenttext, Creator_id, Diaryentry_id)
+insert into Comment (Id, Lastmodified, time, Commenttext, Creator_id, Diaryentry_id)
 values (1,
         Current_timestamp(),
         Current_timestamp(),
@@ -750,7 +750,7 @@ values (1,
         4);
 
 
-insert into Comment(Id, Lastmodified, time, Commenttext, Creator_id, Diaryentry_id)
+insert into Comment (Id, Lastmodified, time, Commenttext, Creator_id, Diaryentry_id)
 values (2,
         Current_timestamp(),
         Current_timestamp(),
@@ -758,7 +758,7 @@ values (2,
         2,
         11);
 
-insert into Comment(Id, Lastmodified, time, Commenttext, Creator_id, Diaryentry_id)
+insert into Comment (Id, Lastmodified, time, Commenttext, Creator_id, Diaryentry_id)
 values (3,
         Current_timestamp(),
         Current_timestamp(),

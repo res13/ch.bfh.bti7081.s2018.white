@@ -13,29 +13,15 @@ import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
-
 import java.util.HashMap;
 
-public class DashboardView<T extends User> extends PmsSecureView<T> {
+public class DashboardView extends PmsSecureView {
 
     public static final String NAME = "pms";
 
     private Panel contentPanel;
 
-    private HashMap<String, PmsSecureView> viewsMap ;
-
-    class ButtonListener implements Button.ClickListener {
-
-        String viewName;
-        public ButtonListener(String viewName) {
-            this.viewName = viewName;
-        }
-
-        @Override
-        public void buttonClick(Button.ClickEvent event) {
-            UI.getCurrent().getNavigator().navigateTo(NAME + "/" + viewName);
-        }
-    }
+    private HashMap<String, PmsSecureView> viewsMap;
 
     @Override
     public String getName() {
@@ -94,8 +80,7 @@ public class DashboardView<T extends User> extends PmsSecureView<T> {
             Label lblUsername = new Label(user.getName());
             horizontalMenu.addComponent(lblUsername);
             horizontalMenu.setComponentAlignment(lblUsername, Alignment.TOP_RIGHT);
-        }
-        else {
+        } else {
             UI.getCurrent().getNavigator().navigateTo(LoginView.NAME);
             return;
         }
@@ -120,11 +105,24 @@ public class DashboardView<T extends User> extends PmsSecureView<T> {
     public void enter(ViewChangeListener.ViewChangeEvent event) {
         if (event.getParameters() == null || event.getParameters().isEmpty()) {
             return;
-        }
-        else {
+        } else {
             if (viewsMap.containsKey(event.getParameters())) {
                 contentPanel.setContent(viewsMap.get(event.getParameters()));
             }
+        }
+    }
+
+    class ButtonListener implements Button.ClickListener {
+
+        String viewName;
+
+        public ButtonListener(String viewName) {
+            this.viewName = viewName;
+        }
+
+        @Override
+        public void buttonClick(Button.ClickEvent event) {
+            UI.getCurrent().getNavigator().navigateTo(NAME + "/" + viewName);
         }
     }
 }

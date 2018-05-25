@@ -1,15 +1,14 @@
 package ch.bfh.bti7081.s2018.white.pms.ui.profile;
 
 import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
-import com.vaadin.server.VaadinSession;
-import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.Label;
-
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.Doctor;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.Patient;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.Relative;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.ui.main.PmsSecureView;
+import com.vaadin.server.VaadinSession;
+import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.Label;
 
 public class ProfileView extends PmsSecureView {
 
@@ -43,7 +42,7 @@ public class ProfileView extends PmsSecureView {
         emailValueLabel = new Label();
         roleValueLabel = new Label();
         birthdayValueLabel = new Label();
-        layout = new GridLayout(2,5);
+        layout = new GridLayout(2, 5);
     }
 
     @Override
@@ -54,11 +53,11 @@ public class ProfileView extends PmsSecureView {
         emailValueLabel.setValue(user.getEmail());
         birthdayValueLabel.setValue(user.getDateOfBirth().toString());
 
-        if(user instanceof Relative){
+        if (user instanceof Relative) {
             roleValueLabel.setValue(Relative.class.getSimpleName());
-        } else if(user instanceof Patient){
+        } else if (user instanceof Patient) {
             roleValueLabel.setValue(Patient.class.getSimpleName());
-        } else if(user instanceof Doctor){
+        } else if (user instanceof Doctor) {
             roleValueLabel.setValue(Doctor.class.getSimpleName());
         }
 

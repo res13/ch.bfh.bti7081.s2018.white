@@ -3,7 +3,6 @@ package ch.bfh.bti7081.s2018.white.pms.common.model.app.diary;
 import ch.bfh.bti7081.s2018.white.pms.common.model.PmsEntity;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
@@ -47,7 +46,7 @@ public class Comment extends PmsEntity {
     public void setCreator(User creator) {
         this.creator = creator;
     }
-    
+
     public DiaryEntry getDiaryEntry() {
         return diaryEntry;
     }

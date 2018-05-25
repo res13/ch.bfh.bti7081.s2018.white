@@ -1,7 +1,6 @@
 package ch.bfh.bti7081.s2018.white.pms.ui.app.diary;
 
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry;
-import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.DiaryEntryServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.DiaryServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.ui.main.PmsSecureView;
@@ -13,7 +12,7 @@ import com.vaadin.ui.TabSheet;
 import java.util.HashMap;
 import java.util.List;
 
-public abstract class DiaryOverview<T extends User> extends PmsSecureView<T> {
+public abstract class DiaryOverview extends PmsSecureView {
 
     private DiaryEntryServiceImpl diaryEntryService;
     private DiaryServiceImpl diaryService;
@@ -34,11 +33,15 @@ public abstract class DiaryOverview<T extends User> extends PmsSecureView<T> {
 
     public abstract List<DiaryEntry> getDiaryEntries();
 
+    public abstract boolean addNewButton();
+
     @Override
     public void createView() {
         newButton.addClickListener(clickEvent -> newDiaryEntry());
         gridDiary.addComponent(accordion, 0, 0);
-        gridDiary.addComponent(newButton, 1, 0);
+        if (addNewButton()) {
+            gridDiary.addComponent(newButton, 1, 0);
+        }
         addComponent(gridDiary);
         for (DiaryEntry diaryEntry : getDiaryEntries()) {
             addDiary(diaryEntry);

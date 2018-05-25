@@ -34,10 +34,6 @@ public class JpaUtility {
         }
     }
 
-    public interface ABlockOfCode<T> {
-        T execute(EntityManager em);
-    }
-
     public <T> T execute(ABlockOfCode<T> aBlockOfCode) {
         EntityManager em = entityManagerFactory.createEntityManager();
         EntityTransaction tx = null;
@@ -56,5 +52,9 @@ public class JpaUtility {
         } finally {
             em.close();
         }
+    }
+
+    public interface ABlockOfCode<T> {
+        T execute(EntityManager em);
     }
 }
