@@ -17,11 +17,13 @@ public class ProfileView extends PmsSecureView {
     private Label lastnameLabel = new Label("Nachname");
     private Label emailLabel = new Label("eMail");
     private Label roleLabel = new Label("Status");
+    private Label birthdayLabel = new Label("Geburtstag");
     private Label firstnameValueLabel = new Label();
     private Label lastnameValueLabel = new Label();
     private Label emailValueLabel = new Label();
     private Label roleValueLabel = new Label();
-    private GridLayout layout = new GridLayout(2,4);
+    private Label birthdayValueLabel = new Label();
+    private GridLayout layout = new GridLayout(2,5);
     
 
     public ProfileView() {
@@ -33,6 +35,7 @@ public class ProfileView extends PmsSecureView {
         firstnameValueLabel.setValue(user.getSurname());
         lastnameValueLabel.setValue(user.getName());
         emailValueLabel.setValue(user.getEmail());
+        birthdayValueLabel.setValue(user.getDateOfBirth().toString());
         
         if(user instanceof Relative){
 	        roleValueLabel.setValue(Relative.class.getSimpleName());
@@ -48,8 +51,10 @@ public class ProfileView extends PmsSecureView {
         layout.addComponent(lastnameValueLabel, 1, 1);
         layout.addComponent(emailLabel, 0, 2);
         layout.addComponent(emailValueLabel, 1, 2);
-        layout.addComponent(roleLabel, 0, 3);
-        layout.addComponent(roleValueLabel, 1, 3);
+        layout.addComponent(birthdayLabel, 0, 3);
+        layout.addComponent(birthdayValueLabel, 1, 3);
+        layout.addComponent(roleLabel, 0, 4);
+        layout.addComponent(roleValueLabel, 1, 4);
         
         addComponent(layout);
     }
