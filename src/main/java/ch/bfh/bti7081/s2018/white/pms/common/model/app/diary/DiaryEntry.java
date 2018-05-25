@@ -1,10 +1,14 @@
 package ch.bfh.bti7081.s2018.white.pms.common.model.app.diary;
 
 import ch.bfh.bti7081.s2018.white.pms.common.model.PmsEntity;
+import ch.bfh.bti7081.s2018.white.pms.common.model.user.Doctor;
+import ch.bfh.bti7081.s2018.white.pms.common.model.user.Patient;
+import ch.bfh.bti7081.s2018.white.pms.common.model.user.Relative;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -28,6 +32,23 @@ public class DiaryEntry extends PmsEntity {
 
     @ManyToOne
     private Diary diary;
+
+    @PrePersist
+    @PreUpdate
+    private void onInsert() {
+        if (creator != null) {
+            if (creator instanceof Relative) {
+                relativeRead = true;
+            }
+            else if (creator instanceof Doctor) {
+                relativeRead = true;
+                patientRead = true;
+            }
+            else if (creator instanceof Patient) {
+                patientRead = true;
+            }
+        }
+    }
 
     public DiaryEntry() {
     }

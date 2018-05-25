@@ -6,10 +6,16 @@ import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
-public abstract class PmsSecureView extends VerticalLayout implements View {
+public abstract class PmsSecureView<T extends User> extends VerticalLayout implements View {
 
     public PmsSecureView() {
         checkLogin();
+        String name = getName();
+        if (name != null) {
+            setCaption(name);
+        }
+        initialize();
+        createView();
     }
 
     private void checkLogin() {
@@ -19,4 +25,11 @@ public abstract class PmsSecureView extends VerticalLayout implements View {
             UI.getCurrent().getNavigator().navigateTo(LoginView.NAME);
         }
     }
+
+    public abstract String getName();
+
+    public abstract void initialize();
+
+    public abstract void createView();
+
 }

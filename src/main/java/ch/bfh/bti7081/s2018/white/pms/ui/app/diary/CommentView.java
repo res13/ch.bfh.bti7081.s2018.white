@@ -11,10 +11,11 @@ import ch.bfh.bti7081.s2018.white.pms.ui.main.PmsSecureView;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import com.vaadin.navigator.View;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
 
-public class CommentView  extends PmsSecureView {
+public class CommentView extends VerticalLayout implements View {
 
 	private CommentServiceImpl commentService = new CommentServiceImpl();
 	

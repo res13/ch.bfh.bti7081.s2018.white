@@ -25,9 +25,7 @@ public class BaseServiceImpl<T extends PmsEntity> implements BaseService<T> {
     @Override
     public T saveOrUpdateEntity(T entity) throws Exception {
         return new JpaUtility().execute(
-                (em) -> {
-                    return em.merge(entity);
-                });
+                (em) -> em.merge(entity));
     }
 
     @Override

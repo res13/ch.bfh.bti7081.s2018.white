@@ -6,8 +6,18 @@ public class ProfileView extends PmsSecureView {
 
     public static final String NAME = "profile";
 
-    public ProfileView() {
-        super();
-        setCaption(NAME);
+    @Override
+    public String getName() {
+        return NAME;
+    }
+
+    @Override
+    public void initialize() {
+
+    }
+
+    @Override
+    public void createView() {
+        // TODO
     }
 }

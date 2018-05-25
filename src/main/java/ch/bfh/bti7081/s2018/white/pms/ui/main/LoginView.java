@@ -25,6 +25,10 @@ public class LoginView extends VerticalLayout implements View {
 
     public LoginView(){
         setCaption(NAME);
+        createView();
+    }
+
+    public void createView() {
         Panel panel = new Panel();
         panel.setSizeUndefined();
         addComponent(panel);
@@ -37,31 +41,7 @@ public class LoginView extends VerticalLayout implements View {
 
         Button send = new Button(MessageHandler.LOGIN);
         send.setClickShortcut(ShortcutAction.KeyCode.ENTER);
-        send.addClickListener((Button.ClickListener) event -> {
-            UserService userService = new UserServiceImpl();
-            try {
-                User user = userService.authenticate(emailField.getValue(), passwordField.getValue());
-                VaadinSession.getCurrent().setAttribute(User.class, user);
-                Class<? extends DashboardView> dashboardView;
-                if (user instanceof Doctor) {
-                    dashboardView = DashboardDoctorView.class;
-                }
-                else if (user instanceof Patient) {
-                    dashboardView = DashboardPatientView.class;
-                }
-                else if (user instanceof Relative) {
-                    dashboardView = DashboardRelativeView.class;
-                }
-                else {
-                    throw new Exception("Invalid user");
-                }
-                UI.getCurrent().getNavigator().addView(DashboardView.NAME, dashboardView);
-                UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME);
-            } catch (Exception e) {
-                log.error(e);
-                Notification.show(e.getMessage(), Notification.Type.ERROR_MESSAGE);
-            }
-        });
+        send.addClickListener((Button.ClickListener) event -> checkUserLogin(emailField.getValue(), passwordField.getValue()));
         content.addComponent(send);
         content.setSizeUndefined();
         content.setMargin(true);
@@ -69,8 +49,30 @@ public class LoginView extends VerticalLayout implements View {
         setComponentAlignment(panel, Alignment.MIDDLE_CENTER);
     }
 
-    @Override
-    public void enter(ViewChangeListener.ViewChangeEvent event) {
-
+    private void checkUserLogin(String email, String password) {
+        UserService userService = new UserServiceImpl();
+        try {
+            User user = userService.authenticate(email, password);
+            VaadinSession.getCurrent().setAttribute(User.class, user);
+            DashboardView dashboardView;
+            if (user instanceof Doctor) {
+                dashboardView = new DashboardView<Doctor>();
+            }
+            else if (user instanceof Patient) {
+                dashboardView = new DashboardView<Patient>();
+            }
+            else if (user instanceof Relative) {
+                dashboardView = new DashboardView<Relative>();
+            }
+            else {
+                throw new Exception(MessageHandler.INVALID_USER_TYPE);
+            }
+            UI.getCurrent().getNavigator().addView(DashboardView.NAME, dashboardView);
+            UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME);
+        } catch (Exception e) {
+            log.error(e);
+            Notification.show(e.getMessage(), Notification.Type.ERROR_MESSAGE);
+        }
     }
+
 }

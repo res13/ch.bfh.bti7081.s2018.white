@@ -12,19 +12,27 @@ import com.vaadin.ui.themes.ValoTheme;
 
 import java.util.List;
 
-@Theme("mytheme")
 public class GoaltrackerOverview extends PmsSecureView {
 
-    private GoalServiceImpl goalService = new GoalServiceImpl();
-    private Grid<Goal> grid = new Grid<>(Goal.class);
-    private TextField filterText = new TextField();
-    private GoalView form = new GoalView(this);
+    private GoalServiceImpl goalService;
+    private Grid<Goal> grid;
     public static final String NAME = "goaltracker";
 
-    public GoaltrackerOverview() {
-        super();
-        setCaption(NAME);
+    @Override
+    public String getName() {
+        return NAME;
+    }
+
+    @Override
+    public void initialize() {
+        goalService = new GoalServiceImpl();
+        grid = new Grid<>(Goal.class);
+    }
+
+    @Override
+    public void createView() {
         final VerticalLayout layout = new VerticalLayout();
+        TextField filterText = new TextField();
         filterText.setPlaceholder(MessageHandler.FILTER);
         filterText.addValueChangeListener(e -> updateList());
         filterText.setValueChangeMode(ValueChangeMode.LAZY);
@@ -35,6 +43,7 @@ public class GoaltrackerOverview extends PmsSecureView {
         filtering.addComponents(filterText, clearFilterTextBtn);
         filtering.setStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
         Button addCustomerBtn = new Button(MessageHandler.ADD_GOAL);
+        GoalView form = new GoalView(this);
         addCustomerBtn.addClickListener(e -> {
             grid.asSingleSelect().clear();
             form.setGoal(new Goal());

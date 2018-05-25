@@ -3,6 +3,8 @@ package ch.bfh.bti7081.s2018.white.pms.ui.main;
 import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.ui.app.diary.DiaryOverview;
+import ch.bfh.bti7081.s2018.white.pms.ui.app.diary.PatientDiaryOverview;
+import ch.bfh.bti7081.s2018.white.pms.ui.app.diary.RelativeDiaryOverview;
 import ch.bfh.bti7081.s2018.white.pms.ui.app.goaltracker.GoaltrackerOverview;
 import ch.bfh.bti7081.s2018.white.pms.ui.profile.ProfileView;
 import ch.bfh.bti7081.s2018.white.pms.ui.settings.SettingsView;
@@ -14,13 +16,13 @@ import com.vaadin.ui.themes.ValoTheme;
 
 import java.util.HashMap;
 
-public abstract class DashboardView extends PmsSecureView {
+public class DashboardView<T extends User> extends PmsSecureView<T> {
 
     public static final String NAME = "pms";
 
     private Panel contentPanel;
 
-    private HashMap<String, PmsSecureView> viewsMap = new HashMap<>();
+    private HashMap<String, PmsSecureView> viewsMap ;
 
     class ButtonListener implements Button.ClickListener {
 
@@ -35,23 +37,26 @@ public abstract class DashboardView extends PmsSecureView {
         }
     }
 
-    public abstract DiaryOverview getDiaryOverview();
+    @Override
+    public String getName() {
+        return NAME;
+    }
 
-    public abstract ProfileView getProfileOverview();
+    @Override
+    public void initialize() {
+        viewsMap = new HashMap<>();
+    }
 
-    public abstract GoaltrackerOverview getGoaltrackerOverview();
-
-    public abstract SettingsView getSettingsView();
-
-    public DashboardView() {
-        super();
-        setCaption("Dashboard");
-        GoaltrackerOverview goaltrackerOverview = getGoaltrackerOverview();
-        DiaryOverview diaryOverview = getDiaryOverview();
-        ProfileView profileView = getProfileOverview();
-        SettingsView settingsView = getSettingsView();
+    @Override
+    public void createView() {
+        GoaltrackerOverview goaltrackerOverview = new GoaltrackerOverview();
+        DiaryOverview patientDiaryOverview = new PatientDiaryOverview();
+        DiaryOverview relativeDiaryOverview = new RelativeDiaryOverview();
+        ProfileView profileView = new ProfileView();
+        SettingsView settingsView = new SettingsView();
         viewsMap.put(goaltrackerOverview.NAME, goaltrackerOverview);
-        viewsMap.put(diaryOverview.NAME, diaryOverview);
+        viewsMap.put(PatientDiaryOverview.NAME, patientDiaryOverview);
+        viewsMap.put(RelativeDiaryOverview.NAME, relativeDiaryOverview);
         viewsMap.put(ProfileView.NAME, profileView);
         viewsMap.put(SettingsView.NAME, settingsView);
 
@@ -64,22 +69,18 @@ public abstract class DashboardView extends PmsSecureView {
 
         Button btnGoal = new Button(MessageHandler.GOAL_TRACKER_NAME, new ButtonListener(GoaltrackerOverview.NAME));
         btnGoal.addStyleNames(ValoTheme.BUTTON_LINK, ValoTheme.MENU_ITEM);
-        Button btnDiary = new Button(MessageHandler.DIARY_NAME, new ButtonListener(DiaryOverview.NAME));
-        btnDiary.addStyleNames(ValoTheme.BUTTON_LINK, ValoTheme.MENU_ITEM);
+        Button btnPatientDiary = new Button(MessageHandler.PATIENT_DIARY, new ButtonListener(PatientDiaryOverview.NAME));
+        btnPatientDiary.addStyleNames(ValoTheme.BUTTON_LINK, ValoTheme.MENU_ITEM);
+        Button btnRelativeDiary = new Button(MessageHandler.RELATIVE_DIARY, new ButtonListener(RelativeDiaryOverview.NAME));
+        btnRelativeDiary.addStyleNames(ValoTheme.BUTTON_LINK, ValoTheme.MENU_ITEM);
         Button btnProfile = new Button(MessageHandler.PROFILE, new ButtonListener(ProfileView.NAME));
         btnProfile.addStyleNames(ValoTheme.BUTTON_LINK, ValoTheme.MENU_ITEM);
-        Button btnLogout = new Button(MessageHandler.LOGOUT, clickEvent -> {
-            VaadinSession.getCurrent().setAttribute(User.class, null);
-            VaadinSession.getCurrent().close();
-            UI.getCurrent().getNavigator().navigateTo(LoginView.NAME);
-        });
-        btnLogout.addStyleNames(ValoTheme.BUTTON_LINK, ValoTheme.MENU_ITEM);
 
         menuContent.addComponent(menuTitle);
         menuContent.addComponent(btnGoal);
-        menuContent.addComponent(btnDiary);
+        menuContent.addComponent(btnPatientDiary);
+        menuContent.addComponent(btnRelativeDiary);
         menuContent.addComponent(btnProfile);
-        menuContent.addComponent(btnLogout);
 
         contentPanel = new Panel();
         horizontalBody.addComponents(menuContent, contentPanel);
@@ -96,12 +97,10 @@ public abstract class DashboardView extends PmsSecureView {
         }
         else {
             UI.getCurrent().getNavigator().navigateTo(LoginView.NAME);
-            VaadinSession.getCurrent().close();
             return;
         }
         horizontalMenu.addComponent(new Button(MessageHandler.LOGOUT, clickEvent -> {
             VaadinSession.getCurrent().setAttribute(User.class, null);
-            VaadinSession.getCurrent().close();
             UI.getCurrent().getNavigator().navigateTo(LoginView.NAME);
         }));
 

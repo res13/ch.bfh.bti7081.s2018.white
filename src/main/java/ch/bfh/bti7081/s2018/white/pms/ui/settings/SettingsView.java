@@ -6,9 +6,19 @@ public class SettingsView extends PmsSecureView {
 
     public static final String NAME = "settings";
 
-    public SettingsView() {
-        super();
-        setCaption(NAME);
+    @Override
+    public String getName() {
+        return NAME;
+    }
+
+    @Override
+    public void initialize() {
+
+    }
+
+    @Override
+    public void createView() {
+        // TODO
     }
 
 }

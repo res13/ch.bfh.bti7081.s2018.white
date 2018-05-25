@@ -85,5 +85,11 @@ public class MessageHandler {
 
     public static final String PATIENT_DIARY = getMessage("PATIENT_DIARY");
 
+    public static final String INVALID_USER_TYPE = getMessage("INVALID_USER_TYPE");
+
+    public static final String PATIENT_READ = getMessage("PATIENT_READ");
+
+    public static final String RELATIVE_READ = getMessage("RELATIVE_READ");
+
 
 }
