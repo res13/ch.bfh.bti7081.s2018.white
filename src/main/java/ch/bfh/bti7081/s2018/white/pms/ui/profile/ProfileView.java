@@ -14,17 +14,17 @@ import ch.bfh.bti7081.s2018.white.pms.ui.main.PmsSecureView;
 public class ProfileView extends PmsSecureView {
 
     public static final String NAME = "profile";
-    private Label firstnameLabel = new Label("Vorname");
-    private Label lastnameLabel = new Label("Nachname");
-    private Label emailLabel = new Label("eMail");
-    private Label roleLabel = new Label("Status");
-    private Label birthdayLabel = new Label("Geburtstag");
-    private Label firstnameValueLabel = new Label();
-    private Label lastnameValueLabel = new Label();
-    private Label emailValueLabel = new Label();
-    private Label roleValueLabel = new Label();
-    private Label birthdayValueLabel = new Label();
-    private GridLayout layout = new GridLayout(2,5);
+    private Label firstnameLabel;
+    private Label lastnameLabel;
+    private Label emailLabel;
+    private Label roleLabel;
+    private Label birthdayLabel;
+    private Label firstnameValueLabel;
+    private Label lastnameValueLabel;
+    private Label emailValueLabel;
+    private Label roleValueLabel;
+    private Label birthdayValueLabel;
+    private GridLayout layout;
 
     @Override
     public String getName() {
