@@ -15,7 +15,7 @@ public abstract class PmsEntity {
 
     @PrePersist
     @PreUpdate
-    private void onInsert() {
+    protected void onInsert() {
         this.lastModified = new Date();
     }
 
