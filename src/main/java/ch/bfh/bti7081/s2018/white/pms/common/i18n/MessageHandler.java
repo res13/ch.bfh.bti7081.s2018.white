@@ -47,6 +47,9 @@ public class MessageHandler {
     public static final String INVALID_USER_TYPE = getMessage("INVALID_USER_TYPE");
     public static final String PATIENT_READ = getMessage("PATIENT_READ");
     public static final String RELATIVE_READ = getMessage("RELATIVE_READ");
+    public static final String RELATIVE = getMessage("RELATIVE");
+    public static final String DOCTOR = getMessage("DOCTOR");
+    public static final String PATIENT = getMessage("PATIENT");
 
     private static String getMessage(String messageId) {
         return MESSAGES.getString(messageId);

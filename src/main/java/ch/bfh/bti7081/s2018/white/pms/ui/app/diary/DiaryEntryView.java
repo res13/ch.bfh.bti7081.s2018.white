@@ -2,12 +2,14 @@ package ch.bfh.bti7081.s2018.white.pms.ui.app.diary;
 
 import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.Comment;
+import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.Diary;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.Patient;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.Relative;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.CommentServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.DiaryEntryServiceImpl;
+import ch.bfh.bti7081.s2018.white.pms.services.impl.DiaryServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.Notifier;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
@@ -16,14 +18,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 public class DiaryEntryView extends VerticalLayout {
 
     private DiaryEntryServiceImpl diaryEntryService;
+    private DiaryServiceImpl diaryService;
     private CommentServiceImpl commentService;
     private VerticalLayout vLayout;
     private CheckBox patientRead;
     private CheckBox relativeRead;
+    private ComboBox<Patient> patientSelect;
     private HorizontalLayout hLayoutComments;
     private HorizontalLayout hLayoutPermissions;
     private HorizontalLayout hLayoutButtons;
@@ -50,11 +55,16 @@ public class DiaryEntryView extends VerticalLayout {
 
     public void initialize() {
         diaryEntryService = new DiaryEntryServiceImpl();
+        diaryService = new DiaryServiceImpl();
         commentService = new CommentServiceImpl();
         vLayout = new VerticalLayout();
         hLayoutComments = new HorizontalLayout();
         hLayoutPermissions = new HorizontalLayout();
         hLayoutButtons = new HorizontalLayout();
+        patientSelect = new ComboBox<>("Patient");
+        patientSelect.setEmptySelectionAllowed(false);
+        patientSelect.setTextInputAllowed(false);
+        patientSelect.setItemCaptionGenerator(Patient::getFullName);
         gLayout = new GridLayout(4, 4);
         title = new TextField();
         text = new TextArea();
@@ -71,6 +81,7 @@ public class DiaryEntryView extends VerticalLayout {
     }
 
     public void createView() {
+        User user = VaadinSession.getCurrent().getAttribute(User.class);
         editButton.addClickListener(clickEvent -> switchEditable());
         saveButton.addClickListener(clickEvent -> saveDiaryEntry());
         newButton.addClickListener(clickEvent -> newComment());
@@ -83,9 +94,16 @@ public class DiaryEntryView extends VerticalLayout {
             time.setValue(diaryEntry.getTime().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
             relativeRead.setValue(diaryEntry.isRelativeRead());
             patientRead.setValue(diaryEntry.isPatientRead());
+            if (user instanceof Relative) {
+                patientSelect.setItems(diaryEntry.getDiary().getCaze().getPatient());
+                patientSelect.setSelectedItem(diaryEntry.getDiary().getCaze().getPatient());
+            }
         } else {
             creator.setValue(VaadinSession.getCurrent().getAttribute(User.class).getFullName());
             time.setValue(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+            if (user instanceof Relative) {
+                patientSelect.setItems(((Relative) user).getPatientList());
+            }
             switchEditable();
         }
         creator.setEnabled(false);
@@ -100,7 +118,9 @@ public class DiaryEntryView extends VerticalLayout {
         if (this.diaryEntry.getId() != null) {
             try {
                 List<Comment> diaryEntryEntities = commentService.getEntitiesByDiaryEntityId(diaryEntry.getId());
-                if (!diaryEntryEntities.isEmpty()) newButton.setCaption("+");
+                if (!diaryEntryEntities.isEmpty()){
+                    newButton.setCaption("+");
+                }
                 for (Comment comment : diaryEntryEntities) {
                     addComment(comment);
                 }
@@ -139,6 +159,7 @@ public class DiaryEntryView extends VerticalLayout {
                     hLayoutPermissions.addComponent(relativeRead);
                 } else if (user instanceof Relative) {
                     hLayoutPermissions.addComponent(patientRead);
+                    hLayoutPermissions.addComponent(patientSelect);
                 }
             }
         } else {
@@ -147,6 +168,7 @@ public class DiaryEntryView extends VerticalLayout {
                 hLayoutPermissions.addComponent(relativeRead);
             } else if (user instanceof Relative && parentDiary instanceof RelativeDiaryOverview) {
                 hLayoutPermissions.addComponent(patientRead);
+                hLayoutPermissions.addComponent(patientSelect);
             }
         }
     }
@@ -160,8 +182,21 @@ public class DiaryEntryView extends VerticalLayout {
         diaryEntry.setEntryText(text.getValue());
         diaryEntry.setCreator(user);
         diaryEntry.setTime(LocalDateTime.now());
-        //TODO: Add new diaryEntry to a diary
-        //diaryEntry.setDiary();
+        Long selectedPatientId = null;
+        if (user instanceof Relative) {
+            selectedPatientId = patientSelect.getSelectedItem().get().getId();
+        }
+        else if (user instanceof Patient) {
+            selectedPatientId = user.getId();
+        }
+        if (selectedPatientId != null) {
+            try {
+                Diary diary = diaryService.getDiaryByPatientEntityId(selectedPatientId);
+                diaryEntry.setDiary(diary);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         if (user instanceof Patient) {
             diaryEntry.setRelativeRead(relativeRead.getValue());
         } else if (user instanceof Relative) {
