@@ -25,6 +25,7 @@
             <property name="hibernate.connection.username" value="sa"/>
             <property name="hibernate.connection.password" value=""/>
             <property name="hibernate.current_session_context_class" value="thread"/>
+            <property name="hibernate.enable_lazy_load_no_trans" value="true"/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
             <property name="connection.pool_size" value="1"/>
             <property name="show_sql" value="true"/>
