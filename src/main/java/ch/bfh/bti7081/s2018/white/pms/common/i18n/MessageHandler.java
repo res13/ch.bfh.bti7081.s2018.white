@@ -36,12 +36,14 @@ public class MessageHandler {
     public static final String PLEASE_LOGIN_AGAIN = getMessage("PLEASE_LOGIN_AGAIN");
     public static final String EDIT = getMessage("EDIT");
     public static final String SAVED = getMessage("SAVED");
+    public static final String NOT_SAVED = getMessage("NOT_SAVED");
     public static final String SAVED_COMMENT = getMessage("SAVED_COMMENT");
     public static final String DELETED = getMessage("DELETED");
     public static final String DELETED_COMMENT = getMessage("DELETED_COMMENT");
     public static final String DELETED_DIARY_ENTRY = getMessage("DELETED_DIARY_ENTRY");
     public static final String NEW_COMMENT = getMessage("NEW_COMMENT");
     public static final String SAVED_DIARY_ENTRY = getMessage("SAVED_DIARY_ENTRY");
+    public static final String NOT_SAVED_DIARY_ENTRY = getMessage("NOT_SAVED_DIARY_ENTRY");
     public static final String RELATIVE_DIARY = getMessage("RELATIVE_DIARY");
     public static final String PATIENT_DIARY = getMessage("PATIENT_DIARY");
     public static final String INVALID_USER_TYPE = getMessage("INVALID_USER_TYPE");

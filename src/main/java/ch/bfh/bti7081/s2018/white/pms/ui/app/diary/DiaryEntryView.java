@@ -18,7 +18,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 public class DiaryEntryView extends VerticalLayout {
 
@@ -148,6 +147,9 @@ public class DiaryEntryView extends VerticalLayout {
     private void switchEditable() {
         title.setEnabled(!title.isEnabled());
         text.setEnabled(!text.isEnabled());
+        patientRead.setEnabled(!patientRead.isEnabled());
+        patientSelect.setEnabled(!patientSelect.isEnabled());
+        
         hLayoutButtons.removeAllComponents();
         hLayoutPermissions.removeAllComponents();
         User user = VaadinSession.getCurrent().getAttribute(User.class);
@@ -177,6 +179,15 @@ public class DiaryEntryView extends VerticalLayout {
         if (this.diaryEntry.getId() == null) {
             this.diaryEntry = new DiaryEntry();
         }
+        if(title.getValue().isEmpty() == true){
+        	Notifier.notify(MessageHandler.NOT_SAVED, MessageHandler.NOT_SAVED_DIARY_ENTRY);
+    		title.focus();
+    		return;
+    	} else if (text.getValue().isEmpty() == true){
+    		Notifier.notify(MessageHandler.NOT_SAVED, MessageHandler.NOT_SAVED_DIARY_ENTRY);
+    		text.focus();
+    		return;
+    	}
         User user = VaadinSession.getCurrent().getAttribute(User.class);
         diaryEntry.setTitle(title.getValue());
         diaryEntry.setEntryText(text.getValue());
@@ -184,7 +195,13 @@ public class DiaryEntryView extends VerticalLayout {
         diaryEntry.setTime(LocalDateTime.now());
         Long selectedPatientId = null;
         if (user instanceof Relative) {
-            selectedPatientId = patientSelect.getSelectedItem().get().getId();
+        	if(patientSelect.getSelectedItem().isPresent() == true){
+        		selectedPatientId = patientSelect.getSelectedItem().get().getId();
+        	} else {
+        		Notifier.notify(MessageHandler.NOT_SAVED, MessageHandler.NOT_SAVED_DIARY_ENTRY);
+        		patientSelect.focus();
+        		return;
+        	}          
         }
         else if (user instanceof Patient) {
             selectedPatientId = user.getId();
@@ -196,19 +213,23 @@ public class DiaryEntryView extends VerticalLayout {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+        } 
         if (user instanceof Patient) {
             diaryEntry.setRelativeRead(relativeRead.getValue());
         } else if (user instanceof Relative) {
             diaryEntry.setPatientRead(patientRead.getValue());
-        }
+        } 
+        
+        
+        
         try {
             this.diaryEntry = diaryEntryService.saveOrUpdateEntity(diaryEntry);
+            System.out.println(diaryEntry.getLastModified());
+            switchEditable();
+            Notifier.notify(MessageHandler.SAVED, MessageHandler.SAVED_DIARY_ENTRY);
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        switchEditable();
-        Notifier.notify(MessageHandler.SAVED, MessageHandler.SAVED_DIARY_ENTRY);
+        }      
     }
 
     private void newComment() {

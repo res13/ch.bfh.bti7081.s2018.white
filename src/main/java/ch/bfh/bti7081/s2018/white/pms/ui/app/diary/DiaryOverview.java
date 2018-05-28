@@ -14,8 +14,6 @@ import java.util.List;
 
 public abstract class DiaryOverview extends PmsSecureView {
 
-    private DiaryEntryServiceImpl diaryEntryService;
-    private DiaryServiceImpl diaryService;
     private Accordion accordion;
     private HashMap<Long, TabSheet.Tab> diaryEntryToTab;
     private GridLayout gridDiary;
@@ -23,8 +21,6 @@ public abstract class DiaryOverview extends PmsSecureView {
 
     @Override
     public void initialize() {
-        diaryEntryService = new DiaryEntryServiceImpl();
-        diaryService = new DiaryServiceImpl();
         accordion = new Accordion();
         diaryEntryToTab = new HashMap<>();
         gridDiary = new GridLayout(2, 1);
