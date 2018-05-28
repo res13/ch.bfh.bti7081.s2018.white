@@ -54,11 +54,11 @@ public class ProfileView extends PmsSecureView {
         birthdayValueLabel.setValue(user.getDateOfBirth().toString());
 
         if (user instanceof Relative) {
-            roleValueLabel.setValue(Relative.class.getSimpleName());
+            roleValueLabel.setValue(MessageHandler.RELATIVE);
         } else if (user instanceof Patient) {
-            roleValueLabel.setValue(Patient.class.getSimpleName());
+            roleValueLabel.setValue(MessageHandler.PATIENT);
         } else if (user instanceof Doctor) {
-            roleValueLabel.setValue(Doctor.class.getSimpleName());
+            roleValueLabel.setValue(MessageHandler.DOCTOR);
         }
 
         layout.addComponent(firstnameLabel, 0, 0);
