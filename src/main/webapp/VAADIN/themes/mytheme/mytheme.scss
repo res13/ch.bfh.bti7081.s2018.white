@@ -39,7 +39,10 @@
 
 
   // Insert your own theme rules here
-  /* .v-margin-left {
+  img.v-icon{
+    height:60%;
+  }
+  .v-margin-left {
      padding-left: 0px;
    }
    .v-margin-right {
@@ -50,7 +53,20 @@
    }
    .v-margin-bottom {
      padding-bottom: 0px;
-   }*/
+   }
+  .v-spacing{
+    height: 0px;
+  }
+  .v-horizontal > .v-expand > .v-slot {
+    position: relative;
+    /*border: 2px solid white;
+    width: 10%;
+    float: right;*/
+  }
+  .btnSetting{
+    float: right;
+  }
+
 }
 
 

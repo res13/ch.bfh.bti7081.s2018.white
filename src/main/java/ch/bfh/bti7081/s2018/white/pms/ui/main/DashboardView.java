@@ -9,6 +9,9 @@ import ch.bfh.bti7081.s2018.white.pms.ui.app.goaltracker.GoaltrackerOverview;
 import ch.bfh.bti7081.s2018.white.pms.ui.profile.ProfileView;
 import ch.bfh.bti7081.s2018.white.pms.ui.settings.SettingsView;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.ClassResource;
+import com.vaadin.server.Resource;
+import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
@@ -79,20 +82,22 @@ public class DashboardView extends PmsSecureView {
         if (user != null) {
             Label lblUsername = new Label(user.getName());
             horizontalMenu.addComponent(lblUsername);
-            horizontalMenu.setComponentAlignment(lblUsername, Alignment.TOP_RIGHT);
+            horizontalMenu.setComponentAlignment(lblUsername, Alignment.MIDDLE_RIGHT);
         } else {
             UI.getCurrent().getNavigator().navigateTo(LoginView.NAME);
             return;
         }
-        horizontalMenu.addComponent(new Button(MessageHandler.LOGOUT, clickEvent -> {
-            VaadinSession.getCurrent().setAttribute(User.class, null);
-            UI.getCurrent().getNavigator().navigateTo(LoginView.NAME);
-        }));
-
-        Button btnSetting = new Button(MessageHandler.SETTINGS, new ButtonListener(SettingsView.NAME));
-
+        Button btnSetting = new Button("", new ButtonListener(SettingsView.NAME));
+        ThemeResource resource = new ThemeResource("images/setting-icon.jpg");
+        Image image = new Image("My Theme Image", resource);
+        btnSetting.setIcon(resource);
+        btnSetting.setStyleName(ValoTheme.BUTTON_LINK);
+        btnSetting.addStyleName("btnSetting");
         horizontalMenu.addComponent(btnSetting);
-        horizontalMenu.setComponentAlignment(btnSetting, Alignment.TOP_RIGHT);
+        horizontalMenu.setComponentAlignment(btnSetting, Alignment.MIDDLE_RIGHT);
+
+
+
 
 
         VerticalLayout verticalLayout = new VerticalLayout();

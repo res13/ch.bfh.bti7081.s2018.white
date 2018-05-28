@@ -15052,3 +15052,35 @@ div.v-layout.v-horizontal.v-widget {
 	width: 19px;
 	overflow: hidden;
 }
+
+.mytheme img.v-icon {
+	height: 60%;
+}
+
+.mytheme .v-margin-left {
+	padding-left: 0px;
+}
+
+.mytheme .v-margin-right {
+	padding-right: 0px;
+}
+
+.mytheme .v-margin-top {
+	padding-top: 0px;
+}
+
+.mytheme .v-margin-bottom {
+	padding-bottom: 0px;
+}
+
+.mytheme .v-spacing {
+	height: 0px;
+}
+
+.mytheme .v-horizontal > .v-expand > .v-slot {
+	position: relative;
+}
+
+.mytheme .btnSetting {
+	float: right;
+}
