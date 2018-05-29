@@ -52,6 +52,7 @@ public class MessageHandler {
     public static final String RELATIVE = getMessage("RELATIVE");
     public static final String DOCTOR = getMessage("DOCTOR");
     public static final String PATIENT = getMessage("PATIENT");
+    public static final String DASHBOARD_NAME = getMessage("DASHBOARD");
 
     private static String getMessage(String messageId) {
         return MESSAGES.getString(messageId);

@@ -45,6 +45,10 @@ public class DiaryEntryView extends VerticalLayout {
     private DiaryOverview parentDiary;
     private HashMap<Long, TabSheet.Tab> commentToTab;
 
+    public DiaryEntryView(DiaryEntry diaryEntry) {
+        this(diaryEntry, null);
+    }
+
     public DiaryEntryView(DiaryEntry diaryEntry, DiaryOverview diaryOverview) {
         initialize();
         this.diaryEntry = diaryEntry;
