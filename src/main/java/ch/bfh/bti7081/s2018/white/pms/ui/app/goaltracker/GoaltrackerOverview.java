@@ -50,10 +50,9 @@ public class GoaltrackerOverview extends PmsSecureView {
         HorizontalLayout toolbar = new HorizontalLayout(filtering, addCustomerBtn);
         grid.setColumns("goal", "goal", "goal");
         HorizontalLayout main = new HorizontalLayout(grid, form);
-        main.setSizeFull();
-        grid.setSizeFull();
         main.setExpandRatio(grid, 1);
         layout.addComponents(toolbar, main);
+        layout.addStyleName("myLayout");
         updateList();
         addComponent(layout);
         form.setVisible(false);
@@ -74,5 +73,6 @@ public class GoaltrackerOverview extends PmsSecureView {
             e.printStackTrace();
         }
         grid.setItems(goals);
+
     }
 }
