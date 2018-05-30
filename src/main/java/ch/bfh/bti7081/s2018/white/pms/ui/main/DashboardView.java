@@ -1,7 +1,12 @@
 package ch.bfh.bti7081.s2018.white.pms.ui.main;
 
 import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
+import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry;
+import ch.bfh.bti7081.s2018.white.pms.common.model.user.Patient;
+import ch.bfh.bti7081.s2018.white.pms.common.model.user.Relative;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
+import ch.bfh.bti7081.s2018.white.pms.services.impl.DiaryEntryServiceImpl;
+import ch.bfh.bti7081.s2018.white.pms.ui.app.diary.DiaryEntryView;
 import ch.bfh.bti7081.s2018.white.pms.ui.app.diary.DiaryOverview;
 import ch.bfh.bti7081.s2018.white.pms.ui.app.diary.PatientDiaryOverview;
 import ch.bfh.bti7081.s2018.white.pms.ui.app.diary.RelativeDiaryOverview;
@@ -9,19 +14,23 @@ import ch.bfh.bti7081.s2018.white.pms.ui.app.goaltracker.GoaltrackerOverview;
 import ch.bfh.bti7081.s2018.white.pms.ui.profile.ProfileView;
 import ch.bfh.bti7081.s2018.white.pms.ui.settings.SettingsView;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class DashboardView extends PmsSecureView {
 
-    public static final String NAME = "pms";
+    public static final String NAME = "Dashboard";
 
     private Panel contentPanel;
 
     private HashMap<String, PmsSecureView> viewsMap;
+
+    private User user;
 
     @Override
     public String getName() {
@@ -35,11 +44,18 @@ public class DashboardView extends PmsSecureView {
 
     @Override
     public void createView() {
+        user = VaadinSession.getCurrent().getAttribute(User.class);
+        if (user == null) {
+            UI.getCurrent().getNavigator().navigateTo(LoginView.NAME);
+            return;
+        }
+
         GoaltrackerOverview goaltrackerOverview = new GoaltrackerOverview();
         DiaryOverview patientDiaryOverview = new PatientDiaryOverview();
         DiaryOverview relativeDiaryOverview = new RelativeDiaryOverview();
         ProfileView profileView = new ProfileView();
         SettingsView settingsView = new SettingsView();
+        viewsMap.put(DashboardView.NAME, this);
         viewsMap.put(goaltrackerOverview.NAME, goaltrackerOverview);
         viewsMap.put(PatientDiaryOverview.NAME, patientDiaryOverview);
         viewsMap.put(RelativeDiaryOverview.NAME, relativeDiaryOverview);
@@ -53,6 +69,8 @@ public class DashboardView extends PmsSecureView {
         VerticalLayout menuContent = new VerticalLayout();
         menuContent.addStyleName(ValoTheme.MENU_ROOT);
 
+        Button btnDashboard = new Button(MessageHandler.DASHBOARD_NAME, new ButtonListener(DashboardView.NAME));
+        btnDashboard.addStyleNames(ValoTheme.BUTTON_LINK, ValoTheme.MENU_ITEM);
         Button btnGoal = new Button(MessageHandler.GOAL_TRACKER_NAME, new ButtonListener(GoaltrackerOverview.NAME));
         btnGoal.addStyleNames(ValoTheme.BUTTON_LINK, ValoTheme.MENU_ITEM);
         Button btnPatientDiary = new Button(MessageHandler.PATIENT_DIARY, new ButtonListener(PatientDiaryOverview.NAME));
@@ -63,37 +81,64 @@ public class DashboardView extends PmsSecureView {
         btnProfile.addStyleNames(ValoTheme.BUTTON_LINK, ValoTheme.MENU_ITEM);
 
         menuContent.addComponent(menuTitle);
+        menuContent.addComponent(btnDashboard);
         menuContent.addComponent(btnGoal);
         menuContent.addComponent(btnPatientDiary);
         menuContent.addComponent(btnRelativeDiary);
         menuContent.addComponent(btnProfile);
 
+        GridLayout gridLayout = new GridLayout(1, 3);
+        gridLayout.addComponent(new Label("Willkommen " + user.getFullName()), 0, 0);
+
+        //FIXME 
+        if (user instanceof Relative) {
+            Relative relative = (Relative) this.user;
+            List<Patient> patientList = relative.getPatientList();
+            gridLayout.addComponent(new Label("Sie sind für " + patientList.size() + " verantwortlich"), 0, 1);
+            VerticalLayout vlRel = new VerticalLayout();
+
+            for (Patient patient : patientList) {
+                vlRel.addComponent(new Label("Übersicht für " + patient.getFullName()));
+                VerticalLayout vlPat = new VerticalLayout();
+
+                //            List<DiaryEntry> patientDiaryEntriesForUser = new DiaryEntryServiceImpl().getRelativeDiaryEntriesForUser(user);
+                HorizontalLayout hlPat = new HorizontalLayout();
+                List<DiaryEntry> patientDiaryEntriesForUser = new DiaryEntryServiceImpl().getPatientDiaryEntriesForUser(patient);
+                for (DiaryEntry diaryEntry : patientDiaryEntriesForUser) {
+                    DiaryEntryView diaryEntryView = new DiaryEntryView(diaryEntry);
+                    hlPat.addComponent(diaryEntryView);
+                }
+                vlPat.addComponent(hlPat);
+
+                //Same for goal
+                vlPat.addComponent(new Label("Add Goal"));
+
+                vlRel.addComponent(vlPat);
+            }
+            gridLayout.addComponent(vlRel, 0, 2);
+        }
+
+
         contentPanel = new Panel();
+        contentPanel.setContent(gridLayout);
         horizontalBody.addComponents(menuContent, contentPanel);
 
         HorizontalLayout horizontalMenu = new HorizontalLayout();
         horizontalMenu.addStyleName(ValoTheme.MENU_ROOT);
         horizontalMenu.setSizeFull();
-        User user = VaadinSession.getCurrent().getAttribute(User.class);
 
-        if (user != null) {
-            Label lblUsername = new Label(user.getName());
-            horizontalMenu.addComponent(lblUsername);
-            horizontalMenu.setComponentAlignment(lblUsername, Alignment.TOP_RIGHT);
-        } else {
-            UI.getCurrent().getNavigator().navigateTo(LoginView.NAME);
-            return;
-        }
-        horizontalMenu.addComponent(new Button(MessageHandler.LOGOUT, clickEvent -> {
-            VaadinSession.getCurrent().setAttribute(User.class, null);
-            UI.getCurrent().getNavigator().navigateTo(LoginView.NAME);
-        }));
+        Label lblUsername = new Label(user.getFullName());
+        horizontalMenu.addComponent(lblUsername);
+        horizontalMenu.setComponentAlignment(lblUsername, Alignment.MIDDLE_RIGHT);
 
-        Button btnSetting = new Button(MessageHandler.SETTINGS, new ButtonListener(SettingsView.NAME));
-
+        Button btnSetting = new Button("", new ButtonListener(SettingsView.NAME));
+        ThemeResource resource = new ThemeResource("images/setting-icon.jpg");
+        Image image = new Image("My Theme Image", resource);
+        btnSetting.setIcon(resource);
+        btnSetting.setStyleName(ValoTheme.BUTTON_LINK);
+        btnSetting.addStyleName("btnSetting");
         horizontalMenu.addComponent(btnSetting);
-        horizontalMenu.setComponentAlignment(btnSetting, Alignment.TOP_RIGHT);
-
+        horizontalMenu.setComponentAlignment(btnSetting, Alignment.MIDDLE_RIGHT);
 
         VerticalLayout verticalLayout = new VerticalLayout();
         verticalLayout.addComponents(horizontalMenu, horizontalBody);

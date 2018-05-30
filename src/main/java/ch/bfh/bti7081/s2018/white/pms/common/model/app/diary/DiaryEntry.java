@@ -36,8 +36,8 @@ public class DiaryEntry extends PmsEntity {
     }
 
     @PrePersist
-    @PreUpdate
-    private void onInsert() {
+    protected void onInsert() {
+        super.onInsert();
         if (creator != null) {
             if (creator instanceof Relative) {
                 relativeRead = true;

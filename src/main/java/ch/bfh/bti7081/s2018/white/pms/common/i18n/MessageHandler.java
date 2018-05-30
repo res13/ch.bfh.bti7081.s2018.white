@@ -55,6 +55,8 @@ public class MessageHandler {
     public static final String TARGET = getMessage("TARGET");
     public static final String STARTDATE = getMessage("STARTDATE");
     public static final String ENDDATE = getMessage("ENDDATE");
+    public static final String DASHBOARD_NAME = getMessage("DASHBOARD");
+	public static final String NOT_SAVED_COMMENT = getMessage("NOT_SAVED_COMMENT");
 
     private static String getMessage(String messageId) {
         return MESSAGES.getString(messageId);

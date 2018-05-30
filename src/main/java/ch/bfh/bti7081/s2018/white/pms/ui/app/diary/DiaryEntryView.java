@@ -13,6 +13,7 @@ import ch.bfh.bti7081.s2018.white.pms.services.impl.DiaryServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.Notifier;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
+import com.vaadin.ui.TabSheet.Tab;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -43,7 +44,11 @@ public class DiaryEntryView extends VerticalLayout {
     private Button newButton;
     private Button deleteButton;
     private DiaryOverview parentDiary;
-    private HashMap<Long, TabSheet.Tab> commentToTab;
+	private Tab tab;
+
+    public DiaryEntryView(DiaryEntry diaryEntry) {
+        this(diaryEntry, null);
+    }
 
     public DiaryEntryView(DiaryEntry diaryEntry, DiaryOverview diaryOverview) {
         initialize();
@@ -76,7 +81,6 @@ public class DiaryEntryView extends VerticalLayout {
         saveButton = new Button(MessageHandler.SAVE);
         newButton = new Button(MessageHandler.NEW_COMMENT);
         deleteButton = new Button(MessageHandler.DELETE);
-        commentToTab = new HashMap<>();
     }
 
     public void createView() {
@@ -138,7 +142,9 @@ public class DiaryEntryView extends VerticalLayout {
         try {
             diaryEntryService.deleteEntity(diaryEntry);
             Notifier.notify(MessageHandler.DELETED, MessageHandler.DELETED_DIARY_ENTRY);
-            parentDiary.deleteDiaryEntry(diaryEntry.getId());
+            if (tab != null) {
+            	parentDiary.deleteDiaryEntry(tab);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -219,9 +225,7 @@ public class DiaryEntryView extends VerticalLayout {
         } else if (user instanceof Relative) {
             diaryEntry.setPatientRead(patientRead.getValue());
         } 
-        
-        
-        
+          
         try {
             this.diaryEntry = diaryEntryService.saveOrUpdateEntity(diaryEntry);
             System.out.println(diaryEntry.getLastModified());
@@ -241,20 +245,20 @@ public class DiaryEntryView extends VerticalLayout {
     }
 
     private TabSheet.Tab addComment(Comment comment) {
-        TabSheet.Tab newCommentTab = accordionComments.addTab(new CommentView(comment, this), "comment");
-        if (comment.getId() != null) {
-            commentToTab.put(comment.getId(), newCommentTab);
-        }
+    	CommentView view = new CommentView(comment, this);
+        TabSheet.Tab newCommentTab = accordionComments.addTab(view, "comment");
+        view.setTab(newCommentTab);
         return newCommentTab;
     }
 
-    public void deleteComment(long CommentId) {
-        if (commentToTab.containsKey(CommentId)) {
-            accordionComments.removeTab(commentToTab.get(CommentId));
-            commentToTab.remove(CommentId);
+    public void deleteComment(TabSheet.Tab tab) {
+            accordionComments.removeTab(tab);
             if (this.accordionComments.getComponentCount() == 0) {
                 newButton.setCaption("New comment");
             }
-        }
     }
+
+	public void setTab(Tab newDiaryEntryTab) {
+		this.tab = newDiaryEntryTab;
+	}
 }
