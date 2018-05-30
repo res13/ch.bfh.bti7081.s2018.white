@@ -15,14 +15,12 @@ import java.util.List;
 public abstract class DiaryOverview extends PmsSecureView {
 
     private Accordion accordion;
-    private HashMap<Long, TabSheet.Tab> diaryEntryToTab;
     private GridLayout gridDiary;
     private Button newButton;
 
     @Override
     public void initialize() {
         accordion = new Accordion();
-        diaryEntryToTab = new HashMap<>();
         gridDiary = new GridLayout(2, 1);
         newButton = new Button("+");
     }
@@ -49,11 +47,8 @@ public abstract class DiaryOverview extends PmsSecureView {
         accordion.setSelectedTab(newDiaryEntryTab);
     }
 
-    public void deleteDiaryEntry(long diaryEntryId) {
-        if (diaryEntryToTab.containsKey(diaryEntryId)) {
-            accordion.removeTab(diaryEntryToTab.get(diaryEntryId));
-            diaryEntryToTab.remove(diaryEntryId);
-        }
+    public void deleteDiaryEntry(TabSheet.Tab tab) {
+        accordion.removeTab(tab);
     }
 
     private TabSheet.Tab addDiary(DiaryEntry diaryEntry) {
@@ -61,9 +56,11 @@ public abstract class DiaryOverview extends PmsSecureView {
         if (title == null) {
             title = "New";
         }
-        TabSheet.Tab newDiaryEntryTab = accordion.addTab(new DiaryEntryView(diaryEntry, this), title);
-        diaryEntryToTab.put(diaryEntry.getId(), newDiaryEntryTab);
+        DiaryEntryView view = new DiaryEntryView(diaryEntry, this);
+        TabSheet.Tab newDiaryEntryTab = accordion.addTab(view, title);
+        view.setTab(newDiaryEntryTab);
         return newDiaryEntryTab;
     }
+
 
 }

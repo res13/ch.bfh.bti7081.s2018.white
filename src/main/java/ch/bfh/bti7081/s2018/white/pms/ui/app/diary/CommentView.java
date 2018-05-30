@@ -8,6 +8,7 @@ import ch.bfh.bti7081.s2018.white.pms.ui.common.Notifier;
 import com.vaadin.navigator.View;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
+import com.vaadin.ui.TabSheet.Tab;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -27,6 +28,7 @@ public class CommentView extends VerticalLayout implements View {
     private Button saveButton = new Button(MessageHandler.SAVE);
     private Button deleteButton = new Button(MessageHandler.DELETE);
     private DiaryEntryView parentView;
+	private Tab tab;
 
 
     public CommentView(Comment comment, DiaryEntryView diaryEntryView) {
@@ -84,6 +86,12 @@ public class CommentView extends VerticalLayout implements View {
         comment.setCreator(VaadinSession.getCurrent().getAttribute(User.class));
         comment.setTime(LocalDateTime.now());
 
+    	if (text.getValue().isEmpty() == true){
+    		Notifier.notify(MessageHandler.NOT_SAVED, MessageHandler.NOT_SAVED_COMMENT);
+    		text.focus();
+    		return;
+    	}
+        
         try {
             comment = commentService.saveOrUpdateEntity(comment);
         } catch (Exception e) {
@@ -101,6 +109,12 @@ public class CommentView extends VerticalLayout implements View {
         }
 
         Notifier.notify(MessageHandler.DELETED, MessageHandler.DELETED_COMMENT);
-        parentView.deleteComment(comment.getId());
+        if (tab != null) {
+        	parentView.deleteComment(tab);
+        }
     }
+    
+	public void setTab(Tab newCommentTab) {
+		this.tab = newCommentTab;
+	}
 }
