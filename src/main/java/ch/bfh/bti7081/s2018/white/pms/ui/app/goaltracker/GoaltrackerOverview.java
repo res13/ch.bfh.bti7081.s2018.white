@@ -73,6 +73,6 @@ public class GoaltrackerOverview extends PmsSecureView {
             e.printStackTrace();
         }
         grid.setItems(goals);
-
+ 
     }
 }
