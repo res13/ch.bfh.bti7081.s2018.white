@@ -2,11 +2,15 @@ package ch.bfh.bti7081.s2018.white.pms.ui.main;
 
 import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry;
+import ch.bfh.bti7081.s2018.white.pms.common.model.app.goaltracker.Goal;
+import ch.bfh.bti7081.s2018.white.pms.common.model.app.goaltracker.GoalState;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.Patient;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.Relative;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.DiaryEntryServiceImpl;
+import ch.bfh.bti7081.s2018.white.pms.services.impl.GoalServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.ui.app.diary.PatientDiaryOverview;
 import ch.bfh.bti7081.s2018.white.pms.ui.app.diary.RelativeDiaryOverview;
+import ch.bfh.bti7081.s2018.white.pms.ui.app.goaltracker.GoaltrackerOverview;
 import com.vaadin.ui.*;
 
 import java.util.List;
@@ -31,24 +35,34 @@ public class RelativeDashboardView {
             vlRel.addComponent(new Label(MessageHandler.OVERVIEW_FOR + patient.getFullName()));
             VerticalLayout vlPat = new VerticalLayout();
 
-            HorizontalLayout hlPat = new HorizontalLayout();
+            VerticalLayout hlDiaryPatient = new VerticalLayout();
             List<DiaryEntry> relativeDiaryEntriesForUser = new DiaryEntryServiceImpl().getRelativeDiaryEntriesForUser(relative);
 
             relativeDiaryEntriesForUser.stream().limit(3).forEach(diaryEntry -> {
                 Button button = new Button(diaryEntry.getTitle() + " - " + diaryEntry.getCreator().getFullName());
                 button.addClickListener(clickEvent ->   UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + RelativeDiaryOverview.NAME));
-                hlPat.addComponent(button);
+                hlDiaryPatient.addComponent(button);
             });
             List<DiaryEntry> patientDiaryEntriesForUser = new DiaryEntryServiceImpl().getPatientDiaryEntriesForUser(patient);
             patientDiaryEntriesForUser.stream().limit(3).forEach(diaryEntry -> {
                 Button button = new Button(diaryEntry.getTitle() + " - " + diaryEntry.getCreator().getFullName());
                 button.addClickListener(clickEvent ->   UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + PatientDiaryOverview.NAME));
-                hlPat.addComponent(button);
+                hlDiaryPatient.addComponent(button);
             });
-            vlPat.addComponent(hlPat);
+            vlPat.addComponent(hlDiaryPatient);
 
-            //Same for goal
-            vlPat.addComponent(new Label("Add Goal"));
+            VerticalLayout hlGoalPatient = new VerticalLayout();
+            //FIXME returns zero results
+            List<Goal> goalEntriesForUser = new GoalServiceImpl().getRelativeGoalEntriesForUser(relative);
+            goalEntriesForUser.addAll(new GoalServiceImpl().getPatientGoalEntriesForUser(patient));
+
+            goalEntriesForUser.stream().limit(5).filter(goal -> goal.getState() == GoalState.OPEN).forEach(goal -> {
+                Button button = new Button(goal.getGoal() + " - " + goal.getCreator().getFullName());
+                button.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" +GoaltrackerOverview.NAME));
+                hlGoalPatient.addComponent(button);
+            });
+
+            vlPat.addComponent(hlGoalPatient);
 
             vlRel.addComponent(vlPat);
         }
