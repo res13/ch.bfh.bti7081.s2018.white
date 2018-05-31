@@ -48,7 +48,7 @@ public class GoaltrackerOverview extends PmsSecureView {
             form.setGoal(new Goal());
         });
         HorizontalLayout toolbar = new HorizontalLayout(filtering, addCustomerBtn);
-        grid.setColumns("goal", "goal", "goal");
+        grid.setColumns("goal");
         HorizontalLayout main = new HorizontalLayout(grid, form);
         main.setExpandRatio(grid, 1);
         layout.addComponents(toolbar, main);
