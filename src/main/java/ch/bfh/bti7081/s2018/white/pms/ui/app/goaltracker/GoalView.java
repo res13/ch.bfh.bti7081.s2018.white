@@ -6,22 +6,15 @@ import ch.bfh.bti7081.s2018.white.pms.common.model.app.goaltracker.GoalState;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.Patient;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.Relative;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
-import ch.bfh.bti7081.s2018.white.pms.services.GoalService;
-import ch.bfh.bti7081.s2018.white.pms.services.impl.CommentServiceImpl;
-import ch.bfh.bti7081.s2018.white.pms.services.impl.DiaryEntryServiceImpl;
-import ch.bfh.bti7081.s2018.white.pms.services.impl.DiaryServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.GoalServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.RelativeServiceImpl;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import com.vaadin.data.Binder;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+
+import java.util.List;
 
 public class GoalView extends VerticalLayout {
 
@@ -66,10 +59,7 @@ public class GoalView extends VerticalLayout {
         save = new Button(MessageHandler.SAVE);
         delete = new Button(MessageHandler.DELETE);
         binder = new Binder<>(Goal.class);
-        patients = null; //relativeServiceImpl.getListOfRelativesAssociatedPatients(user);
-        patientDropdown.setItems(patients);
-        
-        //patientTargetDropdown = goa
+        patientDropdown = new ComboBox();
     }
     
     private void createView() {
@@ -81,9 +71,12 @@ public class GoalView extends VerticalLayout {
          save.setClickShortcut(ShortcutAction.KeyCode.ENTER);
          save.addClickListener(e -> this.save());
          delete.addClickListener(e -> this.delete());
-         
-         
-         
+
+         if(user instanceof Relative){
+             Relative relative = (Relative) this.user;
+             patients = relative.getPatientList();
+         }
+        patientDropdown.setItems(patients);
     }
 
     public void setGoal(Goal goal) {

@@ -46,10 +46,6 @@ public class DiaryEntryView extends VerticalLayout {
     private DiaryOverview parentDiary;
 	private Tab tab;
 
-    public DiaryEntryView(DiaryEntry diaryEntry) {
-        this(diaryEntry, null);
-    }
-
     public DiaryEntryView(DiaryEntry diaryEntry, DiaryOverview diaryOverview) {
         initialize();
         this.diaryEntry = diaryEntry;
