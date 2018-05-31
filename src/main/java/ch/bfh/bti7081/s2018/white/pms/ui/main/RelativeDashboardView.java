@@ -62,11 +62,15 @@ public class RelativeDashboardView {
                 hlGoalPatient.addComponent(button);
             });
 
+
             vlPat.addComponent(hlGoalPatient);
 
             vlRel.addComponent(vlPat);
+
         }
         gridLayout.addComponent(vlRel, 0, 2);
+        gridLayout.addStyleName("myGrid");
+
         return gridLayout;
     }
 }

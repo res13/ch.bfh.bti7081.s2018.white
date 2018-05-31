@@ -81,7 +81,7 @@ public class DashboardView extends PmsSecureView {
         menuContent.addComponent(btnPatientDiary);
         menuContent.addComponent(btnRelativeDiary);
         menuContent.addComponent(btnProfile);
-
+        menuContent.addStyleName("myMenu");
         GridLayout gridLayout = null;
         if (user instanceof Relative) {
             gridLayout = new RelativeDashboardView((Relative) this.user).getGridLayout();

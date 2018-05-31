@@ -28,6 +28,10 @@ public class LoginView extends VerticalLayout implements View {
         addComponent(panel);
 
         FormLayout content = new FormLayout();
+        panel.addStyleName("myLogin");
+        Label welcome = new Label("Willkommen");
+        welcome.addStyleName("myLabel");
+        content.addComponent(welcome);
         TextField emailField = new TextField(MessageHandler.EMAIL);
         content.addComponent(emailField);
         PasswordField passwordField = new PasswordField(MessageHandler.PASSWORD);
