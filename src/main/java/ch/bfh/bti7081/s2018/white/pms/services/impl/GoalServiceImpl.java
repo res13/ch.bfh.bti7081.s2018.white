@@ -24,21 +24,7 @@ public class GoalServiceImpl extends BaseServiceImpl<Goal> implements GoalServic
         super(Goal.class);
     }
 
-    public List<Goal> getPatientGoalEntriesForUser(User user) {
-        return getGoalEntriesForUser(user)
-                .stream()
-                .filter(goalEntry1 -> goalEntry1.getCreator() instanceof Patient)
-                .collect(Collectors.toList());
-    }
-
-    public List<Goal> getRelativeGoalEntriesForUser(User user) {
-        return getGoalEntriesForUser(user)
-                .stream()
-                .filter(goalEntry1 -> goalEntry1.getCreator() instanceof Relative)
-                .collect(Collectors.toList());
-    }
-
-    private List<Goal> getGoalEntriesForUser(User user) {
+    public List<Goal> getGoalEntriesForUser(User user) {
         return new JpaUtility().execute(
                 (em) -> {
                     CriteriaBuilder cb = em.getCriteriaBuilder();

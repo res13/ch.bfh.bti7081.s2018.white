@@ -2,9 +2,11 @@ package ch.bfh.bti7081.s2018.white.pms.ui.app.goaltracker;
 
 import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.goaltracker.Goal;
+import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.GoalServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.ui.main.PmsSecureView;
 import com.vaadin.server.FontAwesome;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.ValueChangeMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
@@ -66,9 +68,10 @@ public class GoaltrackerOverview extends PmsSecureView {
     }
 
     public void updateList() {
+        User user = (User) VaadinSession.getCurrent().getAttribute(User.class.getName());
         List<Goal> goals = null;
         try {
-            goals = goalService.getAllEntities();
+            goals = goalService.getGoalEntriesForUser(user);
         } catch (Exception e) {
             e.printStackTrace();
         }

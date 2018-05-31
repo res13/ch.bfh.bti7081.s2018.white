@@ -61,6 +61,9 @@ public class MessageHandler {
     public static final String WELCOME = getMessage("WELCOME");
     public static final String OVERVIEW_FOR = getMessage("OVERVIEW_FOR");
     public static final String COUNT_PATIENT  = getMessage("COUNT_PATIENT");
+    public static final String MY_DIARY_ENTRIES = getMessage("MY_DIARY_ENTRIES");;
+    public static final String PATIENTS_DIARY_ENTRIES = getMessage("PATIENTS_DIARY_ENTRIES");;
+    public static final String PATIENTS_GOALS = getMessage("PATIENTS_GOALS");;
 
     private static String getMessage(String messageId) {
         return MESSAGES.getString(messageId);
