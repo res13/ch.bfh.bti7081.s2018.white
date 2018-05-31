@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2018.white.pms.ui.main;
 
+import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.Patient;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.Relative;
@@ -20,14 +21,14 @@ public class RelativeDashboardView {
 
     public GridLayout getGridLayout(){
         GridLayout gridLayout = new GridLayout(1, 3);
-        gridLayout.addComponent(new Label("Willkommen " + relative.getFullName()), 0, 0);
+        gridLayout.addComponent(new Label(MessageHandler.WELCOME + relative.getFullName()), 0, 0);
 
         List<Patient> patientList = relative.getPatientList();
-        gridLayout.addComponent(new Label("Sie sind für " + patientList.size() + " verantwortlich"), 0, 1);
+        gridLayout.addComponent(new Label(MessageHandler.COUNT_PATIENT + patientList.size()), 0, 1);
         VerticalLayout vlRel = new VerticalLayout();
 
         for (Patient patient : patientList) {
-            vlRel.addComponent(new Label("Übersicht für " + patient.getFullName()));
+            vlRel.addComponent(new Label(MessageHandler.OVERVIEW_FOR + patient.getFullName()));
             VerticalLayout vlPat = new VerticalLayout();
 
             HorizontalLayout hlPat = new HorizontalLayout();

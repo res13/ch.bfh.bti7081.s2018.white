@@ -41,6 +41,7 @@ public class MessageHandler {
     public static final String DELETED = getMessage("DELETED");
     public static final String DELETED_COMMENT = getMessage("DELETED_COMMENT");
     public static final String DELETED_DIARY_ENTRY = getMessage("DELETED_DIARY_ENTRY");
+    public static final String NEW_DIARY_ENTRY = getMessage("NEW_DIARY_ENTRY");
     public static final String NEW_COMMENT = getMessage("NEW_COMMENT");
     public static final String SAVED_DIARY_ENTRY = getMessage("SAVED_DIARY_ENTRY");
     public static final String NOT_SAVED_DIARY_ENTRY = getMessage("NOT_SAVED_DIARY_ENTRY");
@@ -57,6 +58,9 @@ public class MessageHandler {
     public static final String ENDDATE = getMessage("ENDDATE");
     public static final String DASHBOARD_NAME = getMessage("DASHBOARD");
 	public static final String NOT_SAVED_COMMENT = getMessage("NOT_SAVED_COMMENT");
+    public static final String WELCOME = getMessage("WELCOME");
+    public static final String OVERVIEW_FOR = getMessage("OVERVIEW_FOR");
+    public static final String COUNT_PATIENT  = getMessage("COUNT_PATIENT");
 
     private static String getMessage(String messageId) {
         return MESSAGES.getString(messageId);
