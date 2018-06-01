@@ -224,7 +224,7 @@ public class DiaryEntryView extends VerticalLayout {
           
         try {
             this.diaryEntry = diaryEntryService.saveOrUpdateEntity(diaryEntry);
-            System.out.println(diaryEntry.getLastModified());
+            tab.setCaption(diaryEntry.getTitle());
             switchEditable();
             Notifier.notify(MessageHandler.SAVED, MessageHandler.SAVED_DIARY_ENTRY);
         } catch (Exception e) {
