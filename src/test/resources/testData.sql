@@ -683,7 +683,7 @@ values (7,
         'test goal for patient2, created by doctor2, state = open',
         0,
         2,
-        3);
+        4);
 
 
 insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
@@ -694,7 +694,7 @@ values (8,
         'test goal for patient2, created by relative2, state = open',
         0,
         7,
-        3);
+        4);
 
 
 insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
@@ -705,7 +705,7 @@ values (9,
         'test goal for patient2, created by doctor2, state = successful',
         1,
         2,
-        3);
+        4);
 
 
 insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
@@ -716,7 +716,7 @@ values (10,
         'test goal for patient2, created by relative2, state = successful',
         1,
         7,
-        3);
+        4);
 
 
 insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
@@ -727,7 +727,7 @@ values (11,
         'test goal for patient2, created by doctor2, state = missed',
         2,
         2,
-        3);
+        4);
 
 
 insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
@@ -738,7 +738,7 @@ values (12,
         'test goal for patient2, created by relative2, state = missed',
         2,
         7,
-        3);
+        4);
 
 
 insert into Comment (Id, Lastmodified, time, Commenttext, Creator_id, Diaryentry_id)
