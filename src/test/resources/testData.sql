@@ -660,6 +660,17 @@ values (18,
         4,
         6);
 
+insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
+values (19,
+        Current_timestamp(),
+        'Test diary entry from relative4. Patient can read, Relative can read',
+        true,
+        true,
+        Current_timestamp(),
+        'Test diary entry from relative4',
+        9,
+        6);
+
 
 insert into App (Id, Lastmodified, Name, Caze_id)
 values (3,
