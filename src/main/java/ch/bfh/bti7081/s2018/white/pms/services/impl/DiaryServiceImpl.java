@@ -2,8 +2,11 @@ package ch.bfh.bti7081.s2018.white.pms.services.impl;
 
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.Comment;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.Diary;
+import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.Diary_;
 import ch.bfh.bti7081.s2018.white.pms.common.model.caze.Caze;
+import ch.bfh.bti7081.s2018.white.pms.common.model.caze.Caze_;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.Patient;
+import ch.bfh.bti7081.s2018.white.pms.common.model.user.Patient_;
 import ch.bfh.bti7081.s2018.white.pms.persistence.JpaUtility;
 import ch.bfh.bti7081.s2018.white.pms.services.DiaryService;
 
@@ -26,9 +29,9 @@ public class DiaryServiceImpl extends AppServiceImpl<Diary> implements DiaryServ
                     CriteriaBuilder cb = em.getCriteriaBuilder();
                     CriteriaQuery<Diary> cq = cb.createQuery(clazz);
                     Root<Diary> diary = cq.from(clazz);
-                    Join<Diary, Caze> cazeToDiaryJoin = diary.join("caze");
-                    Join<Caze, Patient> patientToCazeJoin = cazeToDiaryJoin.join("patient");
-                    CriteriaQuery<Diary> where = cq.where(cb.equal(patientToCazeJoin.get("id"), id));
+                    Join<Diary, Caze> cazeToDiaryJoin = diary.join(Diary_.caze);
+                    Join<Caze, Patient> patientToCazeJoin = cazeToDiaryJoin.join(Caze_.patient);
+                    CriteriaQuery<Diary> where = cq.where(cb.equal(patientToCazeJoin.get(Patient_.id), id));
                     TypedQuery<Diary> allQuery = em.createQuery(where);
                     return allQuery.getSingleResult();
                 });
