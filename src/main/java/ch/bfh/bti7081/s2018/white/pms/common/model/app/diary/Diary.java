@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 public class Diary extends App {
 
-    @OneToMany(mappedBy = "diary", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "diary", cascade = CascadeType.REMOVE)
     private List<DiaryEntry> entryList;
 
     public Diary() {
