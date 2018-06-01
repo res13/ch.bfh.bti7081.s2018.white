@@ -103,8 +103,10 @@ public class DashboardView extends PmsSecureView {
             VaadinSession.getCurrent().setAttribute(User.class, null);
             UI.getCurrent().getNavigator().navigateTo(LoginView.NAME);
         });
-        horizontalMenu.addComponent(btnLogout);
-        horizontalMenu.setComponentAlignment(btnLogout, Alignment.MIDDLE_RIGHT);
+        //horizontalMenu.addComponent(btnLogout);
+        btnLogout.addStyleNames(ValoTheme.BUTTON_LINK, ValoTheme.MENU_ITEM);
+        menuContent.addComponent(btnLogout);
+        //horizontalMenu.setComponentAlignment(btnLogout, Alignment.MIDDLE_RIGHT);
 
         Button btnSetting = new Button("", new ButtonListener(SettingsView.NAME));
         ThemeResource resource = new ThemeResource("images/setting-icon.jpg");
