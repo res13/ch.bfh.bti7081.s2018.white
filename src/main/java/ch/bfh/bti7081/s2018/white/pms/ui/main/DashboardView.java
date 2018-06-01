@@ -1,12 +1,8 @@
 package ch.bfh.bti7081.s2018.white.pms.ui.main;
 
 import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
-import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry;
-import ch.bfh.bti7081.s2018.white.pms.common.model.user.Patient;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.Relative;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
-import ch.bfh.bti7081.s2018.white.pms.services.impl.DiaryEntryServiceImpl;
-import ch.bfh.bti7081.s2018.white.pms.ui.app.diary.DiaryEntryView;
 import ch.bfh.bti7081.s2018.white.pms.ui.app.diary.DiaryOverview;
 import ch.bfh.bti7081.s2018.white.pms.ui.app.diary.PatientDiaryOverview;
 import ch.bfh.bti7081.s2018.white.pms.ui.app.diary.RelativeDiaryOverview;
@@ -20,7 +16,6 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class DashboardView extends PmsSecureView {
 
@@ -86,38 +81,12 @@ public class DashboardView extends PmsSecureView {
         menuContent.addComponent(btnPatientDiary);
         menuContent.addComponent(btnRelativeDiary);
         menuContent.addComponent(btnProfile);
-
-        GridLayout gridLayout = new GridLayout(1, 3);
-        gridLayout.addComponent(new Label("Willkommen " + user.getFullName()), 0, 0);
-
-        //FIXME 
+        menuContent.addStyleName("myMenu");
+        GridLayout gridLayout = null;
         if (user instanceof Relative) {
-            Relative relative = (Relative) this.user;
-            List<Patient> patientList = relative.getPatientList();
-            gridLayout.addComponent(new Label("Sie sind für " + patientList.size() + " verantwortlich"), 0, 1);
-            VerticalLayout vlRel = new VerticalLayout();
-
-            for (Patient patient : patientList) {
-                vlRel.addComponent(new Label("Übersicht für " + patient.getFullName()));
-                VerticalLayout vlPat = new VerticalLayout();
-
-                //            List<DiaryEntry> patientDiaryEntriesForUser = new DiaryEntryServiceImpl().getRelativeDiaryEntriesForUser(user);
-                HorizontalLayout hlPat = new HorizontalLayout();
-                List<DiaryEntry> patientDiaryEntriesForUser = new DiaryEntryServiceImpl().getPatientDiaryEntriesForUser(patient);
-                for (DiaryEntry diaryEntry : patientDiaryEntriesForUser) {
-                    DiaryEntryView diaryEntryView = new DiaryEntryView(diaryEntry);
-                    hlPat.addComponent(diaryEntryView);
-                }
-                vlPat.addComponent(hlPat);
-
-                //Same for goal
-                vlPat.addComponent(new Label("Add Goal"));
-
-                vlRel.addComponent(vlPat);
-            }
-            gridLayout.addComponent(vlRel, 0, 2);
+            gridLayout = new RelativeDashboardView((Relative) this.user).getGridLayout();
         }
-
+        //if needed ad patient and doctor view
 
         contentPanel = new Panel();
         contentPanel.setContent(gridLayout);
@@ -130,10 +99,17 @@ public class DashboardView extends PmsSecureView {
         Label lblUsername = new Label(user.getFullName());
         horizontalMenu.addComponent(lblUsername);
         horizontalMenu.setComponentAlignment(lblUsername, Alignment.MIDDLE_RIGHT);
+        Button btnLogout = new Button(MessageHandler.LOGOUT, clickEvent -> {
+            VaadinSession.getCurrent().setAttribute(User.class, null);
+            UI.getCurrent().getNavigator().navigateTo(LoginView.NAME);
+        });
+        //horizontalMenu.addComponent(btnLogout);
+        btnLogout.addStyleNames(ValoTheme.BUTTON_LINK, ValoTheme.MENU_ITEM);
+        menuContent.addComponent(btnLogout);
+        //horizontalMenu.setComponentAlignment(btnLogout, Alignment.MIDDLE_RIGHT);
 
         Button btnSetting = new Button("", new ButtonListener(SettingsView.NAME));
         ThemeResource resource = new ThemeResource("images/setting-icon.jpg");
-        Image image = new Image("My Theme Image", resource);
         btnSetting.setIcon(resource);
         btnSetting.setStyleName(ValoTheme.BUTTON_LINK);
         btnSetting.addStyleName("btnSetting");
