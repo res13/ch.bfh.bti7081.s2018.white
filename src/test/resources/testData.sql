@@ -354,6 +354,22 @@ insert into Patient_doctor (Doctor_id, Patient_id)
 values (3,
         12);
 
+insert into Patient_relative (Relative_id, Patient_id)
+values (9,
+        13);
+
+insert into Patient_relative (Relative_id, Patient_id)
+values (9,
+        14);
+
+insert into Patient_doctor (Doctor_id, Patient_id)
+values (4,
+        13);
+
+insert into Patient_doctor (Doctor_id, Patient_id)
+values (4,
+        14);
+
 
 insert into Caze (Id, Lastmodified, Fromdate, Note, Todate, Patient_id)
 values (1,
@@ -372,6 +388,22 @@ values (2,
         Parsedatetime('31.01.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
         12);
 
+insert into Caze (Id, Lastmodified, Fromdate, Note, Todate, Patient_id)
+values (3,
+        Current_timestamp(),
+        Parsedatetime('01.01.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
+        'Test case of patient3',
+        Parsedatetime('31.01.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
+        13);
+
+
+insert into Caze (Id, Lastmodified, Fromdate, Note, Todate, Patient_id)
+values (4,
+        Current_timestamp(),
+        Parsedatetime('01.01.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
+        'Test case of patient4',
+        Parsedatetime('31.01.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
+        14);
 
 insert into App (Id, Lastmodified, Name, Caze_id)
 values (1,
@@ -393,6 +425,26 @@ values (2,
 
 insert into Diary (Id)
 values (2);
+
+insert into App (Id, Lastmodified, Name, Caze_id)
+values (5,
+        Current_timestamp(),
+        'diary app for patient 3',
+        3);
+
+
+insert into Diary (Id)
+values (5);
+
+insert into App (Id, Lastmodified, Name, Caze_id)
+values (6,
+        Current_timestamp(),
+        'diary app for patient 4',
+        4);
+
+
+insert into Diary (Id)
+values (6);
 
 
 insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
@@ -586,6 +638,28 @@ values (16,
         2,
         2);
 
+insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
+values (17,
+        Current_timestamp(),
+        'Test diary entry from doctor4. Patient can not read, Relative can read',
+        true,
+        true,
+        Current_timestamp(),
+        'Test diary entry from doctor4',
+        4,
+        5);
+
+insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
+values (18,
+        Current_timestamp(),
+        'Test diary entry from doctor4. Patient can read, Relative can read',
+        true,
+        true,
+        Current_timestamp(),
+        'Test diary entry from doctor4',
+        4,
+        6);
+
 
 insert into App (Id, Lastmodified, Name, Caze_id)
 values (3,
@@ -607,6 +681,26 @@ values (4,
 
 insert into Goaltracker (Id)
 values (4);
+
+insert into App (Id, Lastmodified, Name, Caze_id)
+values (7,
+        Current_timestamp(),
+        'goaltracker app for patient 3',
+        3);
+
+
+insert into Goaltracker (Id)
+values (7);
+
+insert into App (Id, Lastmodified, Name, Caze_id)
+values (8,
+        Current_timestamp(),
+        'goaltracker app for patient 4',
+        4);
+
+
+insert into Goaltracker (Id)
+values (8);
 
 
 insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
@@ -741,6 +835,27 @@ values (12,
         4);
 
 
+insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
+values (13,
+        Current_timestamp(),
+        Current_timestamp(),
+        Parsedatetime('31.06.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
+        'test goal for patient3, created by doctor4, state = missed',
+        2,
+        4,
+        7);
+
+insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
+values (14,
+        Current_timestamp(),
+        Current_timestamp(),
+        Parsedatetime('31.06.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
+        'test goal for patient4, created by doctor4, state = missed',
+        2,
+        4,
+        8);
+
+
 insert into Comment (Id, Lastmodified, time, Commenttext, Creator_id, Diaryentry_id)
 values (1,
         Current_timestamp(),
@@ -765,4 +880,6 @@ values (3,
         'another comment to diaryentry number 11 from doctor 3 Andi',
         3,
         11);
+
+
 

@@ -11,3 +11,9 @@
 * relative2@pms.ch - relative2
 * relative3@pms.ch - relative3
 
+## Story3
+* doctor4@pms.ch - doctor4
+* patient3@pms.ch - patient3
+* patient4@pms.ch - patient4
+* relative4@pms.ch - relative4
+
