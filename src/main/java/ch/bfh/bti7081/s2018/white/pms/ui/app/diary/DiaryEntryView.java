@@ -61,7 +61,7 @@ public class DiaryEntryView extends VerticalLayout {
         hLayoutComments = new HorizontalLayout();
         hLayoutPermissions = new HorizontalLayout();
         hLayoutButtons = new HorizontalLayout();
-        patientSelect = new ComboBox<>("Patient");
+        patientSelect = new ComboBox<>(MessageHandler.PATIENT);
         patientSelect.setEmptySelectionAllowed(false);
         patientSelect.setTextInputAllowed(false);
         patientSelect.setItemCaptionGenerator(Patient::getFullName);
