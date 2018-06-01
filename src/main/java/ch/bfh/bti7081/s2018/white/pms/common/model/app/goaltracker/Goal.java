@@ -67,4 +67,12 @@ public class Goal extends PmsEntity {
     public void setState(GoalState state) {
         this.state = state;
     }
+
+    public GoalTracker getGoalTracker() {
+        return goalTracker;
+    }
+
+    public void setGoalTracker(GoalTracker goalTracker) {
+        this.goalTracker = goalTracker;
+    }
 }
