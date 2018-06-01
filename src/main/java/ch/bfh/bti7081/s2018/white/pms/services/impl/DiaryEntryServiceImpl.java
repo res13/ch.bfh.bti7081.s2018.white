@@ -2,11 +2,11 @@ package ch.bfh.bti7081.s2018.white.pms.services.impl;
 
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.Diary;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry;
+import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry_;
+import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.Diary_;
 import ch.bfh.bti7081.s2018.white.pms.common.model.caze.Caze;
-import ch.bfh.bti7081.s2018.white.pms.common.model.user.Doctor;
-import ch.bfh.bti7081.s2018.white.pms.common.model.user.Patient;
-import ch.bfh.bti7081.s2018.white.pms.common.model.user.Relative;
-import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
+import ch.bfh.bti7081.s2018.white.pms.common.model.caze.Caze_;
+import ch.bfh.bti7081.s2018.white.pms.common.model.user.*;
 import ch.bfh.bti7081.s2018.white.pms.persistence.JpaUtility;
 import ch.bfh.bti7081.s2018.white.pms.services.DiaryEntryService;
 
@@ -44,18 +44,18 @@ public class DiaryEntryServiceImpl extends BaseServiceImpl<DiaryEntry> implement
                     CriteriaBuilder cb = em.getCriteriaBuilder();
                     CriteriaQuery<DiaryEntry> cq = cb.createQuery(clazz);
                     Root<DiaryEntry> diaryEntry = cq.from(clazz);
-                    Join<DiaryEntry, Diary> diaryToDiaryEntryJoin = diaryEntry.join("diary");
-                    Join<Diary, Caze> cazeToDiaryJoin = diaryToDiaryEntryJoin.join("caze");
-                    Join<Caze, Patient> patientToCazeJoin = cazeToDiaryJoin.join("patient");
+                    Join<DiaryEntry, Diary> diaryToDiaryEntryJoin = diaryEntry.join(DiaryEntry_.diary);
+                    Join<Diary, Caze> cazeToDiaryJoin = diaryToDiaryEntryJoin.join(Diary_.caze);
+                    Join<Caze, Patient> patientToCazeJoin = cazeToDiaryJoin.join(Caze_.patient);
                     CriteriaQuery<DiaryEntry> where = null;
                     if (user instanceof Relative) {
-                        Join<Patient, Relative> relativeToPatientJoin = patientToCazeJoin.join("relativeList");
-                        where = cq.where(cb.equal(relativeToPatientJoin.get("id"), user.getId()), cb.equal(diaryEntry.get("relativeRead"), true));
+                        Join<Patient, Relative> relativeToPatientJoin = patientToCazeJoin.join(Patient_.relativeList);
+                        where = cq.where(cb.equal(relativeToPatientJoin.get(Relative_.id), user.getId()), cb.isTrue(diaryEntry.get(DiaryEntry_.relativeRead)));
                     } else if (user instanceof Patient) {
-                        where = cq.where(cb.equal(patientToCazeJoin.get("id"), user.getId()), cb.equal(diaryEntry.get("patientRead"), true));
+                        where = cq.where(cb.equal(patientToCazeJoin.get(Patient_.id), user.getId()), cb.isTrue(diaryEntry.get(DiaryEntry_.patientRead)));
                     } else if (user instanceof Doctor) {
-                        Join<Patient, Doctor> doctorToPatientJoin = patientToCazeJoin.join("doctorList");
-                        where = cq.where(cb.equal(doctorToPatientJoin.get("id"), user.getId()));
+                        Join<Patient, Doctor> doctorToPatientJoin = patientToCazeJoin.join(Patient_.doctorList);
+                        where = cq.where(cb.equal(doctorToPatientJoin.get(Doctor_.id), user.getId()));
                     }
                     TypedQuery<DiaryEntry> allQuery = em.createQuery(where);
                     return allQuery.getResultList();

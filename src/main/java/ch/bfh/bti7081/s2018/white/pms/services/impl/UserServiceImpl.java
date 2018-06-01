@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2018.white.pms.services.impl;
 
 import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
+import ch.bfh.bti7081.s2018.white.pms.common.model.user.User_;
 import ch.bfh.bti7081.s2018.white.pms.common.util.PasswordHasher;
 import ch.bfh.bti7081.s2018.white.pms.persistence.JpaUtility;
 import ch.bfh.bti7081.s2018.white.pms.services.UserService;
@@ -49,7 +50,7 @@ public class UserServiceImpl<T extends User> extends BaseServiceImpl<T> implemen
                     CriteriaBuilder cb = em.getCriteriaBuilder();
                     CriteriaQuery<T> cq = cb.createQuery(clazz);
                     Root<T> rootEntry = cq.from(clazz);
-                    CriteriaQuery<T> where = cq.where(cb.equal(rootEntry.get("email"), email));
+                    CriteriaQuery<T> where = cq.where(cb.equal(rootEntry.get(User_.email), email));
                     TypedQuery<T> allQuery = em.createQuery(where);
                     return allQuery.getResultList();
                 });

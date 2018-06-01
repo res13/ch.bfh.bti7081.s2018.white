@@ -2,8 +2,11 @@ package ch.bfh.bti7081.s2018.white.pms.services.impl;
 
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.Diary;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.goaltracker.GoalTracker;
+import ch.bfh.bti7081.s2018.white.pms.common.model.app.goaltracker.GoalTracker_;
 import ch.bfh.bti7081.s2018.white.pms.common.model.caze.Caze;
+import ch.bfh.bti7081.s2018.white.pms.common.model.caze.Caze_;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.Patient;
+import ch.bfh.bti7081.s2018.white.pms.common.model.user.Patient_;
 import ch.bfh.bti7081.s2018.white.pms.persistence.JpaUtility;
 import ch.bfh.bti7081.s2018.white.pms.services.GoalTrackerService;
 
@@ -25,9 +28,9 @@ public class GoalTrackerServiceImpl extends AppServiceImpl<GoalTracker> implemen
                     CriteriaBuilder cb = em.getCriteriaBuilder();
                     CriteriaQuery<GoalTracker> cq = cb.createQuery(clazz);
                     Root<GoalTracker> goalTracker = cq.from(clazz);
-                    Join<GoalTracker, Caze> cazeToDiaryJoin = goalTracker.join("caze");
-                    Join<Caze, Patient> patientToCazeJoin = cazeToDiaryJoin.join("patient");
-                    CriteriaQuery<GoalTracker> where = cq.where(cb.equal(patientToCazeJoin.get("id"), id));
+                    Join<GoalTracker, Caze> cazeToDiaryJoin = goalTracker.join(GoalTracker_.caze);
+                    Join<Caze, Patient> patientToCazeJoin = cazeToDiaryJoin.join(Caze_.patient);
+                    CriteriaQuery<GoalTracker> where = cq.where(cb.equal(patientToCazeJoin.get(Patient_.id), id));
                     TypedQuery<GoalTracker> allQuery = em.createQuery(where);
                     return allQuery.getSingleResult();
                 });

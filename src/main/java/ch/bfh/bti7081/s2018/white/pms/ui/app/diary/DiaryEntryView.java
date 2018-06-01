@@ -17,7 +17,6 @@ import com.vaadin.ui.TabSheet.Tab;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.List;
 
 public class DiaryEntryView extends VerticalLayout {
@@ -116,7 +115,7 @@ public class DiaryEntryView extends VerticalLayout {
         vLayout.addComponent(gLayout);
         if (this.diaryEntry.getId() != null) {
             try {
-                List<Comment> diaryEntryEntities = commentService.getEntitiesByDiaryEntityId(diaryEntry.getId());
+                List<Comment> diaryEntryEntities = commentService.getEntitiesByDiaryEntity(diaryEntry);
                 if (!diaryEntryEntities.isEmpty()){
                     newButton.setCaption("+");
                 }
