@@ -11,6 +11,9 @@ import ch.bfh.bti7081.s2018.white.pms.services.impl.CommentServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.DiaryEntryServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.DiaryServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.Notifier;
+
+import com.vaadin.server.ThemeResource;
+import com.vaadin.server.VaadinService;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
 import com.vaadin.ui.TabSheet.Tab;
@@ -72,10 +75,22 @@ public class DiaryEntryView extends VerticalLayout {
         patientRead = new CheckBox(MessageHandler.PATIENT_READ);
         relativeRead = new CheckBox(MessageHandler.RELATIVE_READ);
         accordionComments = new Accordion();
-        editButton = new Button(MessageHandler.EDIT);
-        saveButton = new Button(MessageHandler.SAVE);
-        newButton = new Button(MessageHandler.NEW_COMMENT);
-        deleteButton = new Button(MessageHandler.DELETE);
+        editButton = new Button();
+        editButton.setStyleName("borderless");
+        editButton.setIcon(new ThemeResource("images/edit.png"));
+        editButton.setDescription(MessageHandler.EDIT);
+        saveButton = new Button();
+        saveButton.setStyleName("borderless");
+        saveButton.setIcon(new ThemeResource("images/save.png"));
+        saveButton.setDescription(MessageHandler.SAVE);
+        newButton = new Button();
+        newButton.setStyleName("borderless");
+        newButton.setIcon(new ThemeResource("images/plus.png"));
+        newButton.setDescription(MessageHandler.NEW_COMMENT);
+        deleteButton = new Button();
+        deleteButton.setStyleName("borderless");
+        deleteButton.setIcon(new ThemeResource("images/delete.png"));
+        deleteButton.setDescription(MessageHandler.DELETE);
     }
 
     public void createView() {

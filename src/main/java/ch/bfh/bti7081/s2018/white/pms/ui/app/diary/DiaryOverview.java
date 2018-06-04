@@ -3,6 +3,8 @@ package ch.bfh.bti7081.s2018.white.pms.ui.app.diary;
 import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry;
 import ch.bfh.bti7081.s2018.white.pms.ui.main.PmsSecureView;
+
+import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Accordion;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.GridLayout;
@@ -20,7 +22,10 @@ public abstract class DiaryOverview extends PmsSecureView {
     public void initialize() {
         accordion = new Accordion();
         gridDiary = new GridLayout(2, 1);
-        newButton = new Button("+");
+        newButton = new Button();
+        newButton.setStyleName("borderless");
+        newButton.setIcon(new ThemeResource("images/plus.png"));
+        newButton.setDescription(MessageHandler.NEW_COMMENT);
     }
 
     public abstract List<DiaryEntry> getDiaryEntries();
