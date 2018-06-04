@@ -251,16 +251,13 @@ public class DiaryEntryView extends VerticalLayout {
 
     private TabSheet.Tab addComment(Comment comment) {
     	CommentView view = new CommentView(comment, this);
-        TabSheet.Tab newCommentTab = accordionComments.addTab(view, "comment");
+        TabSheet.Tab newCommentTab = accordionComments.addTab(view, "");
         view.setTab(newCommentTab);
         return newCommentTab;
     }
 
     public void deleteComment(TabSheet.Tab tab) {
             accordionComments.removeTab(tab);
-            if (this.accordionComments.getComponentCount() == 0) {
-                newButton.setCaption("New comment");
-            }
     }
 
 	public void setTab(Tab newDiaryEntryTab) {
