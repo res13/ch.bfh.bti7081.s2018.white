@@ -25,7 +25,7 @@ public abstract class DiaryOverview extends PmsSecureView {
         newButton = new Button();
         newButton.setStyleName("borderless");
         newButton.setIcon(new ThemeResource("images/plus.png"));
-        newButton.setDescription(MessageHandler.NEW_COMMENT);
+        newButton.setDescription(MessageHandler.NEW_DIARY_ENTRY);
     }
 
     public abstract List<DiaryEntry> getDiaryEntries();

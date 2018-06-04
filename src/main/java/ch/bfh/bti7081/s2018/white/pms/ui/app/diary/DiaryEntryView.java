@@ -13,7 +13,6 @@ import ch.bfh.bti7081.s2018.white.pms.services.impl.DiaryServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.Notifier;
 
 import com.vaadin.server.ThemeResource;
-import com.vaadin.server.VaadinService;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
 import com.vaadin.ui.TabSheet.Tab;
@@ -131,9 +130,6 @@ public class DiaryEntryView extends VerticalLayout {
         if (this.diaryEntry.getId() != null) {
             try {
                 List<Comment> diaryEntryEntities = commentService.getEntitiesByDiaryEntity(diaryEntry);
-                if (!diaryEntryEntities.isEmpty()){
-                    newButton.setCaption("+");
-                }
                 for (Comment comment : diaryEntryEntities) {
                     addComment(comment);
                 }
@@ -251,7 +247,6 @@ public class DiaryEntryView extends VerticalLayout {
         comment.setDiaryEntry(this.diaryEntry);
         TabSheet.Tab newCommentTab = addComment(comment);
         accordionComments.setSelectedTab(newCommentTab);
-        newButton.setCaption("+");
     }
 
     private TabSheet.Tab addComment(Comment comment) {
