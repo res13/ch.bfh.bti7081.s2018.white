@@ -4,9 +4,9 @@ import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.Comment;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.CommentServiceImpl;
+import ch.bfh.bti7081.s2018.white.pms.ui.common.CustomButton;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.Notifier;
 import com.vaadin.navigator.View;
-import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
 import com.vaadin.ui.TabSheet.Tab;
@@ -25,9 +25,9 @@ public class CommentView extends VerticalLayout implements View {
     private Label creator = new Label();
     private Label time = new Label();
     private Comment comment;
-    private Button editButton = new Button();
-    private Button saveButton = new Button();
-    private Button deleteButton = new Button();
+    private CustomButton editButton;
+    private CustomButton saveButton;
+    private CustomButton deleteButton;
     private DiaryEntryView parentView;
 	private Tab tab;
 
@@ -36,18 +36,9 @@ public class CommentView extends VerticalLayout implements View {
         this.comment = comment;
         this.parentView = diaryEntryView;
 
-        editButton = new Button();
-        editButton.setStyleName("borderless");
-        editButton.setIcon(new ThemeResource("images/edit.png"));
-        editButton.setDescription(MessageHandler.EDIT);
-        saveButton = new Button();
-        saveButton.setStyleName("borderless");
-        saveButton.setIcon(new ThemeResource("images/save.png"));
-        saveButton.setDescription(MessageHandler.SAVE);
-        deleteButton = new Button();
-        deleteButton.setStyleName("borderless");
-        deleteButton.setIcon(new ThemeResource("images/delete.png"));
-        deleteButton.setDescription(MessageHandler.DELETE);
+        editButton = new CustomButton(CustomButton.typeEnum.EDIT);
+        saveButton = new CustomButton(CustomButton.typeEnum.SAVE);
+        deleteButton = new CustomButton(CustomButton.typeEnum.DELETE);
         
         editButton.addClickListener(clickEvent -> switchEditable());
         saveButton.addClickListener(clickEvent -> saveComment());
