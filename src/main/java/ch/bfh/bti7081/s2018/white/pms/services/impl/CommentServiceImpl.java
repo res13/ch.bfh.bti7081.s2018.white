@@ -1,6 +1,8 @@
 package ch.bfh.bti7081.s2018.white.pms.services.impl;
 
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.Comment;
+import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.Comment_;
+import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry;
 import ch.bfh.bti7081.s2018.white.pms.persistence.JpaUtility;
 import ch.bfh.bti7081.s2018.white.pms.services.CommentService;
 
@@ -16,13 +18,13 @@ public class CommentServiceImpl extends BaseServiceImpl<Comment> implements Comm
         super(Comment.class);
     }
 
-    public List<Comment> getEntitiesByDiaryEntityId(long id) throws Exception {
+    public List<Comment> getEntitiesByDiaryEntity(DiaryEntry diaryEntry) throws Exception {
         return new JpaUtility().execute(
                 (em) -> {
                     CriteriaBuilder cb = em.getCriteriaBuilder();
                     CriteriaQuery<Comment> cq = cb.createQuery(clazz);
                     Root<Comment> rootEntry = cq.from(clazz);
-                    CriteriaQuery<Comment> where = cq.where(cb.equal(rootEntry.get("diaryEntry"), id));
+                    CriteriaQuery<Comment> where = cq.where(cb.equal(rootEntry.get(Comment_.diaryEntry), diaryEntry));
                     TypedQuery<Comment> allQuery = em.createQuery(where);
                     return allQuery.getResultList();
                 });

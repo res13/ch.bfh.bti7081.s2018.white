@@ -6,9 +6,13 @@ import ch.bfh.bti7081.s2018.white.pms.common.model.user.Patient;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.Relative;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.ui.main.PmsSecureView;
+
+import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.VerticalLayout;
 
 public class ProfileView extends PmsSecureView {
 
@@ -23,7 +27,9 @@ public class ProfileView extends PmsSecureView {
     private Label emailValueLabel;
     private Label roleValueLabel;
     private Label birthdayValueLabel;
-    private GridLayout layout;
+    private Image profileImage;
+    private GridLayout grid;
+    private VerticalLayout layout;
 
     @Override
     public String getName() {
@@ -32,8 +38,8 @@ public class ProfileView extends PmsSecureView {
 
     @Override
     public void initialize() {
-        firstnameLabel = new Label(MessageHandler.SURNAME);
-        lastnameLabel = new Label(MessageHandler.NAME);
+        lastnameLabel = new Label(MessageHandler.SURNAME);
+        firstnameLabel = new Label(MessageHandler.NAME);
         emailLabel = new Label(MessageHandler.EMAIL);
         roleLabel = new Label(MessageHandler.STATUS);
         birthdayLabel = new Label(MessageHandler.BIRTHDAY);
@@ -42,7 +48,9 @@ public class ProfileView extends PmsSecureView {
         emailValueLabel = new Label();
         roleValueLabel = new Label();
         birthdayValueLabel = new Label();
-        layout = new GridLayout(2, 5);
+        grid = new GridLayout(2, 5);
+        layout = new VerticalLayout();
+        profileImage = new Image("", new ThemeResource("images/profile.png"));
     }
 
     @Override
@@ -61,17 +69,19 @@ public class ProfileView extends PmsSecureView {
             roleValueLabel.setValue(MessageHandler.DOCTOR);
         }
 
-        layout.addComponent(firstnameLabel, 0, 0);
-        layout.addComponent(firstnameValueLabel, 1, 0);
-        layout.addComponent(lastnameLabel, 0, 1);
-        layout.addComponent(lastnameValueLabel, 1, 1);
-        layout.addComponent(emailLabel, 0, 2);
-        layout.addComponent(emailValueLabel, 1, 2);
-        layout.addComponent(birthdayLabel, 0, 3);
-        layout.addComponent(birthdayValueLabel, 1, 3);
-        layout.addComponent(roleLabel, 0, 4);
-        layout.addComponent(roleValueLabel, 1, 4);
-
+        grid.addComponent(firstnameLabel, 0, 0);
+        grid.addComponent(firstnameValueLabel, 1, 0);
+        grid.addComponent(lastnameLabel, 0, 1);
+        grid.addComponent(lastnameValueLabel, 1, 1);
+        grid.addComponent(emailLabel, 0, 2);
+        grid.addComponent(emailValueLabel, 1, 2);
+        grid.addComponent(birthdayLabel, 0, 3);
+        grid.addComponent(birthdayValueLabel, 1, 3);
+        grid.addComponent(roleLabel, 0, 4);
+        grid.addComponent(roleValueLabel, 1, 4);
+        layout.addComponent(profileImage);
+        layout.addComponent(grid);
+        
         addComponent(layout);
     }
 }

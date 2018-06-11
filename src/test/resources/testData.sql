@@ -9,11 +9,11 @@ insert into User (Id,
 values (1,
         Current_timestamp(),
         Current_date(),
-        'doctor1@pms.ch',
-        'Doctor 1 name',
+        'sara.sante@pms.ch',
+        'Sara',
         'o/Aq3xhhRFSG5DoB/ajzjw==',
         '1qIYGhTnXBYPxLUWGZRpEg==',
-        'Doctor 1 surname');
+        'Sante');
 
 
 insert into Doctor (Id)
@@ -31,11 +31,11 @@ insert into User (Id,
 values (2,
         Current_timestamp(),
         Current_date(),
-        'doctor2@pms.ch',
-        'Doctor 2 name',
+        'mason.meier@pms.ch',
+        'Mason',
         'zgHoKOch+nFXMafeFgNwlA==',
         'QJno99dJAk6Yx+ApX1PppQ==',
-        'Doctor 2 surname');
+        'Meier');
 
 
 insert into Doctor (Id)
@@ -53,11 +53,11 @@ insert into User (Id,
 values (3,
         Current_timestamp(),
         Current_date(),
-        'doctor3@pms.ch',
-        'Doctor 3 name',
+        'thomas.koehler@pms.ch',
+        'Thomas',
         'ag+WPyCq4J01lN2sxPVaNw==',
         'D2x3Zrr3tIghzmLs/83A5A==',
-        'Doctor 3 surname');
+        'Koehler');
 
 
 insert into Doctor (Id)
@@ -75,11 +75,11 @@ insert into User (Id,
 values (4,
         Current_timestamp(),
         Current_date(),
-        'doctor4@pms.ch',
-        'Doctor 4 name',
+        'barbara.richter@pms.ch',
+        'Barbara',
         'Fru36/ptQllG+R/sxpfWHQ==',
         '6G+HEttRdcrXU2JZedql6w==',
-        'Doctor 4 surname');
+        'Richter');
 
 
 insert into Doctor (Id)
@@ -118,11 +118,11 @@ insert into User (Id,
 values (6,
         Current_timestamp(),
         Current_date(),
-        'relative1@pms.ch',
-        'Relative 1 name',
+        'jonas.johnson@pms.ch',
+        'Jonas',
         'ykq/59GDaJDNmLyhNoyuiA==',
         'koMbnN/USLhubZdYQCE1cQ==',
-        'Relative 1 surname');
+        'Johnson');
 
 
 insert into relative (Id)
@@ -140,11 +140,11 @@ insert into User (Id,
 values (7,
         Current_timestamp(),
         Current_date(),
-        'relative2@pms.ch',
-        'Relative 2 name',
+        'lukas.pfeiffer@pms.ch',
+        'Lukas',
         'ASnrn3Kglm7AEBZhpQIxqg==',
         'j36w/ow1SZnDw0zzvyZJMw==',
-        'Relative 2 surname');
+        'Pfeiffer');
 
 
 insert into relative (Id)
@@ -162,11 +162,11 @@ insert into User (Id,
 values (8,
         Current_timestamp(),
         Current_date(),
-        'relative3@pms.ch',
-        'Relative 3 name',
+        'isabelle.pfeiffer@pms.ch',
+        'Isabelle',
         'nETMBP8g8nXtuQSjsN0gLA==',
         'aCgPu91c4213RQywuT8qug==',
-        'Relative 3 surname');
+        'Pfeiffer');
 
 
 insert into relative (Id)
@@ -184,11 +184,11 @@ insert into User (Id,
 values (9,
         Current_timestamp(),
         Current_date(),
-        'relative4@pms.ch',
-        'Relative 4 name',
+        'dennis.klein@pms.ch',
+        'Dennis',
         'VBZ/MNYJJj4lNlw29ngBMw==',
         '2o4TTkeEJZasbhmfmnf0Nw==',
-        'Relative 4 surname');
+        'Klein');
 
 
 insert into relative (Id)
@@ -227,11 +227,11 @@ insert into User (Id,
 values (11,
         Current_timestamp(),
         Current_date(),
-        'patient1@pms.ch',
-        'Patient 1 name',
+        'ben.barber@pms.ch',
+        'Ben',
         'DhHarZOtRNc0jEkOgoAf1A==',
         'o0z4gCmQNRkPCIa7K5hPMQ==',
-        'Patient 1 surname');
+        'Barber');
 
 
 insert into Patient (Id)
@@ -249,11 +249,11 @@ insert into User (Id,
 values (12,
         Current_timestamp(),
         Current_date(),
-        'patient2@pms.ch',
-        'Patient 2 name',
+        'lucas.mueller@pms.ch',
+        'Lucas',
         '4d77lhgEbJmK92VXx4qjew==',
         '/8gIQXJDu0jfrKSIadPAvw==',
-        'Patient 2 surname');
+        'Mueller');
 
 
 insert into Patient (Id)
@@ -271,11 +271,11 @@ insert into User (Id,
 values (13,
         Current_timestamp(),
         Current_date(),
-        'patient3@pms.ch',
-        'Patient 3 name',
+        'martina.pfeffer@pms.ch',
+        'Martina',
         'dSoNQb4E4N4SGfRp8e3fdw==',
         'YIE61QfmUgm5ogwXdowpAA==',
-        'Patient 3 surname');
+        'Pfeffer');
 
 
 insert into Patient (Id)
@@ -293,11 +293,11 @@ insert into User (Id,
 values (14,
         Current_timestamp(),
         Current_date(),
-        'patient4@pms.ch',
-        'Patient 4 name',
+        'stephanie.dreher@pms.ch',
+        'Stephanie',
         'Gt22haxLr5CV+3FEK2qWJA==',
         'FyBMhqzbIeZdL3LkbJIuHw==',
-        'Patient 4 surname');
+        'Dreher');
 
 
 insert into Patient (Id)
@@ -354,12 +354,28 @@ insert into Patient_doctor (Doctor_id, Patient_id)
 values (3,
         12);
 
+insert into Patient_relative (Relative_id, Patient_id)
+values (9,
+        13);
+
+insert into Patient_relative (Relative_id, Patient_id)
+values (9,
+        14);
+
+insert into Patient_doctor (Doctor_id, Patient_id)
+values (4,
+        13);
+
+insert into Patient_doctor (Doctor_id, Patient_id)
+values (4,
+        14);
+
 
 insert into Caze (Id, Lastmodified, Fromdate, Note, Todate, Patient_id)
 values (1,
         Current_timestamp(),
         Parsedatetime('01.01.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
-        'Test case of patient1',
+        'Case of Ben Barber',
         null,
         11);
 
@@ -368,15 +384,31 @@ insert into Caze (Id, Lastmodified, Fromdate, Note, Todate, Patient_id)
 values (2,
         Current_timestamp(),
         Parsedatetime('01.01.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
-        'Test case of patient2',
+        'Case of Lucas Mueller',
         Parsedatetime('31.01.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
         12);
 
+insert into Caze (Id, Lastmodified, Fromdate, Note, Todate, Patient_id)
+values (3,
+        Current_timestamp(),
+        Parsedatetime('01.01.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
+        'Case of Martina Pfeffer',
+        Parsedatetime('31.01.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
+        13);
+
+
+insert into Caze (Id, Lastmodified, Fromdate, Note, Todate, Patient_id)
+values (4,
+        Current_timestamp(),
+        Parsedatetime('01.01.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
+        'Case of Stephanie Dreher',
+        Parsedatetime('31.01.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
+        14);
 
 insert into App (Id, Lastmodified, Name, Caze_id)
 values (1,
         Current_timestamp(),
-        'diary app for patient 1',
+        'diary app for Ben Barber',
         1);
 
 
@@ -387,22 +419,42 @@ values (1);
 insert into App (Id, Lastmodified, Name, Caze_id)
 values (2,
         Current_timestamp(),
-        'diary app for patient 2',
+        'diary app for Lucas Mueller',
         2);
 
 
 insert into Diary (Id)
 values (2);
 
+insert into App (Id, Lastmodified, Name, Caze_id)
+values (5,
+        Current_timestamp(),
+        'diary app for Martina Pfeffer',
+        3);
+
+
+insert into Diary (Id)
+values (5);
+
+insert into App (Id, Lastmodified, Name, Caze_id)
+values (6,
+        Current_timestamp(),
+        'diary app for Stephanie Dreher',
+        4);
+
+
+insert into Diary (Id)
+values (6);
+
 
 insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
 values (1,
         Current_timestamp(),
-        'Test diary entry from patient1. Relative can read',
+        'Test diary entry from Ben Barber. Relative can read',
         true,
         true,
         Current_timestamp(),
-        'Test diary entry from patient1',
+        'Test diary entry from Ben Barber',
         11,
         1);
 
@@ -410,11 +462,11 @@ values (1,
 insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
 values (2,
         Current_timestamp(),
-        'Test diary entry from patient1. Relative can not read',
+        'Test diary entry from Ben Barber. Relative can not read',
         true,
         false,
         Current_timestamp(),
-        'Test diary entry from patient1',
+        'Test diary entry from Ben Barber',
         11,
         1);
 
@@ -422,11 +474,11 @@ values (2,
 insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
 values (3,
         Current_timestamp(),
-        'Test diary entry from relative1. Patient can read',
+        'Test diary entry from Jonas Johnson. Patient can read',
         true,
         true,
         Current_timestamp(),
-        'Test diary entry from relative1',
+        'Test diary entry from Jonas Johnson',
         6,
         1);
 
@@ -434,11 +486,11 @@ values (3,
 insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
 values (4,
         Current_timestamp(),
-        'Test diary entry from relative1. Patient can not read',
+        'Test diary entry from Jonas Johnson. Patient can not read',
         false,
         true,
         Current_timestamp(),
-        'Test diary entry from relative1',
+        'Test diary entry from Jonas Johnson',
         6,
         1);
 
@@ -446,11 +498,11 @@ values (4,
 insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
 values (5,
         Current_timestamp(),
-        'Test diary entry from doctor1. Patient can read, Relative can read',
+        'Test diary entry from Sara Sante. Patient can read, Relative can read',
         true,
         true,
         Current_timestamp(),
-        'Test diary entry from doctor1',
+        'Test diary entry from Sara Sante',
         1,
         1);
 
@@ -458,11 +510,11 @@ values (5,
 insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
 values (6,
         Current_timestamp(),
-        'Test diary entry from doctor1. Patient can read, Relative can not read',
+        'Test diary entry from Sara Sante. Patient can read, Relative can not read',
         true,
         false,
         Current_timestamp(),
-        'Test diary entry from doctor1',
+        'Test diary entry from Sare Sante',
         1,
         1);
 
@@ -470,11 +522,11 @@ values (6,
 insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
 values (7,
         Current_timestamp(),
-        'Test diary entry from doctor1. Patient can not read, Relative can read',
+        'Test diary entry from Sara Sante. Patient can not read, Relative can read',
         false,
         true,
         Current_timestamp(),
-        'Test diary entry from doctor1',
+        'Test diary entry from Sara Sante',
         1,
         1);
 
@@ -482,11 +534,11 @@ values (7,
 insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
 values (8,
         Current_timestamp(),
-        'Test diary entry from doctor1. Patient can not read, Relative can not read',
+        'Test diary entry from Sara Sante. Patient can not read, Relative can not read',
         false,
         false,
         Current_timestamp(),
-        'Test diary entry from doctor1',
+        'Test diary entry from Sara Sante',
         1,
         1);
 
@@ -494,11 +546,11 @@ values (8,
 insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
 values (9,
         Current_timestamp(),
-        'Test diary entry from patient2. Relative can read',
+        'Test diary entry from Lucas Mueller. Relative can read',
         true,
         true,
         Current_timestamp(),
-        'Test diary entry from patient2',
+        'Test diary entry from Lucas Mueller',
         12,
         2);
 
@@ -506,11 +558,11 @@ values (9,
 insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
 values (10,
         Current_timestamp(),
-        'Test diary entry from patient2. Relative can not read',
+        'Test diary entry from Lucas Mueller. Relative can not read',
         true,
         false,
         Current_timestamp(),
-        'Test diary entry from patient2',
+        'Test diary entry from Lucas Mueller',
         12,
         2);
 
@@ -518,11 +570,11 @@ values (10,
 insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
 values (11,
         Current_timestamp(),
-        'Test diary entry from relative2. Patient can read',
+        'Test diary entry from Lukas Pfeiffer. Patient can read',
         true,
         true,
         Current_timestamp(),
-        'Test diary entry from relative2',
+        'Test diary entry from Lukas Pfeiffer',
         7,
         2);
 
@@ -530,11 +582,11 @@ values (11,
 insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
 values (12,
         Current_timestamp(),
-        'Test diary entry from relative2. Patient can not read',
+        'Test diary entry from Lukas Pfeiffer. Patient can not read',
         false,
         true,
         Current_timestamp(),
-        'Test diary entry from relative2',
+        'Test diary entry from Lukas Pfeiffer',
         7,
         2);
 
@@ -542,11 +594,11 @@ values (12,
 insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
 values (13,
         Current_timestamp(),
-        'Test diary entry from doctor2. Patient can read, Relative can read',
+        'Test diary entry from Mason Meier. Patient can read, Relative can read',
         true,
         true,
         Current_timestamp(),
-        'Test diary entry from doctor2',
+        'Test diary entry from Mason Meier',
         2,
         2);
 
@@ -554,11 +606,11 @@ values (13,
 insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
 values (14,
         Current_timestamp(),
-        'Test diary entry from doctor2. Patient can read, Relative can not read',
+        'Test diary entry from Mason Meier. Patient can read, Relative can not read',
         true,
         false,
         Current_timestamp(),
-        'Test diary entry from doctor2',
+        'Test diary entry from Mason Meier',
         2,
         2);
 
@@ -566,11 +618,11 @@ values (14,
 insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
 values (15,
         Current_timestamp(),
-        'Test diary entry from doctor2. Patient can not read, Relative can read',
+        'Test diary entry from Mason Meier. Patient can not read, Relative can read',
         false,
         true,
         Current_timestamp(),
-        'Test diary entry from doctor2',
+        'Test diary entry from Mason Meier',
         2,
         2);
 
@@ -578,19 +630,52 @@ values (15,
 insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
 values (16,
         Current_timestamp(),
-        'Test diary entry from doctor2. Patient can not read, Relative can not read',
+        'Test diary entry from Mason Meier. Patient can not read, Relative can not read',
         false,
         false,
         Current_timestamp(),
-        'Test diary entry from doctor2',
+        'Test diary entry from Mason Meier',
         2,
         2);
+
+insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
+values (17,
+        Current_timestamp(),
+        'Test diary entry from Barbara Richter. Patient can not read, Relative can read',
+        true,
+        true,
+        Current_timestamp(),
+        'Test diary entry from Barbara Richter',
+        4,
+        5);
+
+insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
+values (18,
+        Current_timestamp(),
+        'Test diary entry from Barbara Richter. Patient can read, Relative can read',
+        true,
+        true,
+        Current_timestamp(),
+        'Test diary entry from Barbara Richter',
+        4,
+        6);
+
+insert into Diaryentry (Id, Lastmodified, Entrytext, Patientread, Relativeread, time, Title, Creator_id, Diary_id)
+values (19,
+        Current_timestamp(),
+        'Test diary entry from Dennis Klein. Patient can read, Relative can read',
+        true,
+        true,
+        Current_timestamp(),
+        'Test diary entry from Dennis Klein',
+        9,
+        6);
 
 
 insert into App (Id, Lastmodified, Name, Caze_id)
 values (3,
         Current_timestamp(),
-        'goaltracker app for patient 1',
+        'goaltracker app for Ben Barber',
         1);
 
 
@@ -601,12 +686,32 @@ values (3);
 insert into App (Id, Lastmodified, Name, Caze_id)
 values (4,
         Current_timestamp(),
-        'goaltracker app for patient 2',
+        'goaltracker app for Lucas Mueller',
         2);
 
 
 insert into Goaltracker (Id)
 values (4);
+
+insert into App (Id, Lastmodified, Name, Caze_id)
+values (7,
+        Current_timestamp(),
+        'goaltracker app for Martina Pfeffer',
+        3);
+
+
+insert into Goaltracker (Id)
+values (7);
+
+insert into App (Id, Lastmodified, Name, Caze_id)
+values (8,
+        Current_timestamp(),
+        'goaltracker app for Stephanie Dreher',
+        4);
+
+
+insert into Goaltracker (Id)
+values (8);
 
 
 insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
@@ -614,7 +719,7 @@ values (1,
         Current_timestamp(),
         Current_timestamp(),
         Parsedatetime('31.06.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
-        'test goal for patient1, created by doctor1, state = open',
+        'test goal for Ben Barber, created by Sara Sante, state = open',
         0,
         1,
         3);
@@ -625,7 +730,7 @@ values (2,
         Current_timestamp(),
         Current_timestamp(),
         Parsedatetime('31.06.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
-        'test goal for patient1, created by relative1, state = open',
+        'test goal for Ben Barber, created by Jonas Johnson, state = open',
         0,
         6,
         3);
@@ -636,7 +741,7 @@ values (3,
         Current_timestamp(),
         Current_timestamp(),
         Parsedatetime('31.06.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
-        'test goal for patient1, created by doctor1, state = successful',
+        'test goal for Ben Barber, created by Sara Sante, state = successful',
         1,
         1,
         3);
@@ -647,7 +752,7 @@ values (4,
         Current_timestamp(),
         Current_timestamp(),
         Parsedatetime('31.06.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
-        'test goal for patient1, created by relative1, state = successful',
+        'test goal for Ben Barber, created by Jonas Johnson, state = successful',
         1,
         6,
         3);
@@ -658,7 +763,7 @@ values (5,
         Current_timestamp(),
         Current_timestamp(),
         Parsedatetime('31.06.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
-        'test goal for patient1, created by doctor1, state = missed',
+        'test goal for Ben Barber, created by Sara Sante, state = missed',
         2,
         1,
         3);
@@ -669,7 +774,7 @@ values (6,
         Current_timestamp(),
         Current_timestamp(),
         Parsedatetime('31.06.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
-        'test goal for patient1, created by relative1, state = missed',
+        'test goal for Ben Barber, created by Jonas Johnson, state = missed',
         2,
         6,
         3);
@@ -680,10 +785,10 @@ values (7,
         Current_timestamp(),
         Current_timestamp(),
         Parsedatetime('31.06.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
-        'test goal for patient2, created by doctor2, state = open',
+        'test goal for Lucas Mueller, created by Mason Meier, state = open',
         0,
         2,
-        3);
+        4);
 
 
 insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
@@ -691,10 +796,10 @@ values (8,
         Current_timestamp(),
         Current_timestamp(),
         Parsedatetime('31.06.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
-        'test goal for patient2, created by relative2, state = open',
+        'test goal for Lucas Mueller, created by Lukas Pfeiffer, state = open',
         0,
         7,
-        3);
+        4);
 
 
 insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
@@ -702,10 +807,10 @@ values (9,
         Current_timestamp(),
         Current_timestamp(),
         Parsedatetime('31.06.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
-        'test goal for patient2, created by doctor2, state = successful',
+        'test goal for Lucas Mueller, created by Mason Meier, state = successful',
         1,
         2,
-        3);
+        4);
 
 
 insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
@@ -713,10 +818,10 @@ values (10,
         Current_timestamp(),
         Current_timestamp(),
         Parsedatetime('31.06.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
-        'test goal for patient2, created by relative2, state = successful',
+        'test goal for Lucas Mueller, created by Lukas Pfeiffer, state = successful',
         1,
         7,
-        3);
+        4);
 
 
 insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
@@ -724,10 +829,10 @@ values (11,
         Current_timestamp(),
         Current_timestamp(),
         Parsedatetime('31.06.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
-        'test goal for patient2, created by doctor2, state = missed',
+        'test goal for Lucas Mueller, created by Mason Meier, state = missed',
         2,
         2,
-        3);
+        4);
 
 
 insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
@@ -735,17 +840,38 @@ values (12,
         Current_timestamp(),
         Current_timestamp(),
         Parsedatetime('31.06.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
-        'test goal for patient2, created by relative2, state = missed',
+        'test goal for Lucas Mueller, created by Lukas Pfeiffer, state = missed',
         2,
         7,
-        3);
+        4);
+
+
+insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
+values (13,
+        Current_timestamp(),
+        Current_timestamp(),
+        Parsedatetime('31.06.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
+        'test goal for Martina Pfeffer, created by Barbara Richter, state = missed',
+        2,
+        4,
+        7);
+
+insert into Goal (Id, Lastmodified, Created, Dueto, Goal, State, Creator_id, Goaltracker_id)
+values (14,
+        Current_timestamp(),
+        Current_timestamp(),
+        Parsedatetime('31.06.2018-00:00:00', 'dd.MM.yyyy-HH:mm:ss'),
+        'test goal for Stephanie Dreher, created by Barbara Richter, state = missed',
+        2,
+        4,
+        8);
 
 
 insert into Comment (Id, Lastmodified, time, Commenttext, Creator_id, Diaryentry_id)
 values (1,
         Current_timestamp(),
         Current_timestamp(),
-        'comment to diaryentry number 4 from doctor 1 Bidu',
+        'comment to diaryentry number 4 from Sara Sante',
         1,
         4);
 
@@ -754,7 +880,7 @@ insert into Comment (Id, Lastmodified, time, Commenttext, Creator_id, Diaryentry
 values (2,
         Current_timestamp(),
         Current_timestamp(),
-        'comment to diaryentry number 11 from doctor 2 Nik',
+        'comment to diaryentry number 11 from Mason Meier',
         2,
         11);
 
@@ -762,7 +888,9 @@ insert into Comment (Id, Lastmodified, time, Commenttext, Creator_id, Diaryentry
 values (3,
         Current_timestamp(),
         Current_timestamp(),
-        'another comment to diaryentry number 11 from doctor 3 Andi',
+        'another comment to diaryentry number 11 from Thomas Koehler',
         3,
         11);
+
+
 

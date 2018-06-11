@@ -1,28 +1,27 @@
 package ch.bfh.bti7081.s2018.white.pms.ui.app.diary;
 
+import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry;
-import ch.bfh.bti7081.s2018.white.pms.services.impl.DiaryEntryServiceImpl;
-import ch.bfh.bti7081.s2018.white.pms.services.impl.DiaryServiceImpl;
+import ch.bfh.bti7081.s2018.white.pms.ui.common.CustomButton;
 import ch.bfh.bti7081.s2018.white.pms.ui.main.PmsSecureView;
+
 import com.vaadin.ui.Accordion;
-import com.vaadin.ui.Button;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.TabSheet;
 
-import java.util.HashMap;
 import java.util.List;
 
 public abstract class DiaryOverview extends PmsSecureView {
 
     private Accordion accordion;
     private GridLayout gridDiary;
-    private Button newButton;
+    private CustomButton newButton;
 
     @Override
     public void initialize() {
         accordion = new Accordion();
         gridDiary = new GridLayout(2, 1);
-        newButton = new Button("+");
+        newButton = new CustomButton(CustomButton.typeEnum.NEW_DIARY_ENTRY);
     }
 
     public abstract List<DiaryEntry> getDiaryEntries();
@@ -54,7 +53,7 @@ public abstract class DiaryOverview extends PmsSecureView {
     private TabSheet.Tab addDiary(DiaryEntry diaryEntry) {
         String title = diaryEntry.getTitle();
         if (title == null) {
-            title = "New";
+            title = MessageHandler.NEW_DIARY_ENTRY;
         }
         DiaryEntryView view = new DiaryEntryView(diaryEntry, this);
         TabSheet.Tab newDiaryEntryTab = accordion.addTab(view, title);

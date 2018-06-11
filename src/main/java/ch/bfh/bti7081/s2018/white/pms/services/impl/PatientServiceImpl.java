@@ -8,4 +8,6 @@ public class PatientServiceImpl extends UserServiceImpl<Patient> implements Pati
     public PatientServiceImpl() {
         super(Patient.class);
     }
+
+
 }

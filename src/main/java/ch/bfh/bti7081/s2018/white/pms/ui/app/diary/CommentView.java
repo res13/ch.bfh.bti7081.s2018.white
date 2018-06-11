@@ -4,6 +4,7 @@ import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.Comment;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.CommentServiceImpl;
+import ch.bfh.bti7081.s2018.white.pms.ui.common.CustomButton;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.Notifier;
 import com.vaadin.navigator.View;
 import com.vaadin.server.VaadinSession;
@@ -22,11 +23,11 @@ public class CommentView extends VerticalLayout implements View {
     private HorizontalLayout hLayoutButtons = new HorizontalLayout();
     private TextArea text = new TextArea();
     private Label creator = new Label();
-    private Label time = new Label();
+    private DateTimeField time = new DateTimeField();
     private Comment comment;
-    private Button editButton = new Button(MessageHandler.EDIT);
-    private Button saveButton = new Button(MessageHandler.SAVE);
-    private Button deleteButton = new Button(MessageHandler.DELETE);
+    private CustomButton editButton;
+    private CustomButton saveButton;
+    private CustomButton deleteButton;
     private DiaryEntryView parentView;
 	private Tab tab;
 
@@ -35,6 +36,10 @@ public class CommentView extends VerticalLayout implements View {
         this.comment = comment;
         this.parentView = diaryEntryView;
 
+        editButton = new CustomButton(CustomButton.typeEnum.EDIT);
+        saveButton = new CustomButton(CustomButton.typeEnum.SAVE);
+        deleteButton = new CustomButton(CustomButton.typeEnum.DELETE);
+        
         editButton.addClickListener(clickEvent -> switchEditable());
         saveButton.addClickListener(clickEvent -> saveComment());
         deleteButton.addClickListener(clickEvent -> deleteComment());
@@ -45,10 +50,10 @@ public class CommentView extends VerticalLayout implements View {
             text.setValue(comment.getCommentText());
             text.setSizeFull();
             creator.setValue(comment.getCreator().getFullName());
-            time.setValue(comment.getTime().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+            time.setValue(comment.getTime());
         } else {
             creator.setValue(VaadinSession.getCurrent().getAttribute(User.class).getFullName());
-            time.setValue(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+            time.setValue(LocalDateTime.now());
             switchEditable();
         }
 

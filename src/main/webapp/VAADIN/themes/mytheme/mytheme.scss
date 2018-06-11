@@ -42,7 +42,7 @@
   img.v-icon{
     height:60%;
   }
-  .v-margin-left {
+    .v-margin-left {
      padding-left: 0px;
    }
    .v-margin-right {
@@ -67,6 +67,24 @@
     float: right;
   }
 
+  .myMenu {
+    height: 100vh;
+  }
+
+  .myGrid {
+    min-width: 730px;
+
+  }
+
+  .myLogin{
+    margin-top: 200px;
+  }
+
+  .myLabel {
+    font-size: 30px;
+    text-align: center;
+    margin-left: -30px;
+  }
 }
 
 

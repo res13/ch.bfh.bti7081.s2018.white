@@ -15084,3 +15084,21 @@ div.v-layout.v-horizontal.v-widget {
 .mytheme .btnSetting {
 	float: right;
 }
+
+.mytheme .myMenu {
+	height: 100vh;
+}
+
+.mytheme .myGrid {
+	min-width: 730px;
+}
+
+.mytheme .myLogin {
+	margin-top: 200px;
+}
+
+.mytheme .myLabel {
+	font-size: 30px;
+	text-align: center;
+	margin-left: -30px;
+}

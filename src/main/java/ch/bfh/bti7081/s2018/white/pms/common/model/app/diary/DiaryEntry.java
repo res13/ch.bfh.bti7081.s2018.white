@@ -26,7 +26,7 @@ public class DiaryEntry extends PmsEntity {
 
     private boolean patientRead;
 
-    @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "diaryEntry", cascade = CascadeType.REMOVE)
     private List<Comment> commentList;
 
     @ManyToOne
