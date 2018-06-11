@@ -11,6 +11,8 @@ import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.GoalServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.GoalTrackerServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.RelativeServiceImpl;
+import ch.bfh.bti7081.s2018.white.pms.ui.common.CustomButton;
+
 import com.vaadin.data.Binder;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.server.VaadinSession;
@@ -32,8 +34,8 @@ public class GoalView extends VerticalLayout {
     private TextField creator;
     private TextArea goalText;
     private NativeSelect<GoalState> status;
-    private Button save;
-    private Button delete;
+    private CustomButton save;
+    private CustomButton delete;
     private ComboBox<Patient> patientDropdown;
     private Goal goal;
     private GoaltrackerOverview overview;
@@ -56,8 +58,8 @@ public class GoalView extends VerticalLayout {
         endDate = new DateTimeField(MessageHandler.ENDDATE);
         creator = new TextField(MessageHandler.CREATED_BY);
         goalText = new TextArea(MessageHandler.GOAL);
-        save = new Button(MessageHandler.SAVE);
-        delete = new Button(MessageHandler.DELETE);
+        save = new CustomButton(CustomButton.typeEnum.SAVE);
+        delete = new CustomButton(CustomButton.typeEnum.DELETE);
         binder = new Binder<>(Goal.class);
         patientDropdown = new ComboBox(MessageHandler.PATIENT);
         patients = new ArrayList<>();
@@ -77,7 +79,6 @@ public class GoalView extends VerticalLayout {
         binder.bind(createdOn, Goal::getCreated, Goal::setCreated);
         binder.bind(endDate, Goal::getDueTo, Goal::setDueTo);
         binder.bind(goalText, Goal::getGoal, Goal::setGoal);
-        save.setStyleName(ValoTheme.BUTTON_PRIMARY);
         save.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         save.addClickListener(e -> this.save());
         delete.addClickListener(e -> this.delete());

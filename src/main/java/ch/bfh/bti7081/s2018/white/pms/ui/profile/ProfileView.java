@@ -38,8 +38,8 @@ public class ProfileView extends PmsSecureView {
 
     @Override
     public void initialize() {
-        firstnameLabel = new Label(MessageHandler.SURNAME);
-        lastnameLabel = new Label(MessageHandler.NAME);
+        lastnameLabel = new Label(MessageHandler.SURNAME);
+        firstnameLabel = new Label(MessageHandler.NAME);
         emailLabel = new Label(MessageHandler.EMAIL);
         roleLabel = new Label(MessageHandler.STATUS);
         birthdayLabel = new Label(MessageHandler.BIRTHDAY);

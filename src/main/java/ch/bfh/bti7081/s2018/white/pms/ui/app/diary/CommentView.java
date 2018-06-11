@@ -23,7 +23,7 @@ public class CommentView extends VerticalLayout implements View {
     private HorizontalLayout hLayoutButtons = new HorizontalLayout();
     private TextArea text = new TextArea();
     private Label creator = new Label();
-    private Label time = new Label();
+    private DateTimeField time = new DateTimeField();
     private Comment comment;
     private CustomButton editButton;
     private CustomButton saveButton;
@@ -50,10 +50,10 @@ public class CommentView extends VerticalLayout implements View {
             text.setValue(comment.getCommentText());
             text.setSizeFull();
             creator.setValue(comment.getCreator().getFullName());
-            time.setValue(comment.getTime().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+            time.setValue(comment.getTime());
         } else {
             creator.setValue(VaadinSession.getCurrent().getAttribute(User.class).getFullName());
-            time.setValue(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+            time.setValue(LocalDateTime.now());
             switchEditable();
         }
 

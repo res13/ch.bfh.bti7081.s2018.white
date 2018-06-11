@@ -6,7 +6,7 @@ import com.vaadin.ui.Button;
 import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 
 public class CustomButton extends Button {
-	public enum typeEnum {NEW_COMMENT,NEW_DIARY_ENTRY,EDIT,DELETE,SAVE,LOGIN};
+	public enum typeEnum {NEW_GOAL,NEW_COMMENT,NEW_DIARY_ENTRY,EDIT,DELETE,SAVE,LOGIN};
 	private typeEnum typeString;
 
     public CustomButton(typeEnum typeString) {
@@ -21,6 +21,10 @@ public class CustomButton extends Button {
     		case NEW_COMMENT:		
     	        this.setIcon(new ThemeResource("images/plus.png"));
     	        this.setDescription(MessageHandler.NEW_COMMENT);
+    			break;
+    		case NEW_GOAL:		
+    	        this.setIcon(new ThemeResource("images/plus.png"));
+    	        this.setDescription(MessageHandler.ADD_GOAL);
     			break;
     		case EDIT:
     	        this.setIcon(new ThemeResource("images/edit.png"));

@@ -37,7 +37,7 @@ public class DiaryEntryView extends VerticalLayout {
     private TextField title;
     private TextArea text;
     private Label creator;
-    private Label time;
+    private DateTimeField time;
     private DiaryEntry diaryEntry;
     private Accordion accordionComments;
     private CustomButton editButton;
@@ -70,7 +70,7 @@ public class DiaryEntryView extends VerticalLayout {
         title = new TextField();
         text = new TextArea();
         creator = new Label();
-        time = new Label();
+        time = new DateTimeField();
         patientRead = new CheckBox(MessageHandler.PATIENT_READ);
         relativeRead = new CheckBox(MessageHandler.RELATIVE_READ);
         accordionComments = new Accordion();
@@ -91,7 +91,7 @@ public class DiaryEntryView extends VerticalLayout {
             title.setValue(diaryEntry.getTitle());
             text.setValue(diaryEntry.getEntryText());
             creator.setValue(diaryEntry.getCreator().getFullName());
-            time.setValue(diaryEntry.getTime().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+            time.setValue(diaryEntry.getTime());
             relativeRead.setValue(diaryEntry.isRelativeRead());
             patientRead.setValue(diaryEntry.isPatientRead());
             if (user instanceof Relative) {
@@ -100,7 +100,7 @@ public class DiaryEntryView extends VerticalLayout {
             }
         } else {
             creator.setValue(VaadinSession.getCurrent().getAttribute(User.class).getFullName());
-            time.setValue(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+            time.setValue(LocalDateTime.now());
             if (user instanceof Relative) {
                 patientSelect.setItems(((Relative) user).getPatientList());
             }
