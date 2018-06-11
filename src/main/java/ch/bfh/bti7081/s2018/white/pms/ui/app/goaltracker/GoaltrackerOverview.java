@@ -19,6 +19,7 @@ public class GoaltrackerOverview extends PmsSecureView {
     public static final String NAME = "goaltracker";
     private GoalServiceImpl goalService;
     private Grid<Goal> grid;
+    private TextField filterText;
 
     @Override
     public String getName() {
@@ -29,12 +30,12 @@ public class GoaltrackerOverview extends PmsSecureView {
     public void initialize() {
         goalService = new GoalServiceImpl();
         grid = new Grid<>(Goal.class);
+        filterText = new TextField();
     }
 
     @Override
     public void createView() {
         final VerticalLayout layout = new VerticalLayout();
-        TextField filterText = new TextField();
         filterText.setPlaceholder(MessageHandler.FILTER);
         filterText.addValueChangeListener(e -> updateList());
         filterText.setValueChangeMode(ValueChangeMode.LAZY);
@@ -72,7 +73,7 @@ public class GoaltrackerOverview extends PmsSecureView {
         User user = (User) VaadinSession.getCurrent().getAttribute(User.class.getName());
         List<Goal> goals = null;
         try {
-            goals = goalService.getGoalEntriesForUser(user);
+            goals = goalService.getGoalEntriesForUserAndFilter(user,filterText.getValue());
         } catch (Exception e) {
             e.printStackTrace();
         }

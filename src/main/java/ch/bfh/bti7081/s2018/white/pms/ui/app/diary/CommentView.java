@@ -22,7 +22,7 @@ public class CommentView extends VerticalLayout implements View {
     private HorizontalLayout hLayoutInfos = new HorizontalLayout();
     private HorizontalLayout hLayoutButtons = new HorizontalLayout();
     private TextArea text = new TextArea();
-    private Label creator = new Label();
+    private TextField creator = new TextField();
     private DateTimeField time = new DateTimeField();
     private Comment comment;
     private CustomButton editButton;

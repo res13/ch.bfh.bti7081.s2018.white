@@ -36,7 +36,7 @@ public class DiaryEntryView extends VerticalLayout {
     private GridLayout gLayout;
     private TextField title;
     private TextArea text;
-    private Label creator;
+    private TextField creator;
     private DateTimeField time;
     private DiaryEntry diaryEntry;
     private Accordion accordionComments;
@@ -69,7 +69,7 @@ public class DiaryEntryView extends VerticalLayout {
         gLayout = new GridLayout(4, 4);
         title = new TextField();
         text = new TextArea();
-        creator = new Label();
+        creator = new TextField();
         time = new DateTimeField();
         patientRead = new CheckBox(MessageHandler.PATIENT_READ);
         relativeRead = new CheckBox(MessageHandler.RELATIVE_READ);

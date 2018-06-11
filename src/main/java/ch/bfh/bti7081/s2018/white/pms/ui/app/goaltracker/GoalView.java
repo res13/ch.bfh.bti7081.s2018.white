@@ -12,13 +12,12 @@ import ch.bfh.bti7081.s2018.white.pms.services.impl.GoalServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.GoalTrackerServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.RelativeServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.CustomButton;
+import ch.bfh.bti7081.s2018.white.pms.ui.common.Notifier;
 
 import com.vaadin.data.Binder;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
-import com.vaadin.ui.themes.ValoTheme;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -127,6 +126,11 @@ public class GoalView extends VerticalLayout {
     }
 
     private void save() {
+    	if(patientDropdown.getSelectedItem().isPresent() != true){
+    		Notifier.notify(MessageHandler.NOT_SAVED, MessageHandler.NOT_SAVED_GOAL);
+    		patientDropdown.focus();
+    		return;
+    	}
         try {
             if (goal.getId() == null) {
                 goal.setState(status.getValue());
@@ -140,5 +144,6 @@ public class GoalView extends VerticalLayout {
             e.printStackTrace();
         }
         overview.updateList();
+        Notifier.notify(MessageHandler.SAVED, MessageHandler.SAVED_GOAL);
     }
 }
