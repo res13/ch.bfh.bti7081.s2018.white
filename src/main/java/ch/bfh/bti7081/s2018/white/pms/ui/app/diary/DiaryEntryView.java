@@ -59,6 +59,7 @@ public class DiaryEntryView extends VerticalLayout {
         diaryService = new DiaryServiceImpl();
         commentService = new CommentServiceImpl();
         vLayout = new VerticalLayout();
+        vLayout.setSpacing(true);
         hLayoutComments = new HorizontalLayout();
         hLayoutPermissions = new HorizontalLayout();
         hLayoutButtons = new HorizontalLayout();
@@ -67,8 +68,11 @@ public class DiaryEntryView extends VerticalLayout {
         patientSelect.setTextInputAllowed(false);
         patientSelect.setItemCaptionGenerator(Patient::getFullName);
         gLayout = new GridLayout(4, 4);
+        gLayout.setSpacing(true);
         title = new TextField();
+        title.setWidth(100,Unit.PERCENTAGE);
         text = new TextArea();
+        text.setWidth(100,Unit.PERCENTAGE);
         creator = new TextField();
         time = new DateTimeField();
         patientRead = new CheckBox(MessageHandler.PATIENT_READ);
@@ -108,10 +112,10 @@ public class DiaryEntryView extends VerticalLayout {
         }
         creator.setEnabled(false);
         time.setEnabled(false);
-        gLayout.addComponent(title, 0, 0);
+        gLayout.addComponent(title, 0, 0, 1, 0);
         gLayout.addComponent(time, 0, 1);
         gLayout.addComponent(creator, 1, 1);
-        gLayout.addComponent(text, 0, 2);
+        gLayout.addComponent(text, 0, 2, 1, 2);
         gLayout.addComponent(hLayoutPermissions, 0, 3);
         gLayout.addComponent(hLayoutButtons, 3, 3);
         vLayout.addComponent(gLayout);

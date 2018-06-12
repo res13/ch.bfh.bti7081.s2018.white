@@ -25,7 +25,6 @@ import java.util.List;
 public class GoalView extends VerticalLayout {
 
     private List<Patient> patients;
-    private RelativeServiceImpl relativeServiceImpl;
     private GoalTrackerServiceImpl goalTrackerServiceImpl;
     private GoalServiceImpl goalServiceImpl;
     private DateTimeField createdOn;
@@ -49,7 +48,6 @@ public class GoalView extends VerticalLayout {
     }
 
     private void initialize() {
-        relativeServiceImpl = new RelativeServiceImpl();
         goalServiceImpl = new GoalServiceImpl();
         goalTrackerServiceImpl = new GoalTrackerServiceImpl();
         status = new NativeSelect<>(MessageHandler.STATUS);
@@ -68,6 +66,8 @@ public class GoalView extends VerticalLayout {
         setSizeUndefined();
         HorizontalLayout buttons = new HorizontalLayout(save, delete);
         addComponents(patientDropdown, creator, createdOn, endDate, status, goalText, buttons);
+        endDate.setRangeStart(LocalDateTime.now());
+        endDate.setDateOutOfRangeMessage(MessageHandler.OUT_OF_RANGE);
         status.setEmptySelectionAllowed(false);
         status.setItems(GoalState.values());
         createdOn.setReadOnly(true);
@@ -130,15 +130,19 @@ public class GoalView extends VerticalLayout {
     		Notifier.notify(MessageHandler.NOT_SAVED, MessageHandler.NOT_SAVED_GOAL);
     		patientDropdown.focus();
     		return;
+    	} else if (goalText.getValue().isEmpty() == true){
+    		Notifier.notify(MessageHandler.NOT_SAVED, MessageHandler.NOT_SAVED_GOAL);
+    		goalText.focus();
+    		return;
     	}
         try {
-            if (goal.getId() == null) {
+            //if (goal.getId() == null) {
                 goal.setState(status.getValue());
                 goal.setCreator(user);
                 Long patientId = patientDropdown.getSelectedItem().get().getId();
                 GoalTracker goalTracker = goalTrackerServiceImpl.getGoalTrackerByPatientEntityId(patientId);
                 goal.setGoalTracker(goalTracker);
-            }
+            //}
             goalServiceImpl.saveOrUpdateEntity(goal);
         } catch (Exception e) {
             e.printStackTrace();

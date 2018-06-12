@@ -68,6 +68,7 @@ public class MessageHandler {
     public static final String GOAL = getMessage("GOAL");
     public static final String SAVED_GOAL = getMessage("SAVED_GOAL");
     public static final String NOT_SAVED_GOAL = getMessage("NOT_SAVED_GOAL");
+    public static final String OUT_OF_RANGE = getMessage("OUT_OF_RANGE");
 
     private static String getMessage(String messageId) {
         return MESSAGES.getString(messageId);
