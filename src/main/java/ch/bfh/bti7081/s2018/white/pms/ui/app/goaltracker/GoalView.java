@@ -102,9 +102,11 @@ public class GoalView extends VerticalLayout {
             } else if (user instanceof Relative) {
                 Relative relative = (Relative) this.user;
                 patients = relative.getPatientList();
+                patientDropdown.setItems(patients);
             } else if (user instanceof Doctor) {
                 Doctor doctor = (Doctor) this.user;
                 patients = doctor.getPatientList();
+                patientDropdown.setItems(patients);
             }
             creator.setValue(user.getFullName());
             status.setSelectedItem(GoalState.OPEN);
