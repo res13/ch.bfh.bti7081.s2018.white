@@ -36,8 +36,8 @@ public class DiaryEntryView extends VerticalLayout {
     private GridLayout gLayout;
     private TextField title;
     private TextArea text;
-    private Label creator;
-    private Label time;
+    private TextField creator;
+    private DateTimeField time;
     private DiaryEntry diaryEntry;
     private Accordion accordionComments;
     private CustomButton editButton;
@@ -59,6 +59,7 @@ public class DiaryEntryView extends VerticalLayout {
         diaryService = new DiaryServiceImpl();
         commentService = new CommentServiceImpl();
         vLayout = new VerticalLayout();
+        vLayout.setSpacing(true);
         hLayoutComments = new HorizontalLayout();
         hLayoutPermissions = new HorizontalLayout();
         hLayoutButtons = new HorizontalLayout();
@@ -67,10 +68,13 @@ public class DiaryEntryView extends VerticalLayout {
         patientSelect.setTextInputAllowed(false);
         patientSelect.setItemCaptionGenerator(Patient::getFullName);
         gLayout = new GridLayout(4, 4);
+        gLayout.setSpacing(true);
         title = new TextField();
+        title.setWidth(100,Unit.PERCENTAGE);
         text = new TextArea();
-        creator = new Label();
-        time = new Label();
+        text.setWidth(100,Unit.PERCENTAGE);
+        creator = new TextField();
+        time = new DateTimeField();
         patientRead = new CheckBox(MessageHandler.PATIENT_READ);
         relativeRead = new CheckBox(MessageHandler.RELATIVE_READ);
         accordionComments = new Accordion();
@@ -91,7 +95,7 @@ public class DiaryEntryView extends VerticalLayout {
             title.setValue(diaryEntry.getTitle());
             text.setValue(diaryEntry.getEntryText());
             creator.setValue(diaryEntry.getCreator().getFullName());
-            time.setValue(diaryEntry.getTime().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+            time.setValue(diaryEntry.getTime());
             relativeRead.setValue(diaryEntry.isRelativeRead());
             patientRead.setValue(diaryEntry.isPatientRead());
             if (user instanceof Relative) {
@@ -100,7 +104,7 @@ public class DiaryEntryView extends VerticalLayout {
             }
         } else {
             creator.setValue(VaadinSession.getCurrent().getAttribute(User.class).getFullName());
-            time.setValue(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+            time.setValue(LocalDateTime.now());
             if (user instanceof Relative) {
                 patientSelect.setItems(((Relative) user).getPatientList());
             }
@@ -108,10 +112,10 @@ public class DiaryEntryView extends VerticalLayout {
         }
         creator.setEnabled(false);
         time.setEnabled(false);
-        gLayout.addComponent(title, 0, 0);
+        gLayout.addComponent(title, 0, 0, 1, 0);
         gLayout.addComponent(time, 0, 1);
         gLayout.addComponent(creator, 1, 1);
-        gLayout.addComponent(text, 0, 2);
+        gLayout.addComponent(text, 0, 2, 1, 2);
         gLayout.addComponent(hLayoutPermissions, 0, 3);
         gLayout.addComponent(hLayoutButtons, 3, 3);
         vLayout.addComponent(gLayout);

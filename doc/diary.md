@@ -1,4 +1,19 @@
 # Meetings
+## 2018-06-01
+### Attendees
+* Beat Schärz (pidu2)
+* Dario Furigo (VirtSyntaxError)
+* Ohran Mujkic (mujko1)
+* Janick Lüdi (janexander)
+
+### Agenda
+* Sprint3 updaten 
+
+### Decisions
+
+### ToDo
+* check sprint backlog
+
 ## 2018-05-25
 ### Attendees
 * Beat Schärz (pidu2)

@@ -22,6 +22,10 @@ public class CustomButton extends Button {
     	        this.setIcon(new ThemeResource("images/plus.png"));
     	        this.setDescription(MessageHandler.NEW_COMMENT);
     			break;
+    		case NEW_GOAL:
+    	        this.setIcon(new ThemeResource("images/plus.png"));
+    	        this.setDescription(MessageHandler.ADD_GOAL);
+    			break;
     		case EDIT:
     	        this.setIcon(new ThemeResource("images/edit.png"));
     	        this.setDescription(MessageHandler.EDIT);

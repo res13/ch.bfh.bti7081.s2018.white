@@ -1,19 +1,20 @@
-#Testdata
+# Testdata
+
 ## Story1
-* doctor1@pms.ch - doctor1
-* patient1@pms.ch - patient1
-* relative1@pms.ch - relative1
+* sara.sante@pms.ch - doctor1
+* ben.barber@pms.ch - patient1
+* jonas.johnson@pms.ch - relative1
 
 ## Story2
-* doctor2@pms.ch - doctor2
-* doctor3@pms.ch - doctor3
-* patient2@pms.ch - patient2
-* relative2@pms.ch - relative2
-* relative3@pms.ch - relative3
+* mason.meier@pms.ch - doctor2
+* thomas.koehler@pms.ch - doctor3
+* lucas.mueller@pms.ch - patient2
+* lukas.pfeiffer@pms.ch - relative2
+* isabelle.pfeiffer@pms.ch - relative3
 
 ## Story3
-* doctor4@pms.ch - doctor4
-* patient3@pms.ch - patient3
-* patient4@pms.ch - patient4
-* relative4@pms.ch - relative4
+* barbara.richter@pms.ch - doctor4
+* martina.pfeffer@pms.ch - patient3
+* stephanie.dreher@pms.ch - patient4
+* dennis.klein@pms.ch - relative4
 

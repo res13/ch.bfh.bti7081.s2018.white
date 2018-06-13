@@ -8,6 +8,7 @@ import ch.bfh.bti7081.s2018.white.pms.ui.common.CustomButton;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.Notifier;
 import com.vaadin.navigator.View;
 import com.vaadin.server.VaadinSession;
+import com.vaadin.server.Sizeable.Unit;
 import com.vaadin.ui.*;
 import com.vaadin.ui.TabSheet.Tab;
 
@@ -18,12 +19,11 @@ public class CommentView extends VerticalLayout implements View {
 
     private CommentServiceImpl commentService = new CommentServiceImpl();
 
-    private VerticalLayout vLayout = new VerticalLayout();
-    private HorizontalLayout hLayoutInfos = new HorizontalLayout();
+    private GridLayout gLayout = new GridLayout(2,3);
     private HorizontalLayout hLayoutButtons = new HorizontalLayout();
     private TextArea text = new TextArea();
-    private Label creator = new Label();
-    private Label time = new Label();
+    private TextField creator = new TextField();
+    private DateTimeField time = new DateTimeField();
     private Comment comment;
     private CustomButton editButton;
     private CustomButton saveButton;
@@ -35,6 +35,7 @@ public class CommentView extends VerticalLayout implements View {
     public CommentView(Comment comment, DiaryEntryView diaryEntryView) {
         this.comment = comment;
         this.parentView = diaryEntryView;
+        text.setWidth(100,Unit.PERCENTAGE);
 
         editButton = new CustomButton(CustomButton.TypeEnum.EDIT);
         saveButton = new CustomButton(CustomButton.TypeEnum.SAVE);
@@ -48,24 +49,23 @@ public class CommentView extends VerticalLayout implements View {
 
         if (this.comment.getId() != null) {
             text.setValue(comment.getCommentText());
-            text.setSizeFull();
             creator.setValue(comment.getCreator().getFullName());
-            time.setValue(comment.getTime().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+            time.setValue(comment.getTime());
         } else {
             creator.setValue(VaadinSession.getCurrent().getAttribute(User.class).getFullName());
-            time.setValue(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+            time.setValue(LocalDateTime.now());
             switchEditable();
         }
 
         creator.setEnabled(false);
         time.setEnabled(false);
 
-        hLayoutInfos.addComponent(time);
-        hLayoutInfos.addComponent(creator);
-        vLayout.addComponent(hLayoutInfos);
-        vLayout.addComponent(text);
-        vLayout.addComponent(hLayoutButtons);
-        addComponents(vLayout);
+        gLayout.addComponent(time, 0, 0);
+        gLayout.addComponent(creator, 1, 0);
+        gLayout.addComponent(text, 0, 1, 1, 1);
+        gLayout.addComponent(hLayoutButtons, 0, 2);
+        gLayout.setSpacing(true);
+        addComponents(gLayout);
     }
 
     private void switchEditable() {
