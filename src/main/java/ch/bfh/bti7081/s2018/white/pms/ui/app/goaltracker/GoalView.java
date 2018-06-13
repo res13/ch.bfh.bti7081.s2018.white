@@ -55,8 +55,8 @@ public class GoalView extends VerticalLayout {
         endDate = new DateTimeField(MessageHandler.ENDDATE);
         creator = new TextField(MessageHandler.CREATED_BY);
         goalText = new TextArea(MessageHandler.GOAL);
-        save = new CustomButton(CustomButton.typeEnum.SAVE);
-        delete = new CustomButton(CustomButton.typeEnum.DELETE);
+        save = new CustomButton(CustomButton.TypeEnum.SAVE);
+        delete = new CustomButton(CustomButton.TypeEnum.DELETE);
         binder = new Binder<>(Goal.class);
         patientDropdown = new ComboBox(MessageHandler.PATIENT);
         patients = new ArrayList<>();
