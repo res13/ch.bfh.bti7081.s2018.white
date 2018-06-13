@@ -72,8 +72,8 @@
   }
 
   .myGrid {
-    min-width: 730px;
-
+    min-width: 1200px;
+    min-height:  730px;
   }
 
   .myLogin{
@@ -85,6 +85,21 @@
     text-align: center;
     margin-left: -30px;
   }
+
+  .lblWelcome{
+    font-size: 60px;
+    text-align: center;
+    color: #1d69b4;
+  }
+  .lblOverview{
+    font-size: 30px;
+    text-align: center;
+    color: #1d69b4;
+  }
+  .lblSubTitle{
+  font-weight: bold;
+  }
+
 }
 
 
