@@ -6,7 +6,7 @@ import com.vaadin.ui.Button;
 import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 
 public class CustomButton extends Button {
-	public enum TypeEnum {NEW_COMMENT,NEW_DIARY_ENTRY,EDIT,DELETE,SAVE,LOGIN};
+	public enum TypeEnum {NEW_COMMENT,NEW_GOAL,NEW_DIARY_ENTRY,EDIT,DELETE,SAVE,LOGIN};
 	private TypeEnum typeString;
 
     public CustomButton(TypeEnum typeString) {
