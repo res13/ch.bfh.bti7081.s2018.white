@@ -12,13 +12,11 @@ import ch.bfh.bti7081.s2018.white.pms.services.impl.DiaryEntryServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.DiaryServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.CustomButton;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.Notifier;
-
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
 import com.vaadin.ui.TabSheet.Tab;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class DiaryEntryView extends VerticalLayout {
@@ -45,7 +43,7 @@ public class DiaryEntryView extends VerticalLayout {
     private CustomButton newButton;
     private CustomButton deleteButton;
     private DiaryOverview parentDiary;
-	private Tab tab;
+    private Tab tab;
 
     public DiaryEntryView(DiaryEntry diaryEntry, DiaryOverview diaryOverview) {
         initialize();
@@ -70,9 +68,9 @@ public class DiaryEntryView extends VerticalLayout {
         gLayout = new GridLayout(4, 4);
         gLayout.setSpacing(true);
         title = new TextField();
-        title.setWidth(100,Unit.PERCENTAGE);
+        title.setWidth(100, Unit.PERCENTAGE);
         text = new TextArea();
-        text.setWidth(100,Unit.PERCENTAGE);
+        text.setWidth(100, Unit.PERCENTAGE);
         creator = new TextField();
         time = new DateTimeField();
         patientRead = new CheckBox(MessageHandler.PATIENT_READ);
@@ -141,7 +139,7 @@ public class DiaryEntryView extends VerticalLayout {
             diaryEntryService.deleteEntity(diaryEntry);
             Notifier.notify(MessageHandler.DELETED, MessageHandler.DELETED_DIARY_ENTRY);
             if (tab != null) {
-            	parentDiary.deleteDiaryEntry(tab);
+                parentDiary.deleteDiaryEntry(tab);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -153,7 +151,7 @@ public class DiaryEntryView extends VerticalLayout {
         text.setEnabled(!text.isEnabled());
         patientRead.setEnabled(!patientRead.isEnabled());
         patientSelect.setEnabled(!patientSelect.isEnabled());
-        
+
         hLayoutButtons.removeAllComponents();
         hLayoutPermissions.removeAllComponents();
         User user = VaadinSession.getCurrent().getAttribute(User.class);
@@ -183,15 +181,15 @@ public class DiaryEntryView extends VerticalLayout {
         if (this.diaryEntry.getId() == null) {
             this.diaryEntry = new DiaryEntry();
         }
-        if(title.getValue().isEmpty() == true){
-        	Notifier.notify(MessageHandler.NOT_SAVED, MessageHandler.NOT_SAVED_DIARY_ENTRY);
-    		title.focus();
-    		return;
-    	} else if (text.getValue().isEmpty() == true){
-    		Notifier.notify(MessageHandler.NOT_SAVED, MessageHandler.NOT_SAVED_DIARY_ENTRY);
-    		text.focus();
-    		return;
-    	}
+        if (title.getValue().isEmpty() == true) {
+            Notifier.notify(MessageHandler.NOT_SAVED, MessageHandler.NOT_SAVED_DIARY_ENTRY);
+            title.focus();
+            return;
+        } else if (text.getValue().isEmpty() == true) {
+            Notifier.notify(MessageHandler.NOT_SAVED, MessageHandler.NOT_SAVED_DIARY_ENTRY);
+            text.focus();
+            return;
+        }
         User user = VaadinSession.getCurrent().getAttribute(User.class);
         diaryEntry.setTitle(title.getValue());
         diaryEntry.setEntryText(text.getValue());
@@ -199,15 +197,14 @@ public class DiaryEntryView extends VerticalLayout {
         diaryEntry.setTime(LocalDateTime.now());
         Long selectedPatientId = null;
         if (user instanceof Relative) {
-        	if(patientSelect.getSelectedItem().isPresent() == true){
-        		selectedPatientId = patientSelect.getSelectedItem().get().getId();
-        	} else {
-        		Notifier.notify(MessageHandler.NOT_SAVED, MessageHandler.NOT_SAVED_DIARY_ENTRY);
-        		patientSelect.focus();
-        		return;
-        	}          
-        }
-        else if (user instanceof Patient) {
+            if (patientSelect.getSelectedItem().isPresent() == true) {
+                selectedPatientId = patientSelect.getSelectedItem().get().getId();
+            } else {
+                Notifier.notify(MessageHandler.NOT_SAVED, MessageHandler.NOT_SAVED_DIARY_ENTRY);
+                patientSelect.focus();
+                return;
+            }
+        } else if (user instanceof Patient) {
             selectedPatientId = user.getId();
         }
         if (selectedPatientId != null) {
@@ -217,13 +214,13 @@ public class DiaryEntryView extends VerticalLayout {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } 
+        }
         if (user instanceof Patient) {
             diaryEntry.setRelativeRead(relativeRead.getValue());
         } else if (user instanceof Relative) {
             diaryEntry.setPatientRead(patientRead.getValue());
-        } 
-          
+        }
+
         try {
             this.diaryEntry = diaryEntryService.saveOrUpdateEntity(diaryEntry);
             tab.setCaption(diaryEntry.getTitle());
@@ -231,7 +228,7 @@ public class DiaryEntryView extends VerticalLayout {
             Notifier.notify(MessageHandler.SAVED, MessageHandler.SAVED_DIARY_ENTRY);
         } catch (Exception e) {
             e.printStackTrace();
-        }      
+        }
     }
 
     private void newComment() {
@@ -242,17 +239,17 @@ public class DiaryEntryView extends VerticalLayout {
     }
 
     private TabSheet.Tab addComment(Comment comment) {
-    	CommentView view = new CommentView(comment, this);
+        CommentView view = new CommentView(comment, this);
         TabSheet.Tab newCommentTab = accordionComments.addTab(view, "");
         view.setTab(newCommentTab);
         return newCommentTab;
     }
 
     public void deleteComment(TabSheet.Tab tab) {
-            accordionComments.removeTab(tab);
+        accordionComments.removeTab(tab);
     }
 
-	public void setTab(Tab newDiaryEntryTab) {
-		this.tab = newDiaryEntryTab;
-	}
+    public void setTab(Tab newDiaryEntryTab) {
+        this.tab = newDiaryEntryTab;
+    }
 }

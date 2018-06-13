@@ -5,7 +5,6 @@ import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.services.UserService;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.UserServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.CustomButton;
-
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.View;
 import com.vaadin.server.VaadinSession;
@@ -31,7 +30,7 @@ public class LoginView extends VerticalLayout implements View {
 
         FormLayout content = new FormLayout();
         panel.addStyleName("myLogin");
-        Label welcome = new Label("Willkommen");
+        Label welcome = new Label(MessageHandler.WELCOME);
         welcome.addStyleName("myLabel");
         content.addComponent(welcome);
         TextField emailField = new TextField(MessageHandler.EMAIL);

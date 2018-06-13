@@ -4,7 +4,6 @@ import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.DiaryEntry;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.CustomButton;
 import ch.bfh.bti7081.s2018.white.pms.ui.main.PmsSecureView;
-
 import com.vaadin.ui.Accordion;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.TabSheet;

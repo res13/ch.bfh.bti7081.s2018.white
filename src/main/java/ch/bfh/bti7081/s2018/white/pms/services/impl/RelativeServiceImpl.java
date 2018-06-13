@@ -8,5 +8,5 @@ public class RelativeServiceImpl extends UserServiceImpl<Relative> implements Re
     public RelativeServiceImpl() {
         super(Relative.class);
     }
-    
+
 }

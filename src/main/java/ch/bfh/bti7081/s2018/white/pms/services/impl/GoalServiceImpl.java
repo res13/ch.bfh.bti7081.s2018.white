@@ -47,7 +47,7 @@ public class GoalServiceImpl extends BaseServiceImpl<Goal> implements GoalServic
                     return allQuery.getResultList();
                 });
     }
-    
+
     public List<Goal> getGoalEntriesForUserAndFilter(User user, String like) {
         return getGoalEntriesForUser(user)
                 .stream()

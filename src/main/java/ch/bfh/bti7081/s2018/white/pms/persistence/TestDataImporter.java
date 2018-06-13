@@ -23,8 +23,7 @@ public class TestDataImporter {
         Connection connection = DriverManager.getConnection(H2_URL, H2_USER, H2_PASSWORD);
         try {
             RunScript.execute(connection, new FileReader(SQL_SCRIPT_DML_PATH));
-        }
-        finally {
+        } finally {
             connection.close();
         }
     }
