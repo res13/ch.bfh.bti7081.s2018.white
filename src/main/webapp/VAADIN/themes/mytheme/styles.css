@@ -15090,7 +15090,16 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme .myGrid {
+<<<<<<< Updated upstream
 	min-width: 730px;
+=======
+<<<<<<< Updated upstream
+    min-width: 730px;
+=======
+	min-width: 1200px;
+	min-height: 730px;
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 }
 
 .mytheme .myLogin {
@@ -15098,7 +15107,35 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme .myLabel {
+<<<<<<< Updated upstream
 	font-size: 30px;
 	text-align: center;
 	margin-left: -30px;
+=======
+<<<<<<< Updated upstream
+    font-size: 30px;
+    text-align: center;
+    margin-left: -30px;
+=======
+	font-size: 30px;
+	text-align: center;
+	margin-left: -30px;
+}
+
+.mytheme .lblWelcome {
+	font-size: 60px;
+	text-align: center;
+	color: #1d69b4;
+}
+
+.mytheme .lblOverview {
+	font-size: 30px;
+	text-align: center;
+	color: #1d69b4;
+}
+
+.mytheme .lblSubTitle {
+	font-weight: bold;
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 }
