@@ -121,10 +121,6 @@ public class DashboardView extends PmsSecureView {
         GridLayout gridLayout = null;
         if (user instanceof Relative) {
             gridLayout = new RelativeDashboardView((Relative) this.user).getGridLayout();
-        } else if (user instanceof Doctor) {
-            // add if needed
-        } else if (user instanceof Patient) {
-            // add if needed
         }
         return gridLayout;
     }
@@ -140,7 +136,7 @@ public class DashboardView extends PmsSecureView {
         }
     }
 
-    class ButtonListener implements Button.ClickListener {
+    static class ButtonListener implements Button.ClickListener {
 
         String viewName;
 

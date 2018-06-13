@@ -4,6 +4,7 @@ import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.goaltracker.Goal;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.GoalServiceImpl;
+import ch.bfh.bti7081.s2018.white.pms.ui.common.ButtonType;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.CustomButton;
 import ch.bfh.bti7081.s2018.white.pms.ui.main.PmsSecureView;
 import com.vaadin.server.FontAwesome;
@@ -45,7 +46,7 @@ public class GoaltrackerOverview extends PmsSecureView {
         CssLayout filtering = new CssLayout();
         filtering.addComponents(filterText, clearFilterTextBtn);
         filtering.setStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
-        CustomButton addCustomerBtn = new CustomButton(CustomButton.TypeEnum.NEW_GOAL);
+        CustomButton addCustomerBtn = new CustomButton(ButtonType.NEW_GOAL);
         GoalView form = new GoalView(this);
         addCustomerBtn.addClickListener(e -> {
             grid.asSingleSelect().clear();

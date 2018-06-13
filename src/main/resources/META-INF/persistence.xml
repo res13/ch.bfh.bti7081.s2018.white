@@ -23,7 +23,7 @@
             <property name="hibernate.connection.driver_class" value="org.h2.Driver"/>
             <property name="hibernate.connection.url" value="jdbc:h2:file:./target/h2db/db/pms;DB_CLOSE_DELAY=-1"/>
             <property name="hibernate.connection.username" value="sa"/>
-            <property name="hibernate.connection.password" value=""/>
+            <property name="hibernate.connection.password" value="sa"/>
             <property name="hibernate.current_session_context_class" value="thread"/>
             <property name="hibernate.enable_lazy_load_no_trans" value="true"/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
