@@ -61,11 +61,11 @@ public class RelativeDashboardView {
             Label lblSubTitleDiaryRelative = new Label(MessageHandler.MY_DIARY_ENTRIES);
             lblSubTitleDiaryRelative.addStyleName("lblSubTitle");
             vlDiaryRelative.addComponentsAndExpand(lblSubTitleDiaryRelative); // new Label(MessageHandler.MY_DIARY_ENTRIES).addStyleName("lblSubTitle")
-            List<DiaryEntry> relativeDiaryEntriesForUser = new DiaryEntryServiceImpl().getRelativeDiaryEntriesForUser(relative);
+            List<DiaryEntry> relativeDiaryEntriesForUser = new DiaryEntryServiceImpl().getRelativeDiaryEntriesForUserAndPatient(relative, patient);
 
             if (!relativeDiaryEntriesForUser.isEmpty()){
                 relativeDiaryEntriesForUser.stream().limit(3).forEach(diaryEntry -> {
-                    Button button = new Button(diaryEntry.getTitle());
+                    Button button = new Button(trimTitle(diaryEntry.getTitle(),30));
                     button.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + RelativeDiaryOverview.NAME));
                     vlDiaryRelative.addComponent(button);
                 });
@@ -81,7 +81,7 @@ public class RelativeDashboardView {
 
             if(!patientDiaryEntriesForUser.isEmpty()){
                 patientDiaryEntriesForUser.stream().limit(3).forEach(diaryEntry -> {
-                    Button button = new Button(diaryEntry.getTitle());
+                    Button button = new Button(trimTitle(diaryEntry.getTitle(),30));
                     button.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + PatientDiaryOverview.NAME));
                     vlDiaryPatient.addComponent(button);
                 });
@@ -96,8 +96,8 @@ public class RelativeDashboardView {
             List<Goal> goalEntriesForUser = new GoalServiceImpl().getGoalEntriesForUser(patient);
 
             if (!goalEntriesForUser.isEmpty()){
-                goalEntriesForUser.stream().limit(5).filter(goal -> goal.getState() == GoalState.OPEN).forEach(goal -> {
-                    Button button = new Button(goal.getGoal());
+                goalEntriesForUser.stream().limit(3).filter(goal -> goal.getState() == GoalState.OPEN).forEach(goal -> {
+                    Button button = new Button(trimTitle(goal.getGoal(),30));
                     button.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + GoaltrackerOverview.NAME));
                     vlGoalPatient.addComponent(button);
                 });
@@ -145,6 +145,13 @@ public class RelativeDashboardView {
     Label getLblEmpty(){
         return new Label(MessageHandler.NO_ENTRIES);
     };
+
+    private String trimTitle(String title, int maxLength) {
+        if (title.length() > maxLength) {
+            return title.substring(0, maxLength - 3) + "...";
+        }
+        return title;
+    }
 
 }
 

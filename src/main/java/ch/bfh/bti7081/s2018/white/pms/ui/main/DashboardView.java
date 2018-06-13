@@ -80,6 +80,7 @@ public class DashboardView extends PmsSecureView {
 
         contentPanel = new Panel();
         contentPanel.setContent(getDashboardViewForRole());
+        contentPanel.setSizeFull();
         horizontalBody.addComponents(menuContent, contentPanel);
 
         HorizontalLayout horizontalMenu = new HorizontalLayout();

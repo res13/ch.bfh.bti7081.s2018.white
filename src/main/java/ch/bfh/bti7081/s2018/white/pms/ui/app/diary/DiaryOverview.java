@@ -7,6 +7,7 @@ import ch.bfh.bti7081.s2018.white.pms.ui.common.CustomButton;
 import ch.bfh.bti7081.s2018.white.pms.ui.main.PmsSecureView;
 import com.vaadin.ui.Accordion;
 import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.TabSheet;
 
 import java.util.List;
@@ -36,8 +37,14 @@ public abstract class DiaryOverview extends PmsSecureView {
             gridDiary.addComponent(newButton, 1, 0);
         }
         addComponent(gridDiary);
-        for (DiaryEntry diaryEntry : getDiaryEntries()) {
-            addDiary(diaryEntry);
+        List<DiaryEntry> diaryEntryList = getDiaryEntries();
+        if (diaryEntryList.isEmpty()) {
+            Label noEntriesLabel = new Label(MessageHandler.NO_ENTRIES);
+            addComponent(noEntriesLabel);
+        } else {
+            for (DiaryEntry diaryEntry : diaryEntryList) {
+                addDiary(diaryEntry);
+            }
         }
     }
 
