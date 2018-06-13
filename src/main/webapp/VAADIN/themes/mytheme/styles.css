@@ -15075,13 +15075,14 @@ div.v-layout.v-horizontal.v-widget {
 
 .mytheme .v-spacing {
 	height: 0px;
+	width: 0px;
 }
 
 .mytheme .v-horizontal > .v-expand > .v-slot {
 	position: relative;
 }
 
-.mytheme .btnSetting {
+.mytheme .btnProfile {
 	float: right;
 }
 
@@ -15090,7 +15091,8 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme .myGrid {
-	min-width: 730px;
+	min-width: 1200px;
+	min-height: 730px;
 }
 
 .mytheme .myLogin {
@@ -15101,4 +15103,24 @@ div.v-layout.v-horizontal.v-widget {
 	font-size: 30px;
 	text-align: center;
 	margin-left: -30px;
+}
+
+.mytheme .lblWelcome {
+	font-size: 60px;
+	text-align: center;
+	color: #1d69b4;
+}
+
+.mytheme .lblOverview {
+	font-size: 30px;
+	text-align: center;
+	color: #1d69b4;
+}
+
+.mytheme .lblSubTitle {
+	font-weight: bold;
+}
+
+.mytheme .v-label-undef-w {
+	margin-top: 5px;
 }

@@ -15,11 +15,16 @@ public class PasswordHasher {
 
     public static final Logger log = LogManager.getLogger(PasswordHasher.class.getName());
     private static final String KEY_FACTORY = "PBKDF2WithHmacSHA1";
+    private static Random random = new Random();
 
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
         System.out.print("Plaintext password: ");
         String plaintextPassword = br.readLine();
+        if (plaintextPassword == null) {
+            System.out.println("No password given...");
+            return;
+        }
         String salt = getRandomSalt();
         System.out.println("Salt: " + salt);
         String passwordHash = hashPlainTextPassword(plaintextPassword, salt);
@@ -37,7 +42,7 @@ public class PasswordHasher {
 
     public static String getRandomSalt() {
         byte[] salt = new byte[16];
-        new Random().nextBytes(salt);
+        random.nextBytes(salt);
         Base64.Encoder enc = Base64.getEncoder();
         return enc.encodeToString(salt);
     }

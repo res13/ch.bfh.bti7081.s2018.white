@@ -6,9 +6,9 @@ import junit.framework.TestCase;
 //FIXME nik do it
 public class BaseServiceImplTest extends TestCase {
 
-    private BaseServiceImpl<DiaryEntry> baseService = new BaseServiceImpl(DiaryEntry.class);
     DiaryEntry diaryEntry = new DiaryEntry();
     String title = "TestTitle1";
+    private BaseServiceImpl<DiaryEntry> baseService = new BaseServiceImpl(DiaryEntry.class);
 
     @Override
     protected void setUp() throws Exception {

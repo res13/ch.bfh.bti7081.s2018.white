@@ -57,15 +57,19 @@ public class MessageHandler {
     public static final String STARTDATE = getMessage("STARTDATE");
     public static final String ENDDATE = getMessage("ENDDATE");
     public static final String DASHBOARD_NAME = getMessage("DASHBOARD");
-	public static final String NOT_SAVED_COMMENT = getMessage("NOT_SAVED_COMMENT");
+    public static final String NOT_SAVED_COMMENT = getMessage("NOT_SAVED_COMMENT");
     public static final String WELCOME = getMessage("WELCOME");
     public static final String OVERVIEW_FOR = getMessage("OVERVIEW_FOR");
-    public static final String COUNT_PATIENT  = getMessage("COUNT_PATIENT");
-    public static final String MY_DIARY_ENTRIES = getMessage("MY_DIARY_ENTRIES");;
-    public static final String PATIENTS_DIARY_ENTRIES = getMessage("PATIENTS_DIARY_ENTRIES");;
-    public static final String PATIENTS_GOALS = getMessage("PATIENTS_GOALS");;
-    public static final String CREATED_BY = getMessage("CREATED_BY");;
-    public static final String GOAL = getMessage("GOAL");;
+    public static final String COUNT_PATIENT = getMessage("COUNT_PATIENT");
+    public static final String MY_DIARY_ENTRIES = getMessage("MY_DIARY_ENTRIES");
+    public static final String PATIENTS_DIARY_ENTRIES = getMessage("PATIENTS_DIARY_ENTRIES");
+    public static final String PATIENTS_GOALS = getMessage("PATIENTS_GOALS");
+    public static final String CREATED_BY = getMessage("CREATED_BY");
+    public static final String GOAL = getMessage("GOAL");
+    public static final String SAVED_GOAL = getMessage("SAVED_GOAL");
+    public static final String NOT_SAVED_GOAL = getMessage("NOT_SAVED_GOAL");
+    public static final String OUT_OF_RANGE = getMessage("OUT_OF_RANGE");
+    public static final String NO_ENTRIES = getMessage("NO_ENTRIES");
 
     private static String getMessage(String messageId) {
         return MESSAGES.getString(messageId);

@@ -5,3 +5,4 @@ target/
 .settings/
 .classpath
 .project
+src/main/webapp/VAADIN/themes/mytheme/styles.css

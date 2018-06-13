@@ -6,7 +6,6 @@ import ch.bfh.bti7081.s2018.white.pms.common.model.user.Patient;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.Relative;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.ui.main.PmsSecureView;
-
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.GridLayout;
@@ -81,7 +80,7 @@ public class ProfileView extends PmsSecureView {
         grid.addComponent(roleValueLabel, 1, 4);
         layout.addComponent(profileImage);
         layout.addComponent(grid);
-        
+
         addComponent(layout);
     }
 }

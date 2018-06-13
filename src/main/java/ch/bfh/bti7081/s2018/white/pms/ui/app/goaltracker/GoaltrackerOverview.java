@@ -4,6 +4,7 @@ import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.goaltracker.Goal;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.GoalServiceImpl;
+import ch.bfh.bti7081.s2018.white.pms.ui.common.ButtonType;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.CustomButton;
 import ch.bfh.bti7081.s2018.white.pms.ui.main.PmsSecureView;
 import com.vaadin.server.FontAwesome;
@@ -19,6 +20,7 @@ public class GoaltrackerOverview extends PmsSecureView {
     public static final String NAME = "goaltracker";
     private GoalServiceImpl goalService;
     private Grid<Goal> grid;
+    private TextField filterText;
 
     @Override
     public String getName() {
@@ -29,12 +31,12 @@ public class GoaltrackerOverview extends PmsSecureView {
     public void initialize() {
         goalService = new GoalServiceImpl();
         grid = new Grid<>(Goal.class);
+        filterText = new TextField();
     }
 
     @Override
     public void createView() {
         final VerticalLayout layout = new VerticalLayout();
-        TextField filterText = new TextField();
         filterText.setPlaceholder(MessageHandler.FILTER);
         filterText.addValueChangeListener(e -> updateList());
         filterText.setValueChangeMode(ValueChangeMode.LAZY);
@@ -44,7 +46,7 @@ public class GoaltrackerOverview extends PmsSecureView {
         CssLayout filtering = new CssLayout();
         filtering.addComponents(filterText, clearFilterTextBtn);
         filtering.setStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
-        CustomButton addCustomerBtn = new CustomButton(CustomButton.typeEnum.NEW_GOAL);
+        CustomButton addCustomerBtn = new CustomButton(ButtonType.NEW_GOAL);
         GoalView form = new GoalView(this);
         addCustomerBtn.addClickListener(e -> {
             grid.asSingleSelect().clear();
@@ -72,11 +74,11 @@ public class GoaltrackerOverview extends PmsSecureView {
         User user = (User) VaadinSession.getCurrent().getAttribute(User.class.getName());
         List<Goal> goals = null;
         try {
-            goals = goalService.getGoalEntriesForUser(user);
+            goals = goalService.getGoalEntriesForUserAndFilter(user, filterText.getValue());
         } catch (Exception e) {
             e.printStackTrace();
         }
         grid.setItems(goals);
- 
+
     }
 }

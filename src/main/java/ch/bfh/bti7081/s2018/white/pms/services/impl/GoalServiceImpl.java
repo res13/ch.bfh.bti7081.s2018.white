@@ -16,6 +16,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GoalServiceImpl extends BaseServiceImpl<Goal> implements GoalService {
 
@@ -45,5 +46,12 @@ public class GoalServiceImpl extends BaseServiceImpl<Goal> implements GoalServic
                     TypedQuery<Goal> allQuery = em.createQuery(where);
                     return allQuery.getResultList();
                 });
+    }
+
+    public List<Goal> getGoalEntriesForUserAndFilter(User user, String like) {
+        return getGoalEntriesForUser(user)
+                .stream()
+                .filter(goal1 -> goal1.getGoal().toLowerCase().contains(like.toLowerCase()))
+                .collect(Collectors.toList());
     }
 }

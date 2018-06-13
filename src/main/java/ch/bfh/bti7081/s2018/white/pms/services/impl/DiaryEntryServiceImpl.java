@@ -38,6 +38,15 @@ public class DiaryEntryServiceImpl extends BaseServiceImpl<DiaryEntry> implement
                 .collect(Collectors.toList());
     }
 
+
+    public List<DiaryEntry> getRelativeDiaryEntriesForUserAndPatient(User user, Patient patient) {
+        return getDiaryEntriesForUser(user)
+                .stream()
+                .filter(diaryEntry1 -> diaryEntry1.getCreator() instanceof Relative)
+                .filter(diaryEntry -> diaryEntry.getDiary().getCaze().getPatient().getId().equals(patient.getId()))
+                .collect(Collectors.toList());
+    }
+
     private List<DiaryEntry> getDiaryEntriesForUser(User user) {
         return new JpaUtility().execute(
                 (em) -> {

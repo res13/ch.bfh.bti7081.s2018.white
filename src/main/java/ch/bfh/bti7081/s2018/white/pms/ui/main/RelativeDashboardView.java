@@ -24,50 +24,136 @@ public class RelativeDashboardView {
     }
 
     public GridLayout getGridLayout() {
-        GridLayout gridLayout = new GridLayout(1, 3);
-        gridLayout.addComponent(new Label(MessageHandler.WELCOME + relative.getFullName()), 0, 0);
+        GridLayout gridLayout = new GridLayout(3, 3);
+
+        Label lblWelcome = new Label(MessageHandler.WELCOME + relative.getFullName());
+        lblWelcome.addStyleName("lblWelcome");
+        gridLayout.addComponent(lblWelcome, 0, 0);
 
         List<Patient> patientList = relative.getPatientList();
-        gridLayout.addComponent(new Label(MessageHandler.COUNT_PATIENT + patientList.size()), 0, 1);
+
+        // TODO : Need we something like this for the relative dashboard?
+        // gridLayout.addComponent(new Label(MessageHandler.COUNT_PATIENT + patientList.size()), 0, 1);
+
+        // Layout over all patients
         VerticalLayout vlRel = new VerticalLayout();
 
+        // Just for testing with more than one
+        // patientList.add(patientList.get(0));
+
         for (Patient patient : patientList) {
-            vlRel.addComponent(new Label(MessageHandler.OVERVIEW_FOR + patient.getFullName()));
-            VerticalLayout vlPat = new VerticalLayout();
 
-            VerticalLayout hlDiaryPatient = new VerticalLayout();
-            hlDiaryPatient.addComponentsAndExpand(new Label(MessageHandler.MY_DIARY_ENTRIES));
-            List<DiaryEntry> relativeDiaryEntriesForUser = new DiaryEntryServiceImpl().getRelativeDiaryEntriesForUser(relative);
-            relativeDiaryEntriesForUser.stream().limit(3).forEach(diaryEntry -> {
-                Button button = new Button(diaryEntry.getTitle() + " - " + diaryEntry.getCreator().getFullName());
-                button.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + RelativeDiaryOverview.NAME));
-                hlDiaryPatient.addComponent(button);
-            });
-            hlDiaryPatient.addComponentsAndExpand(new Label(MessageHandler.PATIENTS_DIARY_ENTRIES));
+            Label lblOverview = new Label(MessageHandler.OVERVIEW_FOR + patient.getFullName());
+            lblOverview.addStyleName("lblOverview");
+            vlRel.addComponent(lblOverview);
+
+            // Structure of page
+            HorizontalLayout hlEntry = new HorizontalLayout();
+            VerticalLayout vlDiaryRelative = new VerticalLayout();
+            VerticalLayout vlDiaryPatient = new VerticalLayout();
+            VerticalLayout vlGoalPatient = new VerticalLayout();
+            vlDiaryRelative.addStyleName("vlEntry");
+            vlDiaryPatient.addStyleName("vlEntry");
+            vlGoalPatient.addStyleName("vlEntry");
+
+
+            // Make some not really aesthetic magic
+            Label lblSubTitleDiaryRelative = new Label(MessageHandler.MY_DIARY_ENTRIES);
+            lblSubTitleDiaryRelative.addStyleName("lblSubTitle");
+            vlDiaryRelative.addComponentsAndExpand(lblSubTitleDiaryRelative); // new Label(MessageHandler.MY_DIARY_ENTRIES).addStyleName("lblSubTitle")
+            List<DiaryEntry> relativeDiaryEntriesForUser = new DiaryEntryServiceImpl().getRelativeDiaryEntriesForUserAndPatient(relative, patient);
+
+            if (!relativeDiaryEntriesForUser.isEmpty()){
+                relativeDiaryEntriesForUser.stream().limit(3).forEach(diaryEntry -> {
+                    Button button = new Button(trimTitle(diaryEntry.getTitle(),30));
+                    button.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + RelativeDiaryOverview.NAME));
+                    vlDiaryRelative.addComponent(button);
+                });
+            }else{
+                vlDiaryRelative.addComponent(getLblEmpty());
+            }
+
+
+            Label lblSubTitleDairyPatient = new Label(MessageHandler.PATIENTS_DIARY_ENTRIES);
+            lblSubTitleDairyPatient.addStyleName("lblSubTitle");
+            vlDiaryPatient.addComponentsAndExpand(lblSubTitleDairyPatient);
             List<DiaryEntry> patientDiaryEntriesForUser = new DiaryEntryServiceImpl().getPatientDiaryEntriesForUser(patient);
-            patientDiaryEntriesForUser.stream().limit(3).forEach(diaryEntry -> {
-                Button button = new Button(diaryEntry.getTitle() + " - " + diaryEntry.getCreator().getFullName());
-                button.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + PatientDiaryOverview.NAME));
-                hlDiaryPatient.addComponent(button);
-            });
-            vlPat.addComponent(hlDiaryPatient);
 
-            VerticalLayout hlGoalPatient = new VerticalLayout();
-            hlGoalPatient.addComponentsAndExpand(new Label(MessageHandler.PATIENTS_GOALS));
+            if(!patientDiaryEntriesForUser.isEmpty()){
+                patientDiaryEntriesForUser.stream().limit(3).forEach(diaryEntry -> {
+                    Button button = new Button(trimTitle(diaryEntry.getTitle(),30));
+                    button.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + PatientDiaryOverview.NAME));
+                    vlDiaryPatient.addComponent(button);
+                });
+            }else{
+                vlDiaryPatient.addComponent(getLblEmpty());
+            }
+
+
+            Label lblSubTitleGoalPatient = new Label(MessageHandler.PATIENTS_GOALS);
+            lblSubTitleGoalPatient.addStyleName("lblSubTitle");
+            vlGoalPatient.addComponentsAndExpand(lblSubTitleGoalPatient);
             List<Goal> goalEntriesForUser = new GoalServiceImpl().getGoalEntriesForUser(patient);
-            goalEntriesForUser.stream().limit(5).filter(goal -> goal.getState() == GoalState.OPEN).forEach(goal -> {
-                Button button = new Button(goal.getGoal() + " - " + goal.getCreator().getFullName());
-                button.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + GoaltrackerOverview.NAME));
-                hlGoalPatient.addComponent(button);
-            });
 
-            vlPat.addComponent(hlGoalPatient);
-            vlRel.addComponent(vlPat);
+            if (!goalEntriesForUser.isEmpty()){
+                goalEntriesForUser.stream().limit(3).filter(goal -> goal.getState() == GoalState.OPEN).forEach(goal -> {
+                    Button button = new Button(trimTitle(goal.getGoal(),30));
+                    button.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + GoaltrackerOverview.NAME));
+                    vlGoalPatient.addComponent(button);
+                });
+            }else{
+                vlGoalPatient.addComponent(getLblEmpty());
+            }
 
+
+
+            hlEntry.addComponent(vlDiaryRelative);
+            hlEntry.addComponent(vlDiaryPatient);
+            hlEntry.addComponent(vlGoalPatient);
+            vlRel.addComponent(hlEntry);
+
+            //vlRel.addComponent(getHlInfo());
+            //vlRel.addComponent(getHlFunctions());
+            /*vlDiaryRelative.addComponent(vlGoalPatient);
+            vlRel.addComponent(vlDiaryRelative);*/
         }
         gridLayout.addComponent(vlRel, 0, 2);
         gridLayout.addStyleName("myGrid");
 
         return gridLayout;
     }
+
+    HorizontalLayout getHlInfo(){
+
+        return null;
+    };
+
+    HorizontalLayout getHlFunctions(){
+        // Show functionality
+        HorizontalLayout hlFunctions = new HorizontalLayout();
+        Button btnDiaryEntry = new Button("Set new Diary Entry");
+        btnDiaryEntry.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + RelativeDiaryOverview.NAME));
+
+        Button btnGoalEntry = new Button("Set new Goal Entry");
+        btnGoalEntry.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + GoaltrackerOverview.NAME));
+
+        hlFunctions.addComponent(btnGoalEntry);
+        hlFunctions.addComponent(btnDiaryEntry);
+        return hlFunctions;
+    };
+
+    Label getLblEmpty(){
+        return new Label(MessageHandler.NO_ENTRIES);
+    };
+
+    private String trimTitle(String title, int maxLength) {
+        if (title.length() > maxLength) {
+            return title.substring(0, maxLength - 3) + "...";
+        }
+        return title;
+    }
+
 }
+
+
+
