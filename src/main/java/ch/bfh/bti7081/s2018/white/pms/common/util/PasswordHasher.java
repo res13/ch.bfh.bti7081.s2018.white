@@ -15,6 +15,7 @@ public class PasswordHasher {
 
     public static final Logger log = LogManager.getLogger(PasswordHasher.class.getName());
     private static final String KEY_FACTORY = "PBKDF2WithHmacSHA1";
+    private static Random random = new Random();
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -37,7 +38,7 @@ public class PasswordHasher {
 
     public static String getRandomSalt() {
         byte[] salt = new byte[16];
-        new Random().nextBytes(salt);
+        random.nextBytes(salt);
         Base64.Encoder enc = Base64.getEncoder();
         return enc.encodeToString(salt);
     }

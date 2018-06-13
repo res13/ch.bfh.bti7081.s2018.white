@@ -8,18 +8,16 @@ import ch.bfh.bti7081.s2018.white.pms.ui.common.CustomButton;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.Notifier;
 import com.vaadin.navigator.View;
 import com.vaadin.server.VaadinSession;
-import com.vaadin.server.Sizeable.Unit;
 import com.vaadin.ui.*;
 import com.vaadin.ui.TabSheet.Tab;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class CommentView extends VerticalLayout implements View {
 
     private CommentServiceImpl commentService = new CommentServiceImpl();
 
-    private GridLayout gLayout = new GridLayout(2,3);
+    private GridLayout gLayout = new GridLayout(2, 3);
     private HorizontalLayout hLayoutButtons = new HorizontalLayout();
     private TextArea text = new TextArea();
     private TextField creator = new TextField();
@@ -29,18 +27,18 @@ public class CommentView extends VerticalLayout implements View {
     private CustomButton saveButton;
     private CustomButton deleteButton;
     private DiaryEntryView parentView;
-	private Tab tab;
+    private Tab tab;
 
 
     public CommentView(Comment comment, DiaryEntryView diaryEntryView) {
         this.comment = comment;
         this.parentView = diaryEntryView;
-        text.setWidth(100,Unit.PERCENTAGE);
+        text.setWidth(100, Unit.PERCENTAGE);
 
-        editButton = new CustomButton(CustomButton.typeEnum.EDIT);
-        saveButton = new CustomButton(CustomButton.typeEnum.SAVE);
-        deleteButton = new CustomButton(CustomButton.typeEnum.DELETE);
-        
+        editButton = new CustomButton(CustomButton.TypeEnum.EDIT);
+        saveButton = new CustomButton(CustomButton.TypeEnum.SAVE);
+        deleteButton = new CustomButton(CustomButton.TypeEnum.DELETE);
+
         editButton.addClickListener(clickEvent -> switchEditable());
         saveButton.addClickListener(clickEvent -> saveComment());
         deleteButton.addClickListener(clickEvent -> deleteComment());
@@ -75,7 +73,7 @@ public class CommentView extends VerticalLayout implements View {
         hLayoutButtons.removeAllComponents();
         if (this.comment.getId() != null && !text.isEnabled()) {
             if (userSession.getId() != null) {
-                if (userSession.getId() == comment.getCreator().getId()) {
+                if (userSession.getId().equals(comment.getCreator().getId())) {
                     hLayoutButtons.addComponent(editButton);
                     hLayoutButtons.addComponent(deleteButton);
                 }
@@ -91,12 +89,12 @@ public class CommentView extends VerticalLayout implements View {
         comment.setCreator(VaadinSession.getCurrent().getAttribute(User.class));
         comment.setTime(LocalDateTime.now());
 
-    	if (text.getValue().isEmpty() == true){
-    		Notifier.notify(MessageHandler.NOT_SAVED, MessageHandler.NOT_SAVED_COMMENT);
-    		text.focus();
-    		return;
-    	}
-        
+        if (text.getValue().isEmpty() == true) {
+            Notifier.notify(MessageHandler.NOT_SAVED, MessageHandler.NOT_SAVED_COMMENT);
+            text.focus();
+            return;
+        }
+
         try {
             comment = commentService.saveOrUpdateEntity(comment);
         } catch (Exception e) {
@@ -115,11 +113,11 @@ public class CommentView extends VerticalLayout implements View {
 
         Notifier.notify(MessageHandler.DELETED, MessageHandler.DELETED_COMMENT);
         if (tab != null) {
-        	parentView.deleteComment(tab);
+            parentView.deleteComment(tab);
         }
     }
-    
-	public void setTab(Tab newCommentTab) {
-		this.tab = newCommentTab;
-	}
+
+    public void setTab(Tab newCommentTab) {
+        this.tab = newCommentTab;
+    }
 }

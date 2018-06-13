@@ -21,8 +21,11 @@ public class TestDataImporter {
     public static void importTestData() throws Exception {
         Class.forName(H2_DRIVER);
         Connection connection = DriverManager.getConnection(H2_URL, H2_USER, H2_PASSWORD);
-        RunScript.execute(connection, new FileReader(SQL_SCRIPT_DML_PATH));
-        connection.close();
+        try {
+            RunScript.execute(connection, new FileReader(SQL_SCRIPT_DML_PATH));
+        } finally {
+            connection.close();
+        }
     }
 
 }

@@ -10,14 +10,13 @@ import ch.bfh.bti7081.s2018.white.pms.common.model.user.Relative;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.GoalServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.GoalTrackerServiceImpl;
-import ch.bfh.bti7081.s2018.white.pms.services.impl.RelativeServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.CustomButton;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.Notifier;
-
 import com.vaadin.data.Binder;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,8 +54,8 @@ public class GoalView extends VerticalLayout {
         endDate = new DateTimeField(MessageHandler.ENDDATE);
         creator = new TextField(MessageHandler.CREATED_BY);
         goalText = new TextArea(MessageHandler.GOAL);
-        save = new CustomButton(CustomButton.typeEnum.SAVE);
-        delete = new CustomButton(CustomButton.typeEnum.DELETE);
+        save = new CustomButton(CustomButton.TypeEnum.SAVE);
+        delete = new CustomButton(CustomButton.TypeEnum.DELETE);
         binder = new Binder<>(Goal.class);
         patientDropdown = new ComboBox(MessageHandler.PATIENT);
         patients = new ArrayList<>();
@@ -93,8 +92,7 @@ public class GoalView extends VerticalLayout {
             status.setSelectedItem(goal.getState());
             creator.setValue(goal.getCreator().getFullName());
             delete.setVisible(true);
-        }
-        else {
+        } else {
             if (user instanceof Patient) {
                 Patient patient = (Patient) user;
                 patientDropdown.setItems(patient);
@@ -103,10 +101,12 @@ public class GoalView extends VerticalLayout {
                 Relative relative = (Relative) this.user;
                 patients = relative.getPatientList();
                 patientDropdown.setItems(patients);
+                patientDropdown.setSelectedItem(patients.get(0));
             } else if (user instanceof Doctor) {
                 Doctor doctor = (Doctor) this.user;
                 patients = doctor.getPatientList();
                 patientDropdown.setItems(patients);
+                patientDropdown.setSelectedItem(patients.get(0));
             }
             creator.setValue(user.getFullName());
             status.setSelectedItem(GoalState.OPEN);
@@ -128,22 +128,22 @@ public class GoalView extends VerticalLayout {
     }
 
     private void save() {
-    	if(patientDropdown.getSelectedItem().isPresent() != true){
-    		Notifier.notify(MessageHandler.NOT_SAVED, MessageHandler.NOT_SAVED_GOAL);
-    		patientDropdown.focus();
-    		return;
-    	} else if (goalText.getValue().isEmpty() == true){
-    		Notifier.notify(MessageHandler.NOT_SAVED, MessageHandler.NOT_SAVED_GOAL);
-    		goalText.focus();
-    		return;
-    	}
+        if (patientDropdown.getSelectedItem().isPresent() != true) {
+            Notifier.notify(MessageHandler.NOT_SAVED, MessageHandler.NOT_SAVED_GOAL);
+            patientDropdown.focus();
+            return;
+        } else if (goalText.getValue().isEmpty() == true) {
+            Notifier.notify(MessageHandler.NOT_SAVED, MessageHandler.NOT_SAVED_GOAL);
+            goalText.focus();
+            return;
+        }
         try {
             //if (goal.getId() == null) {
-                goal.setState(status.getValue());
-                goal.setCreator(user);
-                Long patientId = patientDropdown.getSelectedItem().get().getId();
-                GoalTracker goalTracker = goalTrackerServiceImpl.getGoalTrackerByPatientEntityId(patientId);
-                goal.setGoalTracker(goalTracker);
+            goal.setState(status.getValue());
+            goal.setCreator(user);
+            Long patientId = patientDropdown.getSelectedItem().get().getId();
+            GoalTracker goalTracker = goalTrackerServiceImpl.getGoalTrackerByPatientEntityId(patientId);
+            goal.setGoalTracker(goalTracker);
             //}
             goalServiceImpl.saveOrUpdateEntity(goal);
         } catch (Exception e) {

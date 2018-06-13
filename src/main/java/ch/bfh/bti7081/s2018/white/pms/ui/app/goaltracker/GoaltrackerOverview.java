@@ -45,7 +45,7 @@ public class GoaltrackerOverview extends PmsSecureView {
         CssLayout filtering = new CssLayout();
         filtering.addComponents(filterText, clearFilterTextBtn);
         filtering.setStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
-        CustomButton addCustomerBtn = new CustomButton(CustomButton.typeEnum.NEW_GOAL);
+        CustomButton addCustomerBtn = new CustomButton(CustomButton.TypeEnum.NEW_GOAL);
         GoalView form = new GoalView(this);
         addCustomerBtn.addClickListener(e -> {
             grid.asSingleSelect().clear();
@@ -73,11 +73,11 @@ public class GoaltrackerOverview extends PmsSecureView {
         User user = (User) VaadinSession.getCurrent().getAttribute(User.class.getName());
         List<Goal> goals = null;
         try {
-            goals = goalService.getGoalEntriesForUserAndFilter(user,filterText.getValue());
+            goals = goalService.getGoalEntriesForUserAndFilter(user, filterText.getValue());
         } catch (Exception e) {
             e.printStackTrace();
         }
         grid.setItems(goals);
- 
+
     }
 }
