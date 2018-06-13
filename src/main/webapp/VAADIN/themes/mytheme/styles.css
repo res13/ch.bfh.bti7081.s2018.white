@@ -15075,6 +15075,7 @@ div.v-layout.v-horizontal.v-widget {
 
 .mytheme .v-spacing {
 	height: 0px;
+	width: 0px;
 }
 
 .mytheme .v-horizontal > .v-expand > .v-slot {
@@ -15090,16 +15091,8 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme .myGrid {
-<<<<<<< Updated upstream
-	min-width: 730px;
-=======
-<<<<<<< Updated upstream
-    min-width: 730px;
-=======
 	min-width: 1200px;
 	min-height: 730px;
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 }
 
 .mytheme .myLogin {
@@ -15107,16 +15100,6 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme .myLabel {
-<<<<<<< Updated upstream
-	font-size: 30px;
-	text-align: center;
-	margin-left: -30px;
-=======
-<<<<<<< Updated upstream
-    font-size: 30px;
-    text-align: center;
-    margin-left: -30px;
-=======
 	font-size: 30px;
 	text-align: center;
 	margin-left: -30px;
@@ -15136,6 +15119,8 @@ div.v-layout.v-horizontal.v-widget {
 
 .mytheme .lblSubTitle {
 	font-weight: bold;
->>>>>>> Stashed changes
->>>>>>> Stashed changes
+}
+
+.mytheme .v-label-undef-w {
+	margin-top: 5px;
 }

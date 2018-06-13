@@ -45,6 +45,7 @@
   }
   .v-spacing {
     height: 0px;
+    width: 0px;
   }
   .v-horizontal > .v-expand > .v-slot {
     position: relative;
@@ -94,6 +95,10 @@
   .vlEntry{
    //padding-top: 5%;
    //border: 1px solid red;
+  }
+
+  .v-label-undef-w {
+    margin-top: 5px;
   }
 
 }
