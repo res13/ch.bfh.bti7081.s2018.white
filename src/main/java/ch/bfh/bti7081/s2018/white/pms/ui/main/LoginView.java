@@ -8,7 +8,6 @@ import ch.bfh.bti7081.s2018.white.pms.ui.common.CustomButton;
 
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.View;
-import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
 import org.apache.logging.log4j.LogManager;
@@ -40,7 +39,7 @@ public class LoginView extends VerticalLayout implements View {
         PasswordField passwordField = new PasswordField(MessageHandler.PASSWORD);
         content.addComponent(passwordField);
 
-        CustomButton send = new CustomButton(CustomButton.typeEnum.LOGIN);
+        CustomButton send = new CustomButton(CustomButton.TypeEnum.LOGIN);
         send.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         send.addClickListener((Button.ClickListener) event -> checkUserLogin(emailField.getValue(), passwordField.getValue()));
         content.addComponent(send);

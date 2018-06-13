@@ -6,10 +6,10 @@ import com.vaadin.ui.Button;
 import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 
 public class CustomButton extends Button {
-	public enum typeEnum {NEW_COMMENT,NEW_DIARY_ENTRY,EDIT,DELETE,SAVE,LOGIN};
-	private typeEnum typeString;
+	public enum TypeEnum {NEW_COMMENT,NEW_DIARY_ENTRY,EDIT,DELETE,SAVE,LOGIN};
+	private TypeEnum typeString;
 
-    public CustomButton(typeEnum typeString) {
+    public CustomButton(TypeEnum typeString) {
     	this.typeString = typeString;
     	this.setStyleName("borderless");
     	

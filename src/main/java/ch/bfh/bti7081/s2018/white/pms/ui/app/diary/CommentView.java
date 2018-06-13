@@ -36,9 +36,9 @@ public class CommentView extends VerticalLayout implements View {
         this.comment = comment;
         this.parentView = diaryEntryView;
 
-        editButton = new CustomButton(CustomButton.typeEnum.EDIT);
-        saveButton = new CustomButton(CustomButton.typeEnum.SAVE);
-        deleteButton = new CustomButton(CustomButton.typeEnum.DELETE);
+        editButton = new CustomButton(CustomButton.TypeEnum.EDIT);
+        saveButton = new CustomButton(CustomButton.TypeEnum.SAVE);
+        deleteButton = new CustomButton(CustomButton.TypeEnum.DELETE);
         
         editButton.addClickListener(clickEvent -> switchEditable());
         saveButton.addClickListener(clickEvent -> saveComment());
@@ -75,7 +75,7 @@ public class CommentView extends VerticalLayout implements View {
         hLayoutButtons.removeAllComponents();
         if (this.comment.getId() != null && !text.isEnabled()) {
             if (userSession.getId() != null) {
-                if (userSession.getId() == comment.getCreator().getId()) {
+                if (userSession.getId().equals(comment.getCreator().getId())) {
                     hLayoutButtons.addComponent(editButton);
                     hLayoutButtons.addComponent(deleteButton);
                 }

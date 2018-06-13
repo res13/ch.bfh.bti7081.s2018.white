@@ -74,10 +74,10 @@ public class DiaryEntryView extends VerticalLayout {
         patientRead = new CheckBox(MessageHandler.PATIENT_READ);
         relativeRead = new CheckBox(MessageHandler.RELATIVE_READ);
         accordionComments = new Accordion();
-        editButton = new CustomButton(CustomButton.typeEnum.EDIT);
-        saveButton = new CustomButton(CustomButton.typeEnum.SAVE);
-        deleteButton = new CustomButton(CustomButton.typeEnum.DELETE);
-        newButton = new CustomButton(CustomButton.typeEnum.NEW_COMMENT);
+        editButton = new CustomButton(CustomButton.TypeEnum.EDIT);
+        saveButton = new CustomButton(CustomButton.TypeEnum.SAVE);
+        deleteButton = new CustomButton(CustomButton.TypeEnum.DELETE);
+        newButton = new CustomButton(CustomButton.TypeEnum.NEW_COMMENT);
     }
 
     public void createView() {
@@ -154,7 +154,7 @@ public class DiaryEntryView extends VerticalLayout {
         hLayoutPermissions.removeAllComponents();
         User user = VaadinSession.getCurrent().getAttribute(User.class);
         if (this.diaryEntry.getId() != null && !title.isEnabled()) {
-            if (user.getId() != null && user.getId() == diaryEntry.getCreator().getId()) {
+            if (user.getId() != null && user.getId().equals(diaryEntry.getCreator().getId())) {
                 hLayoutButtons.addComponent(editButton);
                 hLayoutButtons.addComponent(deleteButton);
                 if (user instanceof Patient) {

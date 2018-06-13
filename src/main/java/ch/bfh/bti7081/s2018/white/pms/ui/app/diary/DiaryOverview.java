@@ -21,7 +21,7 @@ public abstract class DiaryOverview extends PmsSecureView {
     public void initialize() {
         accordion = new Accordion();
         gridDiary = new GridLayout(2, 1);
-        newButton = new CustomButton(CustomButton.typeEnum.NEW_DIARY_ENTRY);
+        newButton = new CustomButton(CustomButton.TypeEnum.NEW_DIARY_ENTRY);
     }
 
     public abstract List<DiaryEntry> getDiaryEntries();
