@@ -47,11 +47,14 @@ public class RelativeDashboardView {
             lblOverview.addStyleName("lblOverview");
             vlRel.addComponent(lblOverview);
 
-            // Structure for placement
+            // Structure of page
             HorizontalLayout hlEntry = new HorizontalLayout();
             VerticalLayout vlDiaryRelative = new VerticalLayout();
             VerticalLayout vlDiaryPatient = new VerticalLayout();
             VerticalLayout vlGoalPatient = new VerticalLayout();
+            vlDiaryRelative.addStyleName("vlEntry");
+            vlDiaryPatient.addStyleName("vlEntry");
+            vlGoalPatient.addStyleName("vlEntry");
 
 
             // Make some not really aesthetic magic
@@ -59,37 +62,58 @@ public class RelativeDashboardView {
             lblSubTitleDiaryRelative.addStyleName("lblSubTitle");
             vlDiaryRelative.addComponentsAndExpand(lblSubTitleDiaryRelative); // new Label(MessageHandler.MY_DIARY_ENTRIES).addStyleName("lblSubTitle")
             List<DiaryEntry> relativeDiaryEntriesForUser = new DiaryEntryServiceImpl().getRelativeDiaryEntriesForUser(relative);
-            relativeDiaryEntriesForUser.stream().limit(3).forEach(diaryEntry -> {
-                Button button = new Button(diaryEntry.getTitle());
-                button.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + RelativeDiaryOverview.NAME));
-                vlDiaryRelative.addComponent(button);
-            });
+
+            if (!relativeDiaryEntriesForUser.isEmpty()){
+                relativeDiaryEntriesForUser.stream().limit(3).forEach(diaryEntry -> {
+                    Button button = new Button(diaryEntry.getTitle());
+                    button.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + RelativeDiaryOverview.NAME));
+                    vlDiaryRelative.addComponent(button);
+                });
+            }else{
+                vlDiaryRelative.addComponent(getLblEmpty());
+            }
+
 
             Label lblSubTitleDairyPatient = new Label(MessageHandler.PATIENTS_DIARY_ENTRIES);
             lblSubTitleDairyPatient.addStyleName("lblSubTitle");
             vlDiaryPatient.addComponentsAndExpand(lblSubTitleDairyPatient);
             List<DiaryEntry> patientDiaryEntriesForUser = new DiaryEntryServiceImpl().getPatientDiaryEntriesForUser(patient);
-            patientDiaryEntriesForUser.stream().limit(3).forEach(diaryEntry -> {
-                Button button = new Button(diaryEntry.getTitle());
-                button.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + PatientDiaryOverview.NAME));
-                vlDiaryPatient.addComponent(button);
-            });
+
+            if(!patientDiaryEntriesForUser.isEmpty()){
+                patientDiaryEntriesForUser.stream().limit(3).forEach(diaryEntry -> {
+                    Button button = new Button(diaryEntry.getTitle());
+                    button.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + PatientDiaryOverview.NAME));
+                    vlDiaryPatient.addComponent(button);
+                });
+            }else{
+                vlDiaryPatient.addComponent(getLblEmpty());
+            }
+
 
             Label lblSubTitleGoalPatient = new Label(MessageHandler.PATIENTS_GOALS);
             lblSubTitleGoalPatient.addStyleName("lblSubTitle");
             vlGoalPatient.addComponentsAndExpand(lblSubTitleGoalPatient);
             List<Goal> goalEntriesForUser = new GoalServiceImpl().getGoalEntriesForUser(patient);
-            goalEntriesForUser.stream().limit(5).filter(goal -> goal.getState() == GoalState.OPEN).forEach(goal -> {
-                Button button = new Button(goal.getGoal());
-                button.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + GoaltrackerOverview.NAME));
-                vlGoalPatient.addComponent(button);
-            });
+
+            if (!goalEntriesForUser.isEmpty()){
+                goalEntriesForUser.stream().limit(5).filter(goal -> goal.getState() == GoalState.OPEN).forEach(goal -> {
+                    Button button = new Button(goal.getGoal());
+                    button.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + GoaltrackerOverview.NAME));
+                    vlGoalPatient.addComponent(button);
+                });
+            }else{
+                vlGoalPatient.addComponent(getLblEmpty());
+            }
+
 
 
             hlEntry.addComponent(vlDiaryRelative);
             hlEntry.addComponent(vlDiaryPatient);
             hlEntry.addComponent(vlGoalPatient);
             vlRel.addComponent(hlEntry);
+
+            //vlRel.addComponent(getHlInfo());
+            //vlRel.addComponent(getHlFunctions());
             /*vlDiaryRelative.addComponent(vlGoalPatient);
             vlRel.addComponent(vlDiaryRelative);*/
         }
@@ -98,16 +122,31 @@ public class RelativeDashboardView {
 
         return gridLayout;
     }
+
+    HorizontalLayout getHlInfo(){
+
+        return null;
+    };
+
+    HorizontalLayout getHlFunctions(){
+        // Show functionality
+        HorizontalLayout hlFunctions = new HorizontalLayout();
+        Button btnDiaryEntry = new Button("Set new Diary Entry");
+        btnDiaryEntry.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + RelativeDiaryOverview.NAME));
+
+        Button btnGoalEntry = new Button("Set new Goal Entry");
+        btnGoalEntry.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + GoaltrackerOverview.NAME));
+
+        hlFunctions.addComponent(btnGoalEntry);
+        hlFunctions.addComponent(btnDiaryEntry);
+        return hlFunctions;
+    };
+
+    Label getLblEmpty(){
+        return new Label(MessageHandler.NO_ENTRIES);
+    };
+
 }
 
 
-//        // Show functionality
-//        HorizontalLayout hlFunctions = new HorizontalLayout();
-//        Button btnDiaryEntry = new Button("Set new Diary Entry");
-//        btnDiaryEntry.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + RelativeDiaryOverview.NAME));
-//
-//        Button btnGoalEntry = new Button("Set new Goal Entry");
-//        btnGoalEntry.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + GoaltrackerOverview.NAME));
-//
-//        hlFunctions.addComponent(btnGoalEntry);
-//        hlFunctions.addComponent(btnDiaryEntry);
+
