@@ -18,7 +18,7 @@ public class NavigatorUI extends UI {
     protected void init(VaadinRequest vaadinRequest) {
         new Navigator(this, this);
         getNavigator().addView(LoginView.NAME, LoginView.class);
-//        getNavigator().setErrorView(LoginView.class);
+        getNavigator().setErrorView(LoginView.class);
         setupMessageProvider(vaadinRequest);
     }
 

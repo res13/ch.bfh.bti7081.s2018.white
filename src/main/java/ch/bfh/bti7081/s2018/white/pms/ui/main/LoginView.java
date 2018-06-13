@@ -4,6 +4,7 @@ import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.services.UserService;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.UserServiceImpl;
+import ch.bfh.bti7081.s2018.white.pms.ui.common.ButtonType;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.CustomButton;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.View;
@@ -38,7 +39,7 @@ public class LoginView extends VerticalLayout implements View {
         PasswordField passwordField = new PasswordField(MessageHandler.PASSWORD);
         content.addComponent(passwordField);
 
-        CustomButton send = new CustomButton(CustomButton.TypeEnum.LOGIN);
+        CustomButton send = new CustomButton(ButtonType.LOGIN);
         send.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         send.addClickListener((Button.ClickListener) event -> checkUserLogin(emailField.getValue(), passwordField.getValue()));
         content.addComponent(send);

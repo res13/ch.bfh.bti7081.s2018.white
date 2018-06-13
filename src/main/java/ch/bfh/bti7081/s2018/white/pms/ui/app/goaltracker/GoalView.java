@@ -10,6 +10,7 @@ import ch.bfh.bti7081.s2018.white.pms.common.model.user.Relative;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.GoalServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.GoalTrackerServiceImpl;
+import ch.bfh.bti7081.s2018.white.pms.ui.common.ButtonType;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.CustomButton;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.Notifier;
 import com.vaadin.data.Binder;
@@ -54,8 +55,8 @@ public class GoalView extends VerticalLayout {
         endDate = new DateTimeField(MessageHandler.ENDDATE);
         creator = new TextField(MessageHandler.CREATED_BY);
         goalText = new TextArea(MessageHandler.GOAL);
-        save = new CustomButton(CustomButton.TypeEnum.SAVE);
-        delete = new CustomButton(CustomButton.TypeEnum.DELETE);
+        save = new CustomButton(ButtonType.SAVE);
+        delete = new CustomButton(ButtonType.DELETE);
         binder = new Binder<>(Goal.class);
         patientDropdown = new ComboBox(MessageHandler.PATIENT);
         patients = new ArrayList<>();

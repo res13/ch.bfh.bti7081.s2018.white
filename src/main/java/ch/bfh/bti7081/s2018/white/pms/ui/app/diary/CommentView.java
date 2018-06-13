@@ -4,6 +4,7 @@ import ch.bfh.bti7081.s2018.white.pms.common.i18n.MessageHandler;
 import ch.bfh.bti7081.s2018.white.pms.common.model.app.diary.Comment;
 import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.CommentServiceImpl;
+import ch.bfh.bti7081.s2018.white.pms.ui.common.ButtonType;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.CustomButton;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.Notifier;
 import com.vaadin.navigator.View;
@@ -35,9 +36,9 @@ public class CommentView extends VerticalLayout implements View {
         this.parentView = diaryEntryView;
         text.setWidth(100, Unit.PERCENTAGE);
 
-        editButton = new CustomButton(CustomButton.TypeEnum.EDIT);
-        saveButton = new CustomButton(CustomButton.TypeEnum.SAVE);
-        deleteButton = new CustomButton(CustomButton.TypeEnum.DELETE);
+        editButton = new CustomButton(ButtonType.EDIT);
+        saveButton = new CustomButton(ButtonType.SAVE);
+        deleteButton = new CustomButton(ButtonType.DELETE);
 
         editButton.addClickListener(clickEvent -> switchEditable());
         saveButton.addClickListener(clickEvent -> saveComment());

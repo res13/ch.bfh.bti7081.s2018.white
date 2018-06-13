@@ -18,9 +18,13 @@ public class PasswordHasher {
     private static Random random = new Random();
 
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
         System.out.print("Plaintext password: ");
         String plaintextPassword = br.readLine();
+        if (plaintextPassword == null) {
+            System.out.println("No password given...");
+            return;
+        }
         String salt = getRandomSalt();
         System.out.println("Salt: " + salt);
         String passwordHash = hashPlainTextPassword(plaintextPassword, salt);

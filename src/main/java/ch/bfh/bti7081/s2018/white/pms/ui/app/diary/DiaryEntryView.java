@@ -10,6 +10,7 @@ import ch.bfh.bti7081.s2018.white.pms.common.model.user.User;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.CommentServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.DiaryEntryServiceImpl;
 import ch.bfh.bti7081.s2018.white.pms.services.impl.DiaryServiceImpl;
+import ch.bfh.bti7081.s2018.white.pms.ui.common.ButtonType;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.CustomButton;
 import ch.bfh.bti7081.s2018.white.pms.ui.common.Notifier;
 import com.vaadin.server.VaadinSession;
@@ -76,10 +77,10 @@ public class DiaryEntryView extends VerticalLayout {
         patientRead = new CheckBox(MessageHandler.PATIENT_READ);
         relativeRead = new CheckBox(MessageHandler.RELATIVE_READ);
         accordionComments = new Accordion();
-        editButton = new CustomButton(CustomButton.TypeEnum.EDIT);
-        saveButton = new CustomButton(CustomButton.TypeEnum.SAVE);
-        deleteButton = new CustomButton(CustomButton.TypeEnum.DELETE);
-        newButton = new CustomButton(CustomButton.TypeEnum.NEW_COMMENT);
+        editButton = new CustomButton(ButtonType.EDIT);
+        saveButton = new CustomButton(ButtonType.SAVE);
+        deleteButton = new CustomButton(ButtonType.DELETE);
+        newButton = new CustomButton(ButtonType.NEW_COMMENT);
     }
 
     public void createView() {
