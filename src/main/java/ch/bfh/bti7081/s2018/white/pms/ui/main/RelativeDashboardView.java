@@ -32,7 +32,6 @@ public class RelativeDashboardView {
 
         List<Patient> patientList = relative.getPatientList();
 
-        // TODO : Need we something like this for the relative dashboard?
         // gridLayout.addComponent(new Label(MessageHandler.COUNT_PATIENT + patientList.size()), 0, 1);
 
         // Layout over all patients
@@ -112,35 +111,13 @@ public class RelativeDashboardView {
             hlEntry.addComponent(vlGoalPatient);
             vlRel.addComponent(hlEntry);
 
-            //vlRel.addComponent(getHlInfo());
-            //vlRel.addComponent(getHlFunctions());
-            /*vlDiaryRelative.addComponent(vlGoalPatient);
-            vlRel.addComponent(vlDiaryRelative);*/
+
         }
         gridLayout.addComponent(vlRel, 0, 2);
         gridLayout.addStyleName("myGrid");
 
         return gridLayout;
     }
-
-    HorizontalLayout getHlInfo(){
-
-        return null;
-    };
-
-    HorizontalLayout getHlFunctions(){
-        // Show functionality
-        HorizontalLayout hlFunctions = new HorizontalLayout();
-        Button btnDiaryEntry = new Button("Set new Diary Entry");
-        btnDiaryEntry.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + RelativeDiaryOverview.NAME));
-
-        Button btnGoalEntry = new Button("Set new Goal Entry");
-        btnGoalEntry.addClickListener(clickEvent -> UI.getCurrent().getNavigator().navigateTo(DashboardView.NAME + "/" + GoaltrackerOverview.NAME));
-
-        hlFunctions.addComponent(btnGoalEntry);
-        hlFunctions.addComponent(btnDiaryEntry);
-        return hlFunctions;
-    };
 
     Label getLblEmpty(){
         return new Label(MessageHandler.NO_ENTRIES);

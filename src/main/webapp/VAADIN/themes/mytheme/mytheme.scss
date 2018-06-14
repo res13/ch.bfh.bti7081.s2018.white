@@ -62,7 +62,7 @@
   }
 
   .myGrid {
-    min-width: 1200px;
+    min-width: 1920px;
     min-height:  730px;
   }
 
@@ -92,13 +92,13 @@
   font-weight: bold;
   }
 
-  .vlEntry{
-   //padding-top: 5%;
-   //border: 1px solid red;
-  }
 
   .v-label-undef-w {
     margin-top: 5px;
+  }
+  .vlMain{
+    height: 100%;
+    width: 100%
   }
 
 }
