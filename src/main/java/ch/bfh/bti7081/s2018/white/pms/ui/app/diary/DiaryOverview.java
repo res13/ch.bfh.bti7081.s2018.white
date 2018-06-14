@@ -32,6 +32,7 @@ public abstract class DiaryOverview extends PmsSecureView {
     @Override
     public void createView() {
         newButton.addClickListener(clickEvent -> newDiaryEntry());
+        gridDiary.addStyleName("myGrid");
         gridDiary.addComponent(accordion, 0, 0);
         if (addNewButton()) {
             gridDiary.addComponent(newButton, 1, 0);

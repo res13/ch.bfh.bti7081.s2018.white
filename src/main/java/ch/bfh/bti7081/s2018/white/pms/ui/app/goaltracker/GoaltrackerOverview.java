@@ -57,7 +57,7 @@ public class GoaltrackerOverview extends PmsSecureView {
         HorizontalLayout main = new HorizontalLayout(grid, form);
         main.setExpandRatio(grid, 1);
         layout.addComponents(toolbar, main);
-        layout.addStyleName("myLayout");
+        layout.addStyleName("myGrid");
         updateList();
         addComponent(layout);
         form.setVisible(false);
