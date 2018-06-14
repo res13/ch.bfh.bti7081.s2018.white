@@ -114,7 +114,8 @@ public class DashboardView extends PmsSecureView {
 
         VerticalLayout verticalLayout = new VerticalLayout();
         verticalLayout.addComponents(horizontalMenu, horizontalBody);
-
+        verticalLayout.addStyleName("vlMain");
+        addStyleName("vlMain");
         addComponent(verticalLayout);
     }
 
